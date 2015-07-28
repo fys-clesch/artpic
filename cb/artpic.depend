@@ -1,0 +1,739 @@
+# depslib dependency file v1.0
+1377543094 source:d:\programming\mie\artpic\src\alloc.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+	"refr_data.h"
+
+1394314468 .h"
+
+1382265891 d:\programming\mie\artpic\src\artpic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<unistd.h>
+	<math.h>
+	<complex.h>
+	<limits.h>
+	<float.h>
+	<ctype.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/freeglut.h>
+	<sys/stat.h>
+	<omp.h>
+	<stdarg.h>
+	<fenv.h>
+	<assert.h>
+	<errno.h>
+	<dir.h>
+
+1394316580 
+
+1377963047 d:\programming\mie\artpic\src\msg.h
+
+1377588395 d:\programming\mie\artpic\src\auxf.h
+
+1332007002 d:\programming\mie\artpic\src\refr_data.h
+
+1380372330 source:d:\programming\mie\artpic\src\auxf.c
+	"artpic.h"
+	"lina.h"
+	"alloc.h"
+	"ray_aux.h"
+	"color.h"
+	"rot.h"
+	"msg.h"
+	"auxf.h"
+
+1375709898 d:\programming\mie\artpic\src\lina.h
+
+1377194235 d:\programming\mie\artpic\src\alloc.h
+
+1376920273 d:\programming\mie\artpic\src\ray_aux.h
+
+1377455989 d:\programming\mie\artpic\src\color.h
+
+1372878228 d:\programming\mie\artpic\src\rot.h
+
+1377541894 source:d:\programming\mie\artpic\src\color.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+
+1378120709 source:d:\programming\mie\artpic\src\control.c
+	"artpic.h"
+	"viewer.h"
+	"control.h"
+
+1394315855 "
+
+1378017395 d:\programming\mie\artpic\src\viewer.h
+
+1376293595 d:\programming\mie\artpic\src\control.h
+
+1378191221 source:d:\programming\mie\artpic\src\draw.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"shapes.h"
+	"color.h"
+	"lina.h"
+	"viewer.h"
+	"draw.h"
+
+1378190989 d:\programming\mie\artpic\src\shapes.h
+
+1378017390 d:\programming\mie\artpic\src\draw.h
+
+1377455789 source:d:\programming\mie\artpic\src\font.c
+	"artpic.h"
+	"font.h"
+
+1376293672 d:\programming\mie\artpic\src\font.h
+
+1382208367 source:d:\programming\mie\artpic\src\fresnel.c
+	"artpic.h"
+	"auxf.h"
+	"fresnel.h"
+
+1372516446 d:\programming\mie\artpic\src\fresnel.h
+
+1377158077 source:d:\programming\mie\artpic\src\fromfile.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"auxf.h"
+	"lina.h"
+	"rot.h"
+
+1377195997 source:d:\programming\mie\artpic\src\intersec.c
+	"artpic.h"
+	"auxf.h"
+	"lina.h"
+	"intersec.h"
+
+1394315965 h"
+
+1374075360 d:\programming\mie\artpic\src\intersec.h
+
+1377500786 source:d:\programming\mie\artpic\src\lina.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+	"lina.h"
+
+1384885032 source:d:\programming\mie\artpic\src\main.c
+	"artpic.h"
+	"viewer.h"
+	"draw.h"
+	"intersec.h"
+	"auxf.h"
+	"msg.h"
+	"ray.h"
+	"ray_aux.h"
+	"refr_data.h"
+	"tofig.h"
+	"tofile.h"
+	"fromfile.h"
+	"tests.h"
+	"alloc.h"
+
+1375452569 d:\programming\mie\artpic\src\ray.h
+
+1377090631 d:\programming\mie\artpic\src\tofig.h
+
+1376415183 d:\programming\mie\artpic\src\tofile.h
+
+1374219603 d:\programming\mie\artpic\src\fromfile.h
+
+1375810235 d:\programming\mie\artpic\src\tests.h
+
+1382210536 source:d:\programming\mie\artpic\src\msg.c
+	"artpic.h"
+	"alloc.h"
+	"ray_aux.h"
+	"auxf.h"
+	"msg.h"
+
+1377196026 source:d:\programming\mie\artpic\src\ray.c
+	"artpic.h"
+	"lina.h"
+	"msg.h"
+	"auxf.h"
+	"rot.h"
+	"refr_data.h"
+	"fresnel.h"
+	"ray_aux.h"
+	"tests.h"
+	"ray.h"
+
+1377196035 source:d:\programming\mie\artpic\src\ray_aux.c
+	"artpic.h"
+	"lina.h"
+	"ray.h"
+	"refr_data.h"
+	"msg.h"
+	"auxf.h"
+	"tests.h"
+	"rot.h"
+
+1374219164 source:d:\programming\mie\artpic\src\refr_data.c
+	"artpic.h"
+	"msg.h"
+
+1377158851 source:d:\programming\mie\artpic\src\rot.c
+	"artpic.h"
+	"auxf.h"
+	"rot.h"
+
+1380372267 source:d:\programming\mie\artpic\src\shapes.c
+	"artpic.h"
+	"alloc.h"
+	"auxf.h"
+	"lina.h"
+	"shapes.h"
+
+1377196059 source:d:\programming\mie\artpic\src\tests.c
+	"artpic.h"
+	"lina.h"
+	"msg.h"
+	"ray.h"
+	"ray_aux.h"
+	"fresnel.h"
+	"refr_data.h"
+	"tests.h"
+
+1382210400 source:d:\programming\mie\artpic\src\tofig.c
+	"artpic.h"
+	"auxf.h"
+	"alloc.h"
+	"msg.h"
+	"tofig.h"
+
+1378191350 source:d:\programming\mie\artpic\src\viewer.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"color.h"
+	"control.h"
+	"shapes.h"
+	"draw.h"
+	"viewer.h"
+
+1382209330 source:d:\programming\mie\artpic\src\tofile.c
+	"artpic.h"
+	"auxf.h"
+	"alloc.h"
+	"msg.h"
+	"tofile.h"
+
+1384885279 source:/home/clemens/Dropbox/Programming/Mie/artpic/src/main.c
+	"artpic.h"
+	"viewer.h"
+	"draw.h"
+	"intersec.h"
+	"auxf.h"
+	"msg.h"
+	"ray.h"
+	"ray_aux.h"
+	"refr_data.h"
+	"tofig.h"
+	"tofile.h"
+	"fromfile.h"
+	"tests.h"
+	"alloc.h"
+
+1394310717 /home/clemens/Dropbox/Programming/Mie/artpic/src/artpic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<unistd.h>
+	<math.h>
+	<complex.h>
+	<limits.h>
+	<float.h>
+	<ctype.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/freeglut.h>
+	<sys/stat.h>
+	<omp.h>
+	<stdarg.h>
+	<fenv.h>
+	<assert.h>
+	<errno.h>
+	<dir.h>
+
+1378020995 /home/clemens/Dropbox/Programming/Mie/artpic/src/viewer.h
+
+1378020990 /home/clemens/Dropbox/Programming/Mie/artpic/src/draw.h
+
+1374078960 /home/clemens/Dropbox/Programming/Mie/artpic/src/intersec.h
+
+1377591995 /home/clemens/Dropbox/Programming/Mie/artpic/src/auxf.h
+
+1377966647 /home/clemens/Dropbox/Programming/Mie/artpic/src/msg.h
+
+1375456169 /home/clemens/Dropbox/Programming/Mie/artpic/src/ray.h
+
+1376923873 /home/clemens/Dropbox/Programming/Mie/artpic/src/ray_aux.h
+
+1332007002 /home/clemens/Dropbox/Programming/Mie/artpic/src/refr_data.h
+
+1377094231 /home/clemens/Dropbox/Programming/Mie/artpic/src/tofig.h
+
+1376418783 /home/clemens/Dropbox/Programming/Mie/artpic/src/tofile.h
+
+1374223203 /home/clemens/Dropbox/Programming/Mie/artpic/src/fromfile.h
+
+1375813835 /home/clemens/Dropbox/Programming/Mie/artpic/src/tests.h
+
+1377197835 /home/clemens/Dropbox/Programming/Mie/artpic/src/alloc.h
+
+1419074958 source:c:\users\cs\dropbox\programming\mie\artpic\src\alloc.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+	"refr_data.h"
+
+1419074305 c:\users\cs\dropbox\programming\mie\artpic\src\artpic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<unistd.h>
+	<math.h>
+	<complex.h>
+	<limits.h>
+	<float.h>
+	<ctype.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/freeglut.h>
+	<sys/stat.h>
+	<omp.h>
+	<stdarg.h>
+	<fenv.h>
+	<assert.h>
+	<errno.h>
+	<io.h>
+
+1377963047 c:\users\cs\dropbox\programming\mie\artpic\src\msg.h
+
+1377588395 c:\users\cs\dropbox\programming\mie\artpic\src\auxf.h
+
+1332007002 c:\users\cs\dropbox\programming\mie\artpic\src\refr_data.h
+
+1419075110 source:c:\users\cs\dropbox\programming\mie\artpic\src\auxf.c
+	"artpic.h"
+	"lina.h"
+	"alloc.h"
+	"ray_aux.h"
+	"color.h"
+	"rot.h"
+	"msg.h"
+	"auxf.h"
+
+1375709898 c:\users\cs\dropbox\programming\mie\artpic\src\lina.h
+
+1377194235 c:\users\cs\dropbox\programming\mie\artpic\src\alloc.h
+
+1376920273 c:\users\cs\dropbox\programming\mie\artpic\src\ray_aux.h
+
+1377455989 c:\users\cs\dropbox\programming\mie\artpic\src\color.h
+
+1372878228 c:\users\cs\dropbox\programming\mie\artpic\src\rot.h
+
+1419075198 source:c:\users\cs\dropbox\programming\mie\artpic\src\color.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+
+1419075218 source:c:\users\cs\dropbox\programming\mie\artpic\src\control.c
+	"artpic.h"
+	"viewer.h"
+	"control.h"
+
+1378017395 c:\users\cs\dropbox\programming\mie\artpic\src\viewer.h
+
+1376293595 c:\users\cs\dropbox\programming\mie\artpic\src\control.h
+
+1419076325 source:c:\users\cs\dropbox\programming\mie\artpic\src\draw.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"shapes.h"
+	"color.h"
+	"lina.h"
+	"viewer.h"
+	"draw.h"
+
+1378190989 c:\users\cs\dropbox\programming\mie\artpic\src\shapes.h
+
+1378017390 c:\users\cs\dropbox\programming\mie\artpic\src\draw.h
+
+1419076354 source:c:\users\cs\dropbox\programming\mie\artpic\src\font.c
+	"artpic.h"
+	"font.h"
+
+1376293672 c:\users\cs\dropbox\programming\mie\artpic\src\font.h
+
+1419076419 source:c:\users\cs\dropbox\programming\mie\artpic\src\fresnel.c
+	"artpic.h"
+	"auxf.h"
+	"fresnel.h"
+
+1372516446 c:\users\cs\dropbox\programming\mie\artpic\src\fresnel.h
+
+1419076621 source:c:\users\cs\dropbox\programming\mie\artpic\src\fromfile.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"auxf.h"
+	"lina.h"
+	"rot.h"
+
+1419076633 source:c:\users\cs\dropbox\programming\mie\artpic\src\intersec.c
+	"artpic.h"
+	"auxf.h"
+	"lina.h"
+	"intersec.h"
+
+1374075360 c:\users\cs\dropbox\programming\mie\artpic\src\intersec.h
+
+1419076720 source:c:\users\cs\dropbox\programming\mie\artpic\src\lina.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+	"lina.h"
+
+1384888879 source:c:\users\cs\dropbox\programming\mie\artpic\src\main.c
+	"artpic.h"
+	"viewer.h"
+	"draw.h"
+	"intersec.h"
+	"auxf.h"
+	"msg.h"
+	"ray.h"
+	"ray_aux.h"
+	"refr_data.h"
+	"tofig.h"
+	"tofile.h"
+	"fromfile.h"
+	"tests.h"
+	"alloc.h"
+
+1375452569 c:\users\cs\dropbox\programming\mie\artpic\src\ray.h
+
+1377090631 c:\users\cs\dropbox\programming\mie\artpic\src\tofig.h
+
+1376415183 c:\users\cs\dropbox\programming\mie\artpic\src\tofile.h
+
+1374223203 c:\users\cs\dropbox\programming\mie\artpic\src\fromfile.h
+
+1375810235 c:\users\cs\dropbox\programming\mie\artpic\src\tests.h
+
+1419078029 source:c:\users\cs\dropbox\programming\mie\artpic\src\msg.c
+	"artpic.h"
+	"alloc.h"
+	"ray_aux.h"
+	"auxf.h"
+	"msg.h"
+
+1419078061 source:c:\users\cs\dropbox\programming\mie\artpic\src\ray.c
+	"artpic.h"
+	"lina.h"
+	"msg.h"
+	"auxf.h"
+	"rot.h"
+	"refr_data.h"
+	"fresnel.h"
+	"ray_aux.h"
+	"tests.h"
+	"ray.h"
+
+1419078235 source:c:\users\cs\dropbox\programming\mie\artpic\src\ray_aux.c
+	"artpic.h"
+	"lina.h"
+	"ray.h"
+	"refr_data.h"
+	"msg.h"
+	"auxf.h"
+	"tests.h"
+	"rot.h"
+
+1419078257 source:c:\users\cs\dropbox\programming\mie\artpic\src\refr_data.c
+	"artpic.h"
+	"msg.h"
+
+1419078356 source:c:\users\cs\dropbox\programming\mie\artpic\src\rot.c
+	"artpic.h"
+	"auxf.h"
+	"rot.h"
+
+1419078495 source:c:\users\cs\dropbox\programming\mie\artpic\src\shapes.c
+	"artpic.h"
+	"alloc.h"
+	"auxf.h"
+	"lina.h"
+	"shapes.h"
+
+1419078517 source:c:\users\cs\dropbox\programming\mie\artpic\src\tests.c
+	"artpic.h"
+	"lina.h"
+	"msg.h"
+	"ray.h"
+	"ray_aux.h"
+	"fresnel.h"
+	"refr_data.h"
+	"tests.h"
+
+1419078550 source:c:\users\cs\dropbox\programming\mie\artpic\src\tofig.c
+	"artpic.h"
+	"auxf.h"
+	"alloc.h"
+	"msg.h"
+	"tofig.h"
+
+1419078599 source:c:\users\cs\dropbox\programming\mie\artpic\src\tofile.c
+	"artpic.h"
+	"auxf.h"
+	"alloc.h"
+	"msg.h"
+	"tofile.h"
+
+1419078632 source:c:\users\cs\dropbox\programming\mie\artpic\src\viewer.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"color.h"
+	"control.h"
+	"shapes.h"
+	"draw.h"
+	"viewer.h"
+
+1419074958 source:/home/cs/Dropbox/Programming/Mie/artpic/src/alloc.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+	"refr_data.h"
+
+1419074305 /home/cs/Dropbox/Programming/Mie/artpic/src/artpic.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<unistd.h>
+	<math.h>
+	<complex.h>
+	<limits.h>
+	<float.h>
+	<ctype.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/freeglut.h>
+	<sys/stat.h>
+	<omp.h>
+	<stdarg.h>
+	<fenv.h>
+	<assert.h>
+	<errno.h>
+	<io.h>
+
+1377966647 /home/cs/Dropbox/Programming/Mie/artpic/src/msg.h
+
+1377591995 /home/cs/Dropbox/Programming/Mie/artpic/src/auxf.h
+
+1332007002 /home/cs/Dropbox/Programming/Mie/artpic/src/refr_data.h
+
+1419075110 source:/home/cs/Dropbox/Programming/Mie/artpic/src/auxf.c
+	"artpic.h"
+	"lina.h"
+	"alloc.h"
+	"ray_aux.h"
+	"color.h"
+	"rot.h"
+	"msg.h"
+	"auxf.h"
+
+1375713498 /home/cs/Dropbox/Programming/Mie/artpic/src/lina.h
+
+1377197835 /home/cs/Dropbox/Programming/Mie/artpic/src/alloc.h
+
+1376923873 /home/cs/Dropbox/Programming/Mie/artpic/src/ray_aux.h
+
+1377459589 /home/cs/Dropbox/Programming/Mie/artpic/src/color.h
+
+1372881828 /home/cs/Dropbox/Programming/Mie/artpic/src/rot.h
+
+1419075198 source:/home/cs/Dropbox/Programming/Mie/artpic/src/color.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+
+1419075218 source:/home/cs/Dropbox/Programming/Mie/artpic/src/control.c
+	"artpic.h"
+	"viewer.h"
+	"control.h"
+
+1378020995 /home/cs/Dropbox/Programming/Mie/artpic/src/viewer.h
+
+1376297195 /home/cs/Dropbox/Programming/Mie/artpic/src/control.h
+
+1419076325 source:/home/cs/Dropbox/Programming/Mie/artpic/src/draw.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"shapes.h"
+	"color.h"
+	"lina.h"
+	"viewer.h"
+	"draw.h"
+
+1378194589 /home/cs/Dropbox/Programming/Mie/artpic/src/shapes.h
+
+1378020990 /home/cs/Dropbox/Programming/Mie/artpic/src/draw.h
+
+1419076354 source:/home/cs/Dropbox/Programming/Mie/artpic/src/font.c
+	"artpic.h"
+	"font.h"
+
+1376297272 /home/cs/Dropbox/Programming/Mie/artpic/src/font.h
+
+1419076419 source:/home/cs/Dropbox/Programming/Mie/artpic/src/fresnel.c
+	"artpic.h"
+	"auxf.h"
+	"fresnel.h"
+
+1372520046 /home/cs/Dropbox/Programming/Mie/artpic/src/fresnel.h
+
+1419076621 source:/home/cs/Dropbox/Programming/Mie/artpic/src/fromfile.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"auxf.h"
+	"lina.h"
+	"rot.h"
+
+1419076633 source:/home/cs/Dropbox/Programming/Mie/artpic/src/intersec.c
+	"artpic.h"
+	"auxf.h"
+	"lina.h"
+	"intersec.h"
+
+1374078960 /home/cs/Dropbox/Programming/Mie/artpic/src/intersec.h
+
+1419076720 source:/home/cs/Dropbox/Programming/Mie/artpic/src/lina.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+	"lina.h"
+
+1420119937 source:/home/cs/Dropbox/Programming/Mie/artpic/src/main.c
+	"artpic.h"
+	"viewer.h"
+	"draw.h"
+	"intersec.h"
+	"auxf.h"
+	"msg.h"
+	"ray.h"
+	"ray_aux.h"
+	"refr_data.h"
+	"tofig.h"
+	"tofile.h"
+	"fromfile.h"
+	"tests.h"
+	"alloc.h"
+
+1375456169 /home/cs/Dropbox/Programming/Mie/artpic/src/ray.h
+
+1377094231 /home/cs/Dropbox/Programming/Mie/artpic/src/tofig.h
+
+1376418783 /home/cs/Dropbox/Programming/Mie/artpic/src/tofile.h
+
+1374223203 /home/cs/Dropbox/Programming/Mie/artpic/src/fromfile.h
+
+1375813835 /home/cs/Dropbox/Programming/Mie/artpic/src/tests.h
+
+1419078029 source:/home/cs/Dropbox/Programming/Mie/artpic/src/msg.c
+	"artpic.h"
+	"alloc.h"
+	"ray_aux.h"
+	"auxf.h"
+	"msg.h"
+
+1419078061 source:/home/cs/Dropbox/Programming/Mie/artpic/src/ray.c
+	"artpic.h"
+	"lina.h"
+	"msg.h"
+	"auxf.h"
+	"rot.h"
+	"refr_data.h"
+	"fresnel.h"
+	"ray_aux.h"
+	"tests.h"
+	"ray.h"
+
+1419078235 source:/home/cs/Dropbox/Programming/Mie/artpic/src/ray_aux.c
+	"artpic.h"
+	"lina.h"
+	"ray.h"
+	"refr_data.h"
+	"msg.h"
+	"auxf.h"
+	"tests.h"
+	"rot.h"
+
+1419078257 source:/home/cs/Dropbox/Programming/Mie/artpic/src/refr_data.c
+	"artpic.h"
+	"msg.h"
+
+1419078356 source:/home/cs/Dropbox/Programming/Mie/artpic/src/rot.c
+	"artpic.h"
+	"auxf.h"
+	"rot.h"
+
+1419078495 source:/home/cs/Dropbox/Programming/Mie/artpic/src/shapes.c
+	"artpic.h"
+	"alloc.h"
+	"auxf.h"
+	"lina.h"
+	"shapes.h"
+
+1419078517 source:/home/cs/Dropbox/Programming/Mie/artpic/src/tests.c
+	"artpic.h"
+	"lina.h"
+	"msg.h"
+	"ray.h"
+	"ray_aux.h"
+	"fresnel.h"
+	"refr_data.h"
+	"tests.h"
+
+1419078550 source:/home/cs/Dropbox/Programming/Mie/artpic/src/tofig.c
+	"artpic.h"
+	"auxf.h"
+	"alloc.h"
+	"msg.h"
+	"tofig.h"
+
+1419078599 source:/home/cs/Dropbox/Programming/Mie/artpic/src/tofile.c
+	"artpic.h"
+	"auxf.h"
+	"alloc.h"
+	"msg.h"
+	"tofile.h"
+
+1419078632 source:/home/cs/Dropbox/Programming/Mie/artpic/src/viewer.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"color.h"
+	"control.h"
+	"shapes.h"
+	"draw.h"
+	"viewer.h"
+

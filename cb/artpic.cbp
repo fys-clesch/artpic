@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="artpic" />
+		<Option platforms="Windows;Unix;" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Option show_notes="0">
+			<notes>
+				<![CDATA[All lengths shall be measured in mm, if not specified otherwise.
+clemens schaefermeier]]>
+			</notes>
+		</Option>
+		<Build>
+			<Target title="Debug">
+				<Option platforms="Windows;Unix;" />
+				<Option output="bin/Debug/artpic" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-pg" />
+					<Add option="-g" />
+					<Add option="-fopenmp" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg -lgmon" />
+					<Add option="-pg" />
+					<Add option="-fopenmp" />
+					<Add library="m" />
+					<Add library="freeglut" />
+					<Add library="glu32" />
+					<Add library="opengl32" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option platforms="Windows;Unix;" />
+				<Option output="bin/Release/artpic" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-fopenmp" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-fopenmp" />
+					<Add library="m" />
+					<Add library="freeglut" />
+					<Add library="glu32" />
+					<Add library="opengl32" />
+				</Linker>
+			</Target>
+			<Target title="Debug_Static">
+				<Option platforms="Windows;" />
+				<Option output="bin/Debug_Static/artpic" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug_Static/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-pg" />
+					<Add option="-g" />
+					<Add option="-lgomp" />
+					<Add option="-fopenmp" />
+					<Add option="-DFREEGLUT_STATIC" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg -lgmon" />
+					<Add option="-fopenmp" />
+					<Add library="m" />
+					<Add library="freeglut_static" />
+					<Add library="glu32" />
+					<Add library="opengl32" />
+					<Add library="winmm" />
+					<Add library="gdi32" />
+				</Linker>
+			</Target>
+			<Target title="Release_Static">
+				<Option platforms="Windows;" />
+				<Option output="bin/Release_Static/artpic" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release_Static/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+					<Add option="-lgomp" />
+					<Add option="-fopenmp" />
+					<Add option="-DFREEGLUT_STATIC" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-fopenmp" />
+					<Add library="m" />
+					<Add library="freeglut_static" />
+					<Add library="glu32" />
+					<Add library="opengl32" />
+					<Add library="winmm" />
+					<Add library="gdi32" />
+				</Linker>
+			</Target>
+			<Target title="Debug_Unix">
+				<Option platforms="Unix;" />
+				<Option output="bin/Debug_Unix/artpic" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wextra" />
+					<Add option="-Wall" />
+					<Add option="-pg" />
+					<Add option="-g" />
+					<Add option="-fopenmp" />
+				</Compiler>
+				<Linker>
+					<Add option="-pg" />
+					<Add option="-fopenmp" />
+					<Add library="GLU" />
+					<Add library="glut" />
+					<Add library="GL" />
+				</Linker>
+			</Target>
+			<Target title="Release_Unix">
+				<Option platforms="Unix;" />
+				<Option output="bin/Release_Unix/artpic" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release_Unix/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O3" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="-fopenmp" />
+					<Add library="GLU" />
+					<Add library="glut" />
+					<Add library="GL" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="../Makefile">
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="../src/alloc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/alloc.h" />
+		<Unit filename="../src/artpic.h" />
+		<Unit filename="../src/auxf.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/auxf.h" />
+		<Unit filename="../src/color.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/color.h" />
+		<Unit filename="../src/control.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/control.h" />
+		<Unit filename="../src/draw.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/draw.h" />
+		<Unit filename="../src/font.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/font.h" />
+		<Unit filename="../src/fresnel.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/fresnel.h" />
+		<Unit filename="../src/fromfile.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/fromfile.h" />
+		<Unit filename="../src/intersec.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/intersec.h" />
+		<Unit filename="../src/lina.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/lina.h" />
+		<Unit filename="../src/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/msg.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/msg.h" />
+		<Unit filename="../src/ray.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ray.h" />
+		<Unit filename="../src/ray_aux.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/ray_aux.h" />
+		<Unit filename="../src/refr_data.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/refr_data.h" />
+		<Unit filename="../src/rot.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/rot.h" />
+		<Unit filename="../src/shapes.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/shapes.h" />
+		<Unit filename="../src/tests.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/tests.h" />
+		<Unit filename="../src/tofig.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/tofig.h" />
+		<Unit filename="../src/tofile.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/tofile.h" />
+		<Unit filename="../src/viewer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../src/viewer.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+			<AutoVersioning>
+				<Scheme minor_max="10" build_max="0" rev_max="0" rev_rand_max="10" build_times_to_increment_minor="100" />
+				<Settings autoincrement="1" date_declarations="1" use_define="0" update_manifest="0" do_auto_increment="1" ask_to_increment="0" language="C" svn="0" svn_directory="" header_path="version.h" />
+				<Changes_Log show_changes_editor="1" app_title="released version %M.%m.%b of %p" changeslog_path="ChangesLog.txt" />
+				<Code header_guard="VERSION_H" namespace="" prefix="" />
+			</AutoVersioning>
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

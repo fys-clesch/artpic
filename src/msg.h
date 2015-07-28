@@ -1,0 +1,15 @@
+void print_intro(void);
+void error_msg(const char *res_pt msg, const char *res_pt file, int line, const char *res_pt fname);
+void fp_error(const char *file, int line, const char *fname);
+void print_ray(const ray *res_pt r, const char *res_pt c);
+void print_intrsec(const intrsec *res_pt i, const char *res_pt c);
+void print_doub_mat(const double *m, uint row, uint col, const char *c);
+void print_uint_mat(const uint *m, uint row, uint col, const char *c);
+void print_doub3(const double *p, const int i, const char c);
+void print_point3(const point3 *p, const int i, const char c);
+void print_line3(const line3 *l, const int i, const char c);
+void print_plane3(const plane3 *p, const int i);
+void gimme_bin(uchar i);
+void prog_of_rays(const uint n, const prog_ray_order order);
+void fncyprint(const char *str, const uint d);
+void print_trace_child_count(const glray_s const *res_pt glr);
