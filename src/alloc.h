@@ -30,7 +30,7 @@ hit_screen *alloc_hit_screen(const uint n);
 hit_screen *realloc_hit_screen(hit_screen *m, const uint n, const uint plus);
 bin_hit_screen *alloc_bin_hit_screen(const uint n, const double rad, const uint res_polar, const uint res_azim);
 void free_bin_hit_screen(bin_hit_screen *m, const uint n);
-void alloc_nsphere3(sphere3 *ss, const point3 *ps, const double *rs, const uint n);
+sphere3 *alloc_nsphere3(const point3 *ps, const double *rs, const uint n);
 sphrcl_prtcl *alloc_sphrcl_prtcl(const uint n);
 vertex3 *alloc_vertex3(const uint n);
 patch3 *alloc_patch3(const uint n);
@@ -40,5 +40,5 @@ colorbox *alloc_colorbox(const uint n, const uint ncval);
 boundingbox *alloc_boundingbox(const uint n);
 
 extern uint allocated_tir_event_memory,
-			allocated_exhausted_event_memory,
+            allocated_exhausted_event_memory,
             allocated_lost_event_memory;

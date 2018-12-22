@@ -2,7 +2,7 @@ void norm_rgb(double *rgb);
 void constrain_rgb(double *rgb);
 void rgbtohsv(double *rgb, double *hsv);
 void hsvtorgb(double *hsv, double *rgb);
-void color_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen const *bhs, const colorfun cfun, const double alpha, const bin_hit_print_type type);
+void color_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const bhs, const colorfun cfun, const double alpha, const bin_hit_print_type type);
 void map_cfun(double *rgba, double nval, const double min, const double max, const colorfun cfun);
 
 extern const double lighttocolor[401][3],

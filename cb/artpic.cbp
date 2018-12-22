@@ -20,17 +20,12 @@ clemens schaefermeier]]>
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-Wextra" />
-					<Add option="-Wall" />
 					<Add option="-pg" />
 					<Add option="-g" />
-					<Add option="-fopenmp" />
 				</Compiler>
 				<Linker>
 					<Add option="-pg -lgmon" />
 					<Add option="-pg" />
-					<Add option="-fopenmp" />
-					<Add library="m" />
 					<Add library="freeglut" />
 					<Add library="glu32" />
 					<Add library="opengl32" />
@@ -44,12 +39,9 @@ clemens schaefermeier]]>
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O3" />
-					<Add option="-fopenmp" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-fopenmp" />
-					<Add library="m" />
 					<Add library="freeglut" />
 					<Add library="glu32" />
 					<Add library="opengl32" />
@@ -62,18 +54,12 @@ clemens schaefermeier]]>
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-Wextra" />
-					<Add option="-Wall" />
 					<Add option="-pg" />
 					<Add option="-g" />
-					<Add option="-lgomp" />
-					<Add option="-fopenmp" />
 					<Add option="-DFREEGLUT_STATIC" />
 				</Compiler>
 				<Linker>
-					<Add option="-pg -lgmon" />
-					<Add option="-fopenmp" />
-					<Add library="m" />
+					<Add option="-pg" />
 					<Add library="freeglut_static" />
 					<Add library="glu32" />
 					<Add library="opengl32" />
@@ -89,14 +75,10 @@ clemens schaefermeier]]>
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O3" />
-					<Add option="-lgomp" />
-					<Add option="-fopenmp" />
 					<Add option="-DFREEGLUT_STATIC" />
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-fopenmp" />
-					<Add library="m" />
 					<Add library="freeglut_static" />
 					<Add library="glu32" />
 					<Add library="opengl32" />
@@ -111,15 +93,13 @@ clemens schaefermeier]]>
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-Wextra" />
-					<Add option="-Wall" />
 					<Add option="-pg" />
 					<Add option="-g" />
-					<Add option="-fopenmp" />
+					<Add option="-fsanitize=address" />
 				</Compiler>
 				<Linker>
 					<Add option="-pg" />
-					<Add option="-fopenmp" />
+					<Add option="-fsanitize=address" />
 					<Add library="GLU" />
 					<Add library="glut" />
 					<Add library="GL" />
@@ -136,13 +116,20 @@ clemens schaefermeier]]>
 				</Compiler>
 				<Linker>
 					<Add option="-s" />
-					<Add option="-fopenmp" />
 					<Add library="GLU" />
 					<Add library="glut" />
 					<Add library="GL" />
 				</Linker>
 			</Target>
 		</Build>
+		<Compiler>
+			<Add option="-Wextra" />
+			<Add option="-Wall" />
+			<Add option="-fopenmp" />
+		</Compiler>
+		<Linker>
+			<Add option="-fopenmp" />
+		</Linker>
 		<Unit filename="../Makefile">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>

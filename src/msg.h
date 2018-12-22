@@ -12,4 +12,4 @@ void print_plane3(const plane3 *p, const int i);
 void gimme_bin(uchar i);
 void prog_of_rays(const uint n, const prog_ray_order order);
 void fncyprint(const char *str, const uint d);
-void print_trace_child_count(const glray_s const *res_pt glr);
+void print_trace_child_count(const glray_s *const res_pt glr);

@@ -1,4 +1,4 @@
-CC = gcc
+CC = gcc-8
 
 ifndef DEBUG
  DEBUG = 1
@@ -29,16 +29,16 @@ else
 endif
 
 ifeq ($(DEBUG),1)
- CFLAGS = -O0 -g -Wall -Wextra -Wpedantic -lm -std=c99 -fopenmp
- #add -U__STRICT_ANSI__ when compiling with MSYS
+ CFLAGS = -O0 -g -Wall -Wextra -Wpedantic -lm -std=c11 -fopenmp
+ # add -U__STRICT_ANSI__ when compiling with MSYS!
 else ifeq ($(DEBUG),2)
-  CFLAGS = -O0 -g -pg -Wall -Wextra -Wpedantic -lm -std=c99 -fprofile-arcs -ftest-coverage -fopenmp
+  CFLAGS = -O0 -g -pg -fsanitize=address -Wall -Wextra -Wpedantic -lm -std=c11 -fprofile-arcs -ftest-coverage -fopenmp
 else ifeq ($(DEBUG),0)
  ifeq ($(OPT),1)
-  CFLAGS = -O3 -ffast-math -lm -std=c99 -fopenmp
+  CFLAGS = -O3 -ffast-math -lm -std=c11 -fopenmp
   BFLAGS = -Wl,--strip-all
  else
-  CFLAGS = -O3 -lm -std=c99 -fopenmp
+  CFLAGS = -O3 -lm -std=c11 -fopenmp
   BFLAGS = -Wl,--strip-debug
  endif
 endif
@@ -52,7 +52,7 @@ ifndef OWNFLAGS
 endif
 
 ifeq ($(OSID),1)
-#static compile and linking for windows and freeglut
+# static compile and linking for windows and freeglut
  ifeq ($(FGSTATIC),1)
   FGLSTAT = -D FREEGLUT_STATIC
   LINKOGL = -lfreeglut_static -lglu32 -lopengl32 -lwinmm -lgdi32
