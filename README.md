@@ -25,3 +25,5 @@ So far, the only primitive is a sphere, but complex system can be composed of in
 The program relys on  freeglut, an OpenGL context handler to make it portable over a variety of operating systems, for 3D data visualisation.
 OpenMP is used to trace rays throgh the system in parallel.
 It is convenient to have gnuplot installed for exporting results to plots.
+
+![Example figure](https://github.com/fys-clesch/artpic/blob/master/test.png)
