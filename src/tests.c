@@ -365,7 +365,7 @@ void testing(void)
     load_prtcls("E:/Programming/Mie/artpic/mat.dat",rfrct_indx_h2o,632.8e-6,20.,20.,&l1,&n,&bndngbox,1);*/
     puts("done testing");
     /** Direct draw of some test objects, insert into maindisplay:
-     * lhandle_sphere3(20,40,1.,cred,DRAW_EM_ALL);
+     * lhandle_sphere3(20,40,1.,CRED,DRAW_EM_ALL);
      * ddraw_sphere3(20,40,1.);
      */
 }

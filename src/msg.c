@@ -4,7 +4,7 @@
 #include "auxf.h"
 #include "msg.h"
 
-/** \brief Prints an information about the program to the screen
+/** \brief Prints an information about the program to the screen-
  *
  * \param void
  * \return void
@@ -15,7 +15,7 @@ void print_intro(void)
     char *str = alloc_char(1024);
     snprintf(str, 1024, "\
              artpic - a ray tracing program in C\n\
-             Copyright (C) 2017  Clemens Schaefermeier\n\
+             Copyright (C) 2018  Clemens Schaefermeier\n\
              clemens(at)fh-muenster.de\n\n\
              This program is free software: you can\n\
              redistribute it and/or modify it under the\n\
@@ -37,12 +37,12 @@ void print_intro(void)
     free(str);
 }
 
-/** \brief Prints an error message to stderr
+/** \brief Prints an error message to stderr.
  *
- * \param msg const char *res_pt The message
- * \param file const char *res_pt The name of the file where the error occured
- * \param line int The line number where the error occured
- * \param fname const char *res_pt The name of the function where the error occured
+ * \param msg const char *res_pt The message.
+ * \param file const char *res_pt The name of the file where the error occurred.
+ * \param line int The line number where the error occurred.
+ * \param fname const char *res_pt The name of the function where the error occurred.
  * \return void
  *
  */
@@ -56,11 +56,11 @@ void error_msg(const char *res_pt msg, const char *res_pt file, int line, const 
 #endif
 }
 
-/** \brief Prints floating point exceptions
+/** \brief Prints floating point exceptions.
  *
- * \param file const char* The name of the file which called this function
- * \param line int The line where this function was called
- * \param fname const char* The name of the function which called this function
+ * \param file const char* The name of the file which called this function.
+ * \param line int The line where this function was called.
+ * \param fname const char* The name of the function which called this function.
  * \return void
  *
  */
@@ -78,10 +78,10 @@ void fp_error(const char *file, int line, const char *fname)
     FP_ERR_CLEAR;
 }
 
-/** \brief Prints a ray variable to the screen
+/** \brief Prints a ray variable to the screen.
  *
- * \param r const ray *res_pt A pointer to a ray variable
- * \param c const char *res_pt Some additional string to identify the ray
+ * \param r const ray *res_pt A pointer to a ray variable.
+ * \param c const char *res_pt Some additional string to identify the ray.
  * \return void
  *
  */
@@ -100,10 +100,10 @@ void print_ray(const ray *res_pt r, const char *res_pt c)
     print_doub3((*r).ppol, (*r).trans_child, 'p');
 }
 
-/** \brief Prints an intrsec variable to the screen
+/** \brief Prints an intrsec variable to the screen.
  *
- * \param i const intrsec *res_pt A pointer to an intrsec variable
- * \param c const char *res_pt Some additional string to identify the intrsec
+ * \param i const intrsec *res_pt A pointer to an intrsec variable.
+ * \param c const char *res_pt Some additional string to identify the intrsec.
  * \return void
  *
  */
@@ -117,12 +117,12 @@ void print_intrsec(const intrsec *res_pt i, const char *res_pt c)
             (*i).incdnc == NONE ? "none" : (*i).incdnc == OBLIQUE ? "oblique" : (*i).incdnc == VERTICAL ? "vertical" : "right-angled");
 }
 
-/** \brief Prints a double matrix to the screen
+/** \brief Prints a double matrix to the screen.
  *
- * \param m const double* The matrix
- * \param row uint The range of the first index
- * \param col uint The range of the second index
- * \param c const char* A name to identify the matrix
+ * \param m const double* The matrix.
+ * \param row uint The range of the first index.
+ * \param col uint The range of the second index.
+ * \param c const char* A name to identify the matrix.
  * \return void
  *
  */
@@ -132,17 +132,18 @@ void print_doub_mat(const double *m, uint row, uint col, const char *c)
     fprintf(stdout, "%s:\n", c);
     for(i = 0; i < row; i++)
     {
-        for(j = 0, ii = i * col; j < col; j++) fprintf(stdout, "%15.4g ", m[ii + j]);
+        for(j = 0, ii = i * col; j < col; j++)
+            fprintf(stdout, "%15.4g ", m[ii + j]);
         fprintf(stdout, "\n");
     }
 }
 
-/** \brief Prints a double matrix to the screen
+/** \brief Prints a double matrix to the screen.
  *
- * \param m const uint* The matrix
- * \param row uint The range of the first index
- * \param col uint The range of the second index
- * \param c const char* A name to identify the matrix
+ * \param m const uint* The matrix.
+ * \param row uint The range of the first index.
+ * \param col uint The range of the second index.
+ * \param c const char* A name to identify the matrix.
  * \return void
  *
  */
@@ -157,11 +158,11 @@ void print_uint_mat(const uint *m, uint row, uint col, const char *c)
     }
 }
 
-/** \brief Prints a double[3] variable to the screen
+/** \brief Prints a double[3] variable to the screen.
  *
- * \param p const double* The pointer to the double array
- * \param i const int An integer to identify the variable
- * \param c const char A character to identify the variable
+ * \param p const double* The pointer to the double array.
+ * \param i const int An integer to identify the variable.
+ * \param c const char A character to identify the variable.
  * \return void
  *
  */
@@ -171,11 +172,11 @@ void print_doub3(const double *p, const int i, const char c)
             "", p[0], c, i, p[1], "", p[2]);
 }
 
-/** \brief Prints a point3 variable to the screen
+/** \brief Prints a point3 variable to the screen.
  *
- * \param p const point3* The pointer to the point3 variable
- * \param i const int An integer to identify the variable
- * \param c const char A character to identify the variable
+ * \param p const point3* The pointer to the point3 variable.
+ * \param i const int An integer to identify the variable.
+ * \param c const char A character to identify the variable.
  * \return void
  *
  */
@@ -185,11 +186,11 @@ void print_point3(const point3 *p, const int i, const char c)
             "", (*p).x[0], c, i, (*p).x[1], "", (*p).x[2]);
 }
 
-/** \brief Prints a line3 variable to the screen
+/** \brief Prints a line3 variable to the screen.
  *
- * \param l const line3* The pointer to the line3 variable
- * \param i const int An integer to identify the variable
- * \param c const char A character to identify the variable
+ * \param l const line3* The pointer to the line3 variable.
+ * \param i const int An integer to identify the variable.
+ * \param c const char A character to identify the variable.
  * \return void
  *
  */
@@ -201,10 +202,10 @@ void print_line3(const line3 *l, const int i, const char c)
             "", (*l).o[2], "", (*l).r[2]);
 }
 
-/** \brief Prints a plane3 variable to the screen
+/** \brief Prints a plane3 variable to the screen.
  *
- * \param p const plane3* The pointer to the plane3 variable
- * \param i const int An integer to identify the variable
+ * \param p const plane3* The pointer to the plane3 variable.
+ * \param i const int An integer to identify the variable.
  * \return void
  *
  */
@@ -216,9 +217,9 @@ void print_plane3(const plane3 *p, const int i)
             "", (*p).o[2], "", (*p).n[2]);
 }
 
-/** \brief Prints an unsigned char in a binary format
+/** \brief Prints an unsigned char in a binary format.
  *
- * \param i uchar The char to be converted
+ * \param i uchar The char to be converted.
  * \return void
  *
  */
@@ -234,13 +235,13 @@ void gimme_bin(uchar i)
     fprintf(stdout, "dec: %4i -> bin: %s\n", i, out);
 }
 
-/** \brief Handles the printing of the calculation progress
+/** \brief Handles the printing of the calculation progress.
  *
- * \param n const uint The number of the rays which have been traced (un)successfully at the time of calling this function
- * \param order const prog_ray_order The precise order to this function
+ * \param n const uint The number of the rays which have been traced (un)successfully at the time of calling this function.
+ * \param order const prog_ray_order The precise order to this function.
  * \return void
  *
- * The first call to this function has to be done with INIT_PROG, the last one with CLEAR_OUT
+ * The first call to this function has to be done with INIT_PROG, the last one with CLEAR_OUT.
  */
 void prog_of_rays(const uint n, const prog_ray_order order)
 {
@@ -258,7 +259,7 @@ void prog_of_rays(const uint n, const prog_ray_order order)
         memset(bar, '-', 100);
 #if PRINT_PROG_OF_RAYS
         fprintf(stdout, "\nprogress of driving %lu rays through your setup:\n|%-100.100s|",
-                global_ray_info.count_gen, printbar); /**< global_ray_info.count_gen is a global variable */
+                GLOBAL_RAY_INFO.count_gen, printbar); /**< GLOBAL_RAY_INFO.count_gen is a global variable. */
         fflush(stdout);
 #endif
     }
@@ -267,7 +268,7 @@ void prog_of_rays(const uint n, const prog_ray_order order)
         sn += n;
         if(order == PRINT_PROG)
         {
-            memcpy(printbar, bar, sn * 100 / global_ray_info.count_gen);
+            memcpy(printbar, bar, sn * 100 / GLOBAL_RAY_INFO.count_gen);
 #if PRINT_PROG_OF_RAYS
             fprintf(stdout, "%c|%-100.100s|", 13, printbar);
             fflush(stdout);
@@ -276,8 +277,8 @@ void prog_of_rays(const uint n, const prog_ray_order order)
     }
     else
     {
-        assert(sn * 100 / global_ray_info.count_gen <= 100);
-        memcpy(printbar, bar, sn * 100 / global_ray_info.count_gen);
+        assert(sn * 100 / GLOBAL_RAY_INFO.count_gen <= 100);
+        memcpy(printbar, bar, sn * 100 / GLOBAL_RAY_INFO.count_gen);
 #if PRINT_PROG_OF_RAYS
         fprintf(stdout, "%c|%-100.100s|", 13, printbar);
 #endif
@@ -289,17 +290,17 @@ void prog_of_rays(const uint n, const prog_ray_order order)
                 "          lost           %10lu\n"
                 "          detected       %10lu (%lu %%)\n",
                 fabs(omp_get_wtime() - start_t),
-                global_ray_info.count_gen, global_ray_info.count_exhstd,
-                global_ray_info.count_lost, global_ray_info.count_hit,
-                100 * global_ray_info.count_hit / global_ray_info.count_gen);
+                GLOBAL_RAY_INFO.count_gen, GLOBAL_RAY_INFO.count_exhstd,
+                GLOBAL_RAY_INFO.count_lost, GLOBAL_RAY_INFO.count_hit,
+                100 * GLOBAL_RAY_INFO.count_hit / GLOBAL_RAY_INFO.count_gen);
         sn = 0;
     }
 }
 
-/** \brief Print a char array in a fancy style
+/** \brief Print a char array in a fancy style.
  *
- * \param str const char* The message
- * \param d const uint The time in microseconds to sleep between each letter-animation
+ * \param str const char* The message.
+ * \param d const uint The time in microseconds to sleep between each letter-animation.
  * \return void
  *
  */
@@ -327,9 +328,9 @@ void fncyprint(const char *str, const uint d)
     fflush(stdout);
 }
 
-/** \brief Prints a glray_s variable to check for proper initialization
+/** \brief Prints a glray_s variable to check for proper initialisation.
  *
- * \param const glray_s *const res_pt glr The ray to be checked
+ * \param const glray_s *const res_pt glr The ray to be checked.
  * \return void
  *
  */

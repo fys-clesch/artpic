@@ -5,12 +5,12 @@
 #include "lina.h"
 #include "rot.h"
 
-/** \brief Reads an int data matrix file and stores it into memory
+/** \brief Reads an int data matrix file and stores it into memory.
  *
- * \param fname const char* The name of the file to be read
- * \param m double* The array to store the data
- * \param row const uint The count of the first index of the matrix
- * \param col const uint The count of the second index of the matrix
+ * \param fname const char* The name of the file to be read.
+ * \param m double* The array to store the data.
+ * \param row const uint The count of the first index of the matrix.
+ * \param col const uint The count of the second index of the matrix.
  * \return void
  *
  */
@@ -46,12 +46,12 @@ void intf_to_mem(const char *fname, double *m, const uint row, const uint col)
     else if(i < o) error_msg("file smaller than expected", ERR_ARG);
 }
 
-/** \brief Reads a double data matrix file and stores it into memory
+/** \brief Reads a double data matrix file and stores it into memory.
  *
- * \param fname const char* The name of the file to be read
- * \param m double* The array to store the data
- * \param row const uint The count of the first index of the matrix
- * \param col const uint The count of the second index of the matrix
+ * \param fname const char* The name of the file to be read.
+ * \param m double* The array to store the data.
+ * \param row const uint The count of the first index of the matrix.
+ * \param col const uint The count of the second index of the matrix.
  * \return void
  *
  */
@@ -86,23 +86,23 @@ void doubf_to_mem(const char *fname, double *m, const uint row, const uint col)
     else if(i < o) error_msg("file smaller than expected", ERR_ARG);
 }
 
-/** \brief Generate particles from a file
+/** \brief Generate particles from a file.
  *
- * \param fname const char *res_pt The name of the file
+ * \param fname const char *res_pt The name of the file.
  * \param (*reffun)(double, const char *) cdoub The function to evaluate the refractive index of the medium. First input is the wavelength, second the length unit, e.g. 'mm'.
- * \param wavlen const double The wavelength in millimetres
- * \param xspread const double The center to center distance in the x direction
- * \param yspread const double The center to center distance in the y direction
+ * \param wavlen const double The wavelength in millimetres.
+ * \param xspread const double The centre to centre distance in the x direction.
+ * \param yspread const double The centre to centre distance in the y direction.
  * \param tvec const line3 *res_pt The vector along which the particles are displaced. The particles thereby placed in a plane orthogonal to this vector, starting from the x-y plane.
- * \param prtcls uint *res_pt The number of particles which have been loaded from the file
- * \param bbox boundingbox *res_pt The boundingbox variable which is written in the cause of this function
- * \param chatty const uchar A flag to control the output printed on screen during the execution
- * \return sphrcl_prtcl* An array of particles which is created due to this function
+ * \param prtcls uint *res_pt The number of particles which have been loaded from the file.
+ * \param bbox boundingbox *res_pt The boundingbox variable which is written in the cause of this function.
+ * \param chatty const uchar A flag to control the output printed on screen during the execution.
+ * \return sphrcl_prtcl* An array of particles which is created due to this function.
  *
- * The file must contain a matrix whose entries correspond to binarized particles
- * A 0 in the file is a particle
- * The particles are initialized with a refractive index according to the given wavelength
- * The plane on which the particles are generated will be transformed along the vector
+ * The file must contain a matrix whose entries correspond to binarised particles.
+ * A 0 in the file is a particle.
+ * The particles are initialized with a refractive index according to the given wavelength.
+ * The plane on which the particles are generated will be transformed along the vector.
  */
 sphrcl_prtcl *load_prtcls(const char *res_pt fname,
                         cdoub(*reffun)(double, const char *),
@@ -124,21 +124,21 @@ sphrcl_prtcl *load_prtcls(const char *res_pt fname,
     char tc;
     if(chatty) fprintf(stdout, "\nloading particle matrix from '%s'... ", fname);
     fflush(stdout);
-    while(fscanf(rfile, "%c", &tc) != EOF) /**< Determine the length of a column */
+    while(fscanf(rfile, "%c", &tc) != EOF) /**< Determine the length of a column. */
         if(tc == '\n')
         {
-            if(j) break; /**< This happens in case of an additional linebreak at the end of the file */
-            else if(!o) col = o = i; /**< First linebreak */
+            if(j) break; /**< This happens in case of an additional linebreak at the end of the file. */
+            else if(!o) col = o = i; /**< First linebreak. */
             else if((o += col) != i) error_msg("reading error, columns are not constant", ERR_ARG);
             j = 1;
         }
         else if(isdigit(tc))
         {
-            i++; /**< The counter */
+            i++; /**< The counter. */
             j = 0;
         }
         else if(tc == '\t') j = 0;
-    if(!j) o += col; /**< Adds the last column to the total number */
+    if(!j) o += col; /**< Adds the last column to the total number. */
     mat = alloc_uint(o);
     rewind(rfile);
     /**< Now really extract data from the file: */
@@ -171,14 +171,14 @@ sphrcl_prtcl *load_prtcls(const char *res_pt fname,
     double mu_prtcl = 1.,
            alpha, beta,
            startx, starty, startz;
-    const double psize = (xspread / col < yspread / row) ? (xspread / (2.*col)) : (yspread / (2.*row)); /**< This determines the particle's radius */
+    const double psize = (xspread / col < yspread / row) ? (xspread / (2.*col)) : (yspread / (2.*row)); /**< This determines the particle's radius. */
     startx = -xspread / 2. + ((col & 1) ? 0. : (xspread / (2.*col)));
     starty = yspread / 2. - ((row & 1) ? 0. : (yspread / (2.*row)));
     startz = 0.;
     /**< Get the point to construct the box: */
     double rp1[3] = {startx, starty, startz},
-                    rp2[3] = {startx + xspread / col, starty, startz},
-                             rp3[3] = {startx, starty - yspread / row, startz};
+           rp2[3] = {startx + xspread / col, starty, startz},
+           rp3[3] = {startx, starty - yspread / row, startz};
     /**< Initialize the edge vertices of the box: */
     (*bbox).rect[0].x[0] = startx - psize;
     (*bbox).rect[0].x[1] = starty + psize;
@@ -197,8 +197,9 @@ sphrcl_prtcl *load_prtcls(const char *res_pt fname,
     snprintf((*bbox).xwidth, INFOLENGTH, "%g mm", fabs((*bbox).rect[0].x[0] - (*bbox).rect[1].x[0]));
     snprintf((*bbox).yheight, INFOLENGTH, "%g mm", fabs((*bbox).rect[0].x[1] - (*bbox).rect[3].x[1]));
     snprintf((*bbox).zdepth, INFOLENGTH, "%g mm", fabs((*bbox).rect[0].x[2] - (*bbox).rect[4].x[2]));
-    /**< Apply the rotation and translation according to the vector */
-    if((*tvec).r[0] == 0. && (*tvec).r[1] == 0. && (*tvec).r[2] == 0.) alpha = beta = 0.;
+    /**< Apply the rotation and translation according to the vector. */
+    if((*tvec).r[0] == 0. && (*tvec).r[1] == 0. && (*tvec).r[2] == 0.)
+        alpha = beta = 0.;
     else
     {
         alpha = atan2((*tvec).r[0], -(*tvec).r[1]);

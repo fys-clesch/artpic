@@ -1,13 +1,13 @@
 #include "artpic.h"
 #include "msg.h"
 
-const cdoub n_vac = 1. + 0.i;
-const double mu_vac = 1.;
+const cdoub N_VAC = 1. + 0.i;
+const double MU_VAC = 1.;
 
-/** \brief Computes the refractive index of H2O
+/** \brief Computes the refractive index of H2O.
  *
- * \param lam double The wavelength
- * \param s const char* The unit of lam
+ * \param lam double The wavelength.
+ * \param s const char* The unit of lam.
  * \return cdoub The output
  *
  * http://refractiveindex.info/?group=LIQUIDS&material=Water
@@ -47,15 +47,15 @@ cdoub rfrct_indx_h2o(double lam, const char *s)
     else return (sqrt(n) + 1.1e-7 * 1.i);
 }
 
-/** \brief Computes the refractive index of air
+/** \brief Computes the refractive index of air.
  *
- * \param lam double The wavelength
- * \param s const char* The unit of lam
- * \return cdoub The output
+ * \param lam double The wavelength.
+ * \param s const char* The unit of lam.
+ * \return cdoub The output.
  *
- * Reference for the data: Philip E. Ciddor
+ * Reference for the data: Philip E. Ciddor.
  * Refractive index of air: new equations for the visible and near infrared
- * Appl. Optics 35, 1566-1573 (1996)
+ * Appl. Optics 35, 1566-1573 (1996).
  * doi:10.1364/AO.35.001566
  * Conditions: 15.0 deg, 101 325 Pa
  */
@@ -81,5 +81,6 @@ cdoub rfrct_indx_air(double lam, const char *s)
         error_msg("imaginary value, returning 1.", ERR_ARG);
         return 1. + 0.i;
     }
-    else return (n + 0.i);
+    else
+        return (n + 0.i);
 }

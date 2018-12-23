@@ -101,8 +101,8 @@ int main(int argc, char **argv)
     sphrcl_prtcl *prtcls = alloc_sphrcl_prtcl(nprtcls);
 //  set_sphrcl_prtcl(&prtcls[0],rfrct_indx_h2o(lambda,"mm"),mu_prtcl,0.,0.,0.,.4);
     set_sphrcl_prtcl(&prtcls[0], 1.4 + 0.i, mu_prtcl, 0., 0., 0., .4);
-    set_sphrcl_prtcl(&prtcls[1], n_vac, mu_prtcl, 0., 1., 0., .42);
-    set_sphrcl_prtcl(&prtcls[2], n_vac, mu_prtcl, 0., 0., 1., .41);
+    set_sphrcl_prtcl(&prtcls[1], N_VAC, mu_prtcl, 0., 1., 0., .42);
+    set_sphrcl_prtcl(&prtcls[2], N_VAC, mu_prtcl, 0., 0., 1., .41);
     set_sphere3(&screen, 0., 0., 0., b_htscrn[0].rad);
     /**< Initiate the bundle of rays: */
     set_point3(&polarisation, 1., 0., 0.);
@@ -174,7 +174,7 @@ int main(int argc, char **argv)
                     prog_of_rays(1, COUNT_PROG);
                 }
                 #pragma omp atomic
-                global_ray_info.count_hit++;
+                GLOBAL_RAY_INFO.count_hit++;
                 continue; /**< If the screen was hit, proceed with the next ray */
             }
         }
@@ -185,7 +185,7 @@ int main(int argc, char **argv)
                 reg_hit(&first, &htscrn[ui], 0xDEAD, EXCEPTION_STATE);
             }
             #pragma omp atomic
-            global_ray_info.count_lost++;
+            GLOBAL_RAY_INFO.count_lost++;
             fprintf(stderr, "ray %u:\n", ui);
             error_msg("direct loss of a ray", ERR_ARG);
             continue;
@@ -270,7 +270,7 @@ int main(int argc, char **argv)
                 if(use_ogl)
                     make_trace(&subrs[i1], &glrays[0], ui);
                 #pragma omp atomic
-                global_ray_info.count_exhstd++;
+                GLOBAL_RAY_INFO.count_exhstd++;
                 continue;
             }
             /**< Check for the nearest intersection with the particles: */
@@ -296,7 +296,7 @@ int main(int argc, char **argv)
                     if(use_ogl)
                         make_trace(&subrs[i1], &glrays[0], ui);
                     #pragma omp atomic
-                    global_ray_info.count_hit++;
+                    GLOBAL_RAY_INFO.count_hit++;
                     continue;
                 }
             if(min_l == DBL_MAX)
@@ -309,7 +309,7 @@ int main(int argc, char **argv)
                 if(use_ogl)
                     make_trace(&subrs[i1], &glrays[0], ui);
                 #pragma omp atomic
-                global_ray_info.count_lost++;
+                GLOBAL_RAY_INFO.count_lost++;
                 continue;
             }
             /**< Set the intersection: */
@@ -355,7 +355,7 @@ int main(int argc, char **argv)
         }
         #pragma omp critical(count_gen_update) /**< This can be substituted by atomic capture with OMP 3.1 */
         {
-            global_ray_info.count_gen += (i2 + n_move * n_subrs);
+            GLOBAL_RAY_INFO.count_gen += (i2 + n_move * n_subrs);
         }
         #pragma omp critical(prog_of_rays)
         {

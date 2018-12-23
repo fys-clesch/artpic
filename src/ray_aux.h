@@ -8,4 +8,4 @@ void propagate_ray_eps(ray *r);
 uchar set_refr_index(const ray *res_pt ri, intrsec *res_pt i, const cdoub n_prtcl, const double mu_prtcl);
 void reg_hit(const ray *res_pt r, hit_screen *res_pt hs, const double cangl_i, const ray_end_state state);
 
-extern gen_ray_info global_ray_info;
+extern gen_ray_info GLOBAL_RAY_INFO;

@@ -8,23 +8,36 @@
 #include "viewer.h"
 
 /**
- * Good OpenGL tutorial: http://www.3dsource.de/faq/viewing.htm
+ * Good OpenGL tutorial: http://www.3dsource.de/faq/viewing.htm.
  */
-uint main_width, main_height, parent_win, sub1_win;
-const uint init_main_width = 800, init_main_height = 600;
-const double nearclppng = -1000., farclppng = 1000.;
-double rotY = 0., norY = 0., rotX = 0.,
-       movY = 0., movX = 0., zoom = DEFAULT_ZOOM;
+uint main_width,
+     main_height,
+     parent_win,
+     sub1_win;
+const uint init_main_width = 800,
+           init_main_height = 600;
+const double nearclppng = -1000.,
+             farclppng = 1000.;
+double rotY = 0.,
+       norY = 0.,
+       rotX = 0.,
+       movY = 0.,
+       movX = 0.,
+       zoom = DEFAULT_ZOOM;
 uchar use_light = 0;
 
-extern const uchar lmouse_down, rmouse_down, stop_rot, translate, esc_pressed;
+extern const uchar lmouse_down,
+                   rmouse_down,
+                   stop_rot,
+                   translate,
+                   esc_pressed;
 extern const uint draw_ray_n;
 extern const double bin_sphere3_alpha;
 
-/** \brief Initiates the OpenGL viewer
+/** \brief Initiates the OpenGL viewer.
  *
- * \param argc int The number of arguments taken from the main function
- * \param argv char** The list of arguments taken from the main function
+ * \param argc int The number of arguments taken from the main function.
+ * \param argv char** The list of arguments taken from the main function.
  * \return void
  *
  */
@@ -50,9 +63,9 @@ void go_freeglut(int argc, char **argv)
 
 /** \brief Initializes the OpenGL mode
  *
- * \param argc int The first argument from main
- * \param argv char** The second argument from main
- * \return uint The identifier of the main window
+ * \param argc int The first argument from main.
+ * \param argv char** The second argument from main.
+ * \return uint The identifier of the main window.
  *
  */
 uint init_main(int argc, char **argv)
@@ -67,7 +80,7 @@ uint init_main(int argc, char **argv)
     glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
     glutCreateWindow("artpic");
     glutSetCursor(GLUT_CURSOR_CROSSHAIR);
-    /* glEnable(GL_DEPTH_TEST); */ /**< If enabled, one can not see through a transparent sphere */
+    /* glEnable(GL_DEPTH_TEST); */ /**< If enabled, one can not see through a transparent sphere. */
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     glEnable(GL_LIGHT0);
@@ -78,14 +91,14 @@ uint init_main(int argc, char **argv)
     glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);
     /* glEnable(GL_NORMALIZE); */
     glEnable(GL_COLOR_MATERIAL);
-    glLightfv(GL_LIGHT0, GL_AMBIENT, light_ambient);
-    glLightfv(GL_LIGHT0, GL_DIFFUSE, light_diffuse);
-    glLightfv(GL_LIGHT0, GL_SPECULAR, light_specular);
-    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
-    glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
-    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
-    glMaterialfv(GL_FRONT, GL_SHININESS, high_shininess);
+    glLightfv(GL_LIGHT0, GL_AMBIENT, LIGHT_AMBIENT);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, LIGHT_DIFFUSE);
+    glLightfv(GL_LIGHT0, GL_SPECULAR, LIGHT_SPECULAR);
+    glLightfv(GL_LIGHT0, GL_POSITION, LIGHT_POSITION);
+    glMaterialfv(GL_FRONT, GL_AMBIENT, MAT_AMBIENT);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, MAT_DIFFUSE);
+    glMaterialfv(GL_FRONT, GL_SPECULAR, MAT_SPECULAR);
+    glMaterialfv(GL_FRONT, GL_SHININESS, HIGH_SHININESS);
     glClearColor(0., 0., 0., 0.);
     glClearDepth(1.);
     glViewport(0, 0, main_width, main_height);
@@ -100,12 +113,12 @@ uint init_main(int argc, char **argv)
     return glutGetWindow();
 }
 
-/** \brief Handles the updating functionality
+/** \brief Handles the updating functionality.
  *
  * \param void
  * \return void
  *
- * This is called by glutIdleFunc
+ * This is called by glutIdleFunc.
  */
 void animate(void)
 {
@@ -129,18 +142,18 @@ void animate(void)
     if(!lmouse_down && !stop_rot)
     {
         static const double vrot = .02;
-        rotY += vrot * (glutGet(GLUT_ELAPSED_TIME) - avgtime); /**< Constant rotation */
+        rotY += vrot * (glutGet(GLUT_ELAPSED_TIME) - avgtime); /**< Constant rotation. */
     }
     rotY = fmod(rotY, 360.);
     rotX = fmod(rotX, 360.);
 }
 
-/** \brief Changes the drawing mode in case the window is not visible
+/** \brief Changes the drawing mode in case the window is not visible.
  *
- * \param vis const int The visibility status
+ * \param vis const int The visibility status.
  * \return void
  *
- * This is called by glutVisibilityFunc
+ * This is called by glutVisibilityFunc.
  */
 void visibility(const int vis)
 {
@@ -152,12 +165,12 @@ void visibility(const int vis)
     }
 }
 
-/** \brief Changes the drawing mode in case the window is covered or inactive
+/** \brief Changes the drawing mode in case the window is covered or inactive.
  *
- * \param state const int The visibility status
+ * \param state const int The visibility status.
  * \return void
  *
- * This is called by glutWindowStatusFunc
+ * This is called by glutWindowStatusFunc.
  */
 void win_state(const int state)
 {
@@ -169,12 +182,12 @@ void win_state(const int state)
     }
 }
 
-/** \brief Handles the main window of the application
+/** \brief Handles the main window of the application.
  *
  * \param void
  * \return void
  *
- * This is called by the first instance of glutDisplayFunc
+ * This is called by the first instance of glutDisplayFunc.
  */
 void maindisplay(void)
 {
@@ -201,7 +214,7 @@ void maindisplay(void)
                  yf[3] = {0., 10., 0.},
                  zs[3] = {0., 0., -10.},
                  zf[3] = {0., 0., 10.};
-    glColor4dv(cwhite);
+    glColor4dv(CWHITE);
     draw_arrowv(xs, xf, .15, .1, 6);
     draw_arrowv(ys, yf, .15, .1, 6);
     draw_arrowv(zs, zf, .15, .1, 6);
@@ -211,12 +224,12 @@ void maindisplay(void)
     glutSwapBuffers();
 }
 
-/** \brief A subdisplay handler
+/** \brief A subdisplay handler.
  *
  * \param void
  * \return void
  *
- * This can be called after an instance of glutCreateSubWindow
+ * This can be called after an instance of glutCreateSubWindow.
  */
 void subdisplay(void)
 {
@@ -228,7 +241,7 @@ void subdisplay(void)
     glMatrixMode(GL_MODELVIEW);
     glPushMatrix();
     glLoadIdentity();
-    glColor3dv(cwhite);
+    glColor3dv(CWHITE);
     /*drawblockstring2d("these keys may have the one or the other effect: "
                       "F1, F11, F12, Esc, R, m, Mouse Buttons. "
                       "this list might be incomplete.",
@@ -244,10 +257,10 @@ void subdisplay(void)
     glutSwapBuffers();
 }
 
-/** \brief Takes care of proper resizing the graphics after the window size is changed
+/** \brief Takes care of proper resizing the graphics after the window size is changed.
  *
- * \param width const int The new width of the window
- * \param height const int The new height of the window
+ * \param width const int The new width of the window.
+ * \param height const int The new height of the window.
  * \return void
  *
  */
@@ -264,7 +277,7 @@ void reshape(const int width, const int height)
     glOrtho(-(double)main_width / 2., (double)main_width / 2., -(double)main_height / 2., (double)main_height / 2., nearclppng, farclppng);
 }
 
-/** \brief Handles deallocation of the memory allocated during the drawing processes
+/** \brief Handles deallocation of the memory allocated during the drawing processes.
  *
  * \param void
  * \return void
@@ -282,17 +295,17 @@ void free_drawing_mem(void)
     fprintf(stdout, "done\n");
 }
 
-/** \brief Handles proper closing of the windows and deallocation of the memory
+/** \brief Handles proper closing of the windows and deallocation of the memory.
  *
  * \param void
  * \return void
  *
- * this is called by glutCloseFunc
+ * This is called by glutCloseFunc.
  */
 void close_all(void)
 {
     static uchar done = 0;
-    if(!done) /**< No chance to free the memory twice */
+    if(!done) /**< No chance to free the memory twice. */
     {
         if(glutGetWindow() && esc_pressed)
         {

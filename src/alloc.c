@@ -262,9 +262,9 @@ ray *alloc_ray(const uint n)
             .pint = 0.,
             .opol = {1., 0., 0.},
             .ppol = {0., 1., 0.},
-            .mu_i = mu_vac,
+            .mu_i = MU_VAC,
             .travel = 0.,
-            .n_i = n_vac,
+            .n_i = N_VAC,
             .tir = 0,
             .trans_child = 0,
             .hits = 0};
@@ -310,9 +310,9 @@ ray *realloc_ray(ray *m, const double lam, const uint n, const uint plus)
         .pint = 0.,
         .opol = {1., 0., 0.},
         .ppol = {0., 1., 0.},
-        .mu_i = mu_vac,
+        .mu_i = MU_VAC,
         .travel = 0.,
-        .n_i = n_vac,
+        .n_i = N_VAC,
         .tir = 0,
         .trans_child = 0,
         .hits = 0};
@@ -588,8 +588,8 @@ intrsec *alloc_intrsec(const uint n)
             .normal = {0., 0., 0.},
             .angl = 0.,
             .cangl = 0.,
-            .mu_f = mu_vac,
-            .n_f = n_vac,
+            .mu_f = MU_VAC,
+            .n_f = N_VAC,
             .incdnc = NONE};
     return m;
 }
@@ -624,8 +624,8 @@ intrsec *realloc_intrsec(intrsec *m, const uint n, const uint plus)
                 .normal = {0., 0., 0.},
                 .angl = 0.,
                 .cangl = 0.,
-                .mu_f = mu_vac,
-                .n_f = n_vac,
+                .mu_f = MU_VAC,
+                .n_f = N_VAC,
                 .incdnc = NONE};
     }
     return m;
@@ -1037,8 +1037,8 @@ sphrcl_prtcl *alloc_sphrcl_prtcl(const uint n)
             .s = (sphere3){
                 .o = {0., 0., 0.},
                 .r = 0.},
-            .n = n_vac,
-            .mu = mu_vac,
+            .n = N_VAC,
+            .mu = MU_VAC,
             .hits = 0,
             .exhstds = 0,
             .no = j++};
@@ -1112,17 +1112,17 @@ void free_patch3(patch3 *m, const uint n)
     free(m);
 }
 
-/** \brief Allocates memory for a colorval array.
+/** \brief Allocates memory for a colourval array.
  *
  * \param n const uint The length of the array.
- * \return colorval* The array.
+ * \return colourval* The array.
  *
  */
-colorval *alloc_colorval(const uint n)
+colourval *alloc_colourval(const uint n)
 {
     uint i;
-    colorval *m = (colorval *)malloc(n * sizeof(colorval));
-    count_mem(n * sizeof(colorval));
+    colourval *m = (colourval *)malloc(n * sizeof(colourval));
+    count_mem(n * sizeof(colourval));
     if(NULL == m)
     {
         error_msg("memory allocation failed. good bye.", ERR_ARG);
@@ -1130,24 +1130,24 @@ colorval *alloc_colorval(const uint n)
         exit(EXIT_FAILURE);
     }
     for(i = 0; i < n; i++)
-        m[i] = (colorval){
+        m[i] = (colourval){
             .rgba = {0xDEAD, 0xDEAD, 0xDEAD, 0xDEAD},
             .val = 0xDEAD};
     return m;
 }
 
-/** \brief Allocates memory for a colorbox array.
+/** \brief Allocates memory for a colourbox array.
  *
  * \param n const uint The length of the array.
- * \param ncval const uint The number of colorvals inside the colorbox.
- * \return colorbox* The array.
+ * \param ncval const uint The number of colourvals inside the colourbox.
+ * \return colourbox* The array.
  *
  */
-colorbox *alloc_colorbox(const uint n, const uint ncval)
+colourbox *alloc_colourbox(const uint n, const uint ncval)
 {
     uint i;
-    colorbox *m = (colorbox *)malloc(n * sizeof(colorbox));
-    count_mem(n * sizeof(colorbox));
+    colourbox *m = (colourbox *)malloc(n * sizeof(colourbox));
+    count_mem(n * sizeof(colourbox));
     if(NULL == m)
     {
         error_msg("memory allocation failed. good bye.", ERR_ARG);
@@ -1156,11 +1156,11 @@ colorbox *alloc_colorbox(const uint n, const uint ncval)
     }
     for(i = 0; i < n; i++)
     {
-        m[i] = (colorbox){
+        m[i] = (colourbox){
             .max = 0.,
             .min = 0.,
             .ncval = ncval};
-        m[i].cval = alloc_colorval(ncval);
+        m[i].cval = alloc_colourval(ncval);
     }
     return m;
 }

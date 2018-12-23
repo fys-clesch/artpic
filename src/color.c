@@ -3,10 +3,10 @@
 #include "auxf.h"
 
 /**
- * A table to convert wavelengths from 380 to 780 nm to RGB values corresponding to a CIE 1964
- * Standard observer and a CIE system with IlluminantE
+ * A table to convert wavelengths from 380 to 780 nm to RGB values corresponding to a CIE 1964.
+ * Standard observer and a CIE system with IlluminantE.
  */
-const double lighttocolor[401][3] =
+const double LIGHTTOCOLOR[401][3] =
 {
     {0.0729182, 0, 1}, {0.0468786, 0.0022235, 1}, {0.0436796, 0.00703644, 1},
     {0.0441658, 0.00696042, 1}, {0.0444142, 0.00691748, 1}, {0.0443842, 0.00699808, 1},
@@ -144,27 +144,27 @@ const double lighttocolor[401][3] =
     {1, 0, 0.181333}, {1, 0, 0.181333}
 };
 
-const double cwhite[4] = {1., 1., 1., 1.},
-cblack[4] = {0., 0., 0., 1.},
-ctrans[4] = {1., 1., 1., .01},
-cgrey[4] = {.8, .8, .8, .5},
-clightgrey[4] = {.9, .9, .9, .5},
-cred[4] = {1., .01, .05, 1.},
-cgreen[4] = {.01, 1., .01, 1.},
-cblue[4] = {.01, .1, 1., 1.};
+const double CWHITE[4] = {1., 1., 1., 1.},
+             CBLACK[4] = {0., 0., 0., 1.},
+             CTRANS[4] = {1., 1., 1., .01},
+             CGREY[4] = {.8, .8, .8, .5},
+             CLIGHTGREY[4] = {.9, .9, .9, .5},
+             CRED[4] = {1., .01, .05, 1.},
+             CGREEN[4] = {.01, 1., .01, 1.},
+             CBLUE[4] = {.01, .1, 1., 1.};
 
-const float light_ambient[4] = {0., 0., 0., .8},
-light_diffuse[4] = {.8, .8, .8, .8},
-light_specular[4] = {.8, .8, .8, .8},
-light_position[4] = {2., 5., 5., 0.},
-mat_ambient[4] = {.7, .7, .7, .8},
-mat_diffuse[4] = {.8, .8, .8, .8},
-mat_specular[4] = {1., 1., 1., .8},
-high_shininess[1] = {100.};
+const float LIGHT_AMBIENT[4] = {0., 0., 0., .8},
+            LIGHT_DIFFUSE[4] = {.8, .8, .8, .8},
+            LIGHT_SPECULAR[4] = {.8, .8, .8, .8},
+            LIGHT_POSITION[4] = {2., 5., 5., 0.},
+            MAT_AMBIENT[4] = {.7, .7, .7, .8},
+            MAT_DIFFUSE[4] = {.8, .8, .8, .8},
+            MAT_SPECULAR[4] = {1., 1., 1., .8},
+            HIGH_SHININESS[1] = {100.};
 
-/** \brief Norms a double array of rgb values to the maximum
+/** \brief Norms a double array of RGB values to the maximum.
  *
- * \param rgb double* The rgb array
+ * \param rgb double* The RGB array.
  * \return void
  *
  */
@@ -180,9 +180,9 @@ void norm_rgb(double *rgb)
     }
 }
 
-/** \brief Makes the minimum value of a double array non-negative
+/** \brief Makes the minimum value of a double array non-negative.
  *
- * \param rgb double* The rgb array
+ * \param rgb double* The RGB array.
  * \return void
  *
  */
@@ -200,14 +200,14 @@ void constrain_rgb(double *rgb)
     }
 }
 
-/** \brief Converts a rgb value to a hsv value
+/** \brief Converts a RGB value to a HSV value.
  *
- * \param rgb double* An array containing the rgb values
- * \param hsv double* An array to store the hsv values
+ * \param rgb double* An array containing the RGB values.
+ * \param hsv double* An array to store the HSV values.
  * \return void
  *
- * This function works for different scopes, that is rgb and hsv can overlap
- * RGB might be changed due to constrain_rgb and norm_rgb
+ * This function works for different scopes, that is RGB and HSV can overlap.
+ * RGB might be changed due to constrain_rgb and norm_rgb.
  */
 void rgbtohsv(double *rgb, double *hsv)
 {
@@ -226,21 +226,27 @@ void rgbtohsv(double *rgb, double *hsv)
         hsv[0] = 60.*(2. + (rgb[2] - rgb[0]) / (max - min));
     else if(max == rgb[2])
         hsv[0] = 60.*(4. + (rgb[0] - rgb[1]) / (max - min));
-    else error_msg("this should not happen", ERR_ARG);
-    if(hsv[0] < 0.) hsv[0] += 360.;
-    if(max == 0.) hsv[1] = 0.;
-    else hsv[1] = (max - min) / max;
-    if(hsv[0] != 0. && hsv[1] != 0.) hsv[2] = max;
-    else hsv[2] = 0.;
+    else
+        error_msg("this should not happen", ERR_ARG);
+    if(hsv[0] < 0.)
+        hsv[0] += 360.;
+    if(max == 0.)
+        hsv[1] = 0.;
+    else
+        hsv[1] = (max - min) / max;
+    if(hsv[0] != 0. && hsv[1] != 0.)
+        hsv[2] = max;
+    else
+        hsv[2] = 0.;
 }
 
-/** \brief Converts a hsv value to a rgb value
+/** \brief Converts a HSV value to a RGB value.
  *
- * \param hsv double* An array containing the hsv values
- * \param rgb double* An array to store the rgb values
+ * \param hsv double* An array containing the HSV values.
+ * \param rgb double* An array to store the RGB values.
  * \return void
  *
- * This function works for different scopes, that is rgb and hsv can overlap
+ * This function works for different scopes, that is RGB and HSV can overlap.
  */
 void hsvtorgb(double *hsv, double *rgb)
 {
@@ -294,24 +300,24 @@ void hsvtorgb(double *hsv, double *rgb)
     }
 }
 
-/** \brief Colors the given bin_hit_screen variable with a color function
+/** \brief Colours the given bin_hit_screen variable with a colour function.
  *
- * \param ptc patch3* The patches that have to be colored
- * \param nptc const uint The number of patches
- * \param *bhs const bin_hit_screen const The variable from which the results are taken which are going to used for coloring
- * \param cfun const colorfun The function to be used for mapping
- * \param alpha const double The alpha channel of the rgb color
- * \param type const bin_hit_print_type specifies The quantity that should be mapped to rgb space
+ * \param ptc patch3* The patches that have to be coloured.
+ * \param nptc const uint The number of patches.
+ * \param *bhs const bin_hit_screen const The variable from which the results are taken which are going to used for colouring.
+ * \param cfun const colourfun The function to be used for mapping.
+ * \param alpha const double The alpha channel of the RGB colour.
+ * \param type const bin_hit_print_type specifies The quantity that should be mapped to RGB space.
  * \return void
  *
  * The patch and the bin size have to be the same (this is tested)
- * Using a double const for bhs to make sure that whether the pointer nor the 'data of it' will be changed
+ * Using a double const for bhs to make sure that whether the pointer nor the 'data of it' will be changed.
  */
-void color_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const bhs, const colorfun cfun, const double alpha, const bin_hit_print_type type)
+void colour_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const bhs, const colourfun cfun, const double alpha, const bin_hit_print_type type)
 {
     uint i;
     double max, min = DBL_MAX, diff = 0xDEAD,
-                t_logminval = 1., /**< A temporary minimum value for the log-scaling  */
+                t_logminval = 1., /**< A temporary minimum value for the log-scaling.  */
                 **fptr;
     uchar logmod;
     switch(type)
@@ -357,7 +363,7 @@ void color_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const 
         }
         else
         {
-            const double logminval = 1e-99; /**< The minimum value used for the log-scaling */
+            const double logminval = 1e-99; /**< The minimum value used for the log-scaling. */
             if(min > logminval) t_logminval = min;
             else t_logminval = logminval;
             min = (min > t_logminval) ? log10(min) : log10(t_logminval);
@@ -385,7 +391,7 @@ void color_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const 
                 ptc[i].rgba[3] = alpha;
             }
             else
-                memcpy(ptc[i].rgba, cgrey, 4 * sizeof(double));
+                memcpy(ptc[i].rgba, CGREY, 4 * sizeof(double));
         }
     else if(cfun == VISIBLE_LIGHT)
     {
@@ -398,16 +404,16 @@ void color_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const 
             if(nval >= 0. && nval <= 1.)
             {
                 uint t1 = (uint)floor(nval * 400.);
-                ptc[i].rgba[0] = lighttocolor[t1][0];
-                ptc[i].rgba[1] = lighttocolor[t1][1];
-                ptc[i].rgba[2] = lighttocolor[t1][2];
+                ptc[i].rgba[0] = LIGHTTOCOLOR[t1][0];
+                ptc[i].rgba[1] = LIGHTTOCOLOR[t1][1];
+                ptc[i].rgba[2] = LIGHTTOCOLOR[t1][2];
                 ptc[i].rgba[3] = alpha;
             }
             else
-                memcpy(ptc[i].rgba, cgrey, 4 * sizeof(double));
+                memcpy(ptc[i].rgba, CGREY, 4 * sizeof(double));
         }
     }
-    else error_msg("unknown colorfun option", ERR_ARG);
+    else error_msg("unknown colourfun option", ERR_ARG);
     if(type == POLARISATION_DENSITY)
         for(i = 0; i < nptc; i++)
             if(fptr[(*bhs).idx[i].ia][(*bhs).idx[i].ib] < DBL_EPSILON2)
@@ -417,17 +423,17 @@ void color_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const 
             }
 }
 
-/** \brief Maps a single double value to a rgba value
+/** \brief Maps a single double value to a RGBA value.
  *
- * \param rgba double* The rgba value to be produced
- * \param nval double The value to be mapped to the rgba space
- * \param min const double The minimum value to be mapped
- * \param max const double The maximum value to be mapped
- * \param cfun const colorfun The function to be used for mapping
+ * \param rgba double* The RGBA value to be produced.
+ * \param nval double The value to be mapped to the RGBA space.
+ * \param min const double The minimum value to be mapped.
+ * \param max const double The maximum value to be mapped.
+ * \param cfun const colourfun The function to be used for mapping.
  * \return void
  *
  */
-void map_cfun(double *rgba, double nval, const double min, const double max, const colorfun cfun)
+void map_cfun(double *rgba, double nval, const double min, const double max, const colourfun cfun)
 {
     double diff = max - min;
     if(cfun == SINCOS_MAP)
@@ -447,7 +453,7 @@ void map_cfun(double *rgba, double nval, const double min, const double max, con
             rgba[3] = 1.;
         }
         else
-            memcpy(rgba, cgrey, 4 * sizeof(double));
+            memcpy(rgba, CGREY, 4 * sizeof(double));
     }
     else if(cfun == VISIBLE_LIGHT)
     {
@@ -455,13 +461,13 @@ void map_cfun(double *rgba, double nval, const double min, const double max, con
         if(nval >= 0. && nval <= 1.)
         {
             uint t1 = (uint)floor(nval * 400.);
-            rgba[0] = lighttocolor[t1][0];
-            rgba[1] = lighttocolor[t1][1];
-            rgba[2] = lighttocolor[t1][2];
+            rgba[0] = LIGHTTOCOLOR[t1][0];
+            rgba[1] = LIGHTTOCOLOR[t1][1];
+            rgba[2] = LIGHTTOCOLOR[t1][2];
             rgba[3] = 1.;
         }
         else
-            memcpy(rgba, cgrey, 4 * sizeof(double));
+            memcpy(rgba, CGREY, 4 * sizeof(double));
     }
     else
         error_msg("wrong identifier", ERR_ARG);

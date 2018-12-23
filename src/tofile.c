@@ -4,16 +4,16 @@
 #include "msg.h"
 #include "tofile.h"
 
-/** \brief Saves a double array to the file f
+/** \brief Saves a double array to the file f.
  *
- * \param m const double* The double array
- * \param row const uint The range of the first index
- * \param col const uint The range of the second index
- * \param f const char* The name of the file
+ * \param m const double* The double array.
+ * \param row const uint The range of the first index.
+ * \param col const uint The range of the second index.
+ * \param f const char* The name of the file.
  * \return void
  *
- * The format of the output is such that it can be used to include the file as a const double array
- * Row and col are used to help indexing and formatting the output
+ * The format of the output is such that it can be used to include the file as a const double array.
+ * Row and col are used to help indexing and formatting the output.
  */
 void mem_to_f(const double *m, const uint row, const uint col, const char *f)
 {
@@ -43,14 +43,14 @@ void mem_to_f(const double *m, const uint row, const uint col, const char *f)
     fclose(wfile);
 }
 
-/** \brief Prints results stored in a bin_hit_screen variable in a file
+/** \brief Prints results stored in a bin_hit_screen variable in a file.
  *
- * \param fname const char *res_pt The name of the file
- * \param bhs const bin_hit_screen *res_pt The bin_hit_screen variable which stores the results
- * \param pprec const uint A flag to specify the printing precision in terms of decimal places
+ * \param fname const char *res_pt The name of the file.
+ * \param bhs const bin_hit_screen *res_pt The bin_hit_screen variable which stores the results.
+ * \param pprec const uint A flag to specify the printing precision in terms of decimal places.
  * \param polar_slice uint The number of the polar slice to be printed. if specified with 0, all are printed.
- * \param type const bin_hit_print_type Specifies which information shall be printed to file
- * \param add_info const char *res_pt Some additional information which will be printed to the file
+ * \param type const bin_hit_print_type Specifies which information shall be printed to file.
+ * \param add_info const char *res_pt Some additional information which will be printed to the file.
  * \param unattndd const uchar If set to 1, no warning will be displayed in case 'fname' already exists. The file will be overwritten.
  * \return void
  *
@@ -69,17 +69,17 @@ void print_bin_hit_screen(const char *res_pt fname, const bin_hit_screen *res_pt
     const double ra = M_PI2 / ((double)(*bhs).res_azim), rp = M_PI / ((double)(*bhs).res_polar),
                  lam = (*bhs).lam * 1e6;
     double ta, tp;
-    if(polar_slice != 0) /**< Determine the bins in the chosen azimuthal slice and the size of the output */
+    if(polar_slice != 0) /**< Determine the bins in the chosen azimuthal slice and the size of the output. */
     {
         for(i = 0; i < (*bhs).nbin; i++)
             if((*bhs).idx[i].ia == polar_slice - 1)
                 break;
         pind = i;
         for(i = 0; (*bhs).idx[pind + i].ia == (*bhs).idx[pind].ia; i++)
-            fsize += sizeof(double); /**< fsize can be used for binary output */
+            fsize += sizeof(double); /**< fsize can be used for binary output. */
     }
     else fsize = (*bhs).nbin * sizeof(double);
-    if((i = strcspn(fname, "/")) < strlen(fname)) /**< Create a directory to store the file if it doesn't exist */
+    if((i = strcspn(fname, "/")) < strlen(fname)) /**< Create a directory to store the file if it doesn't exist. */
     {
         uint k = i++;
         for(; i < strlen(fname); i++)
@@ -104,7 +104,7 @@ fnaming:
         error_msg("maximum filename length exceeded: another file could be overwritten, clear identification unlikely. "
                   "pressing 'Enter' will continue the program.", ERR_ARG);
     }
-    if(!stat(modfname, &fbuf)) /**< Check if the file already exists */
+    if(!stat(modfname, &fbuf)) /**< Check if the file already exists. */
     {
         if(!unattndd)
         {
@@ -116,7 +116,7 @@ fnaming:
                 run++;
                 goto fnaming;
             }
-            else if(yn == '\n' || yn == 'n' || yn == 'N') /**< This maybe elaborated for more security */
+            else if(yn == '\n' || yn == 'n' || yn == 'N') /**< This maybe elaborated for more security. */
             {}
             else
             {

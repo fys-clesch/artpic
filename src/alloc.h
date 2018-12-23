@@ -35,8 +35,8 @@ sphrcl_prtcl *alloc_sphrcl_prtcl(const uint n);
 vertex3 *alloc_vertex3(const uint n);
 patch3 *alloc_patch3(const uint n);
 void free_patch3(patch3 *m, const uint n);
-colorval *alloc_colorval(const uint n);
-colorbox *alloc_colorbox(const uint n, const uint ncval);
+colourval *alloc_colourval(const uint n);
+colourbox *alloc_colourbox(const uint n, const uint ncval);
 boundingbox *alloc_boundingbox(const uint n);
 
 extern uint ALLOCATED_TIR_EVENT_MEMORY,

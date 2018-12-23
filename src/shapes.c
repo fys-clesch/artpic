@@ -4,21 +4,21 @@
 #include "lina.h"
 #include "shapes.h"
 
-/** \brief Generates a table of sine and cosine values
+/** \brief Generates a table of sine and cosine values.
  *
- * \param s_t double *res_pt The output array of sine values
- * \param c_t double *res_pt The output array of cosine values
- * \param res const uint The number of steps from 0 to full_angl
- * \param full_angl const double The maximum angle to be used for the computation
+ * \param s_t double *res_pt The output array of sine values.
+ * \param c_t double *res_pt The output array of cosine values.
+ * \param res const uint The number of steps from 0 to full_angl.
+ * \param full_angl const double The maximum angle to be used for the computation.
  * \return void
  *
- * The input arrays are not allowed to overlap
+ * The input arrays are not allowed to overlap.
  */
 void gen_spherical_table(double *res_pt s_t, double *res_pt c_t, const uint res, const double full_angl)
 {
     uint i;
     double angl = full_angl / (double)res, t1 = angl;
-    s_t = alloc_double(res + 1); /**< Duplicate of the first entry at the end */
+    s_t = alloc_double(res + 1); /**< Duplicate of the first entry at the end. */
     c_t = alloc_double(res + 1);
     s_t[0] = s_t[res] = 0.;
     c_t[0] = c_t[res] = 1.;
@@ -26,15 +26,15 @@ void gen_spherical_table(double *res_pt s_t, double *res_pt c_t, const uint res,
         sincosd(t1, &c_t[i], &s_t[i]);
 }
 
-/** \brief Generates vertices to render a sphere
+/** \brief Generates vertices to render a sphere.
  *
- * \param vsph vertex3* The output array of vertices
- * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi
- * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi
- * \param r const double The radius of the sphere
+ * \param vsph vertex3* The output array of vertices.
+ * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi.
+ * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi.
+ * \param r const double The radius of the sphere.
  * \return void
  *
- * This is called by gen_patch3_bin_sphere3
+ * This is called by gen_patch3_bin_sphere3.
  */
 void gen_sphere3_vertex3(vertex3 *vsph, const uint res_polar, const uint res_azim, const double r)
 {
@@ -51,7 +51,7 @@ void gen_sphere3_vertex3(vertex3 *vsph, const uint res_polar, const uint res_azi
     t2 = t1 = M_PI / (double)res_polar;
     for(i = 1, k = 0; i < res_polar; i++, t2 += t1)
     {
-        sincosd(t2, &z, &tp); /**< From top to bottom */
+        sincosd(t2, &z, &tp); /**< From top to bottom. */
         double zr = z * r,
                tpr = tp * r;
         for(j = 0; j < res_azim; j++, k++)
@@ -70,16 +70,16 @@ void gen_sphere3_vertex3(vertex3 *vsph, const uint res_polar, const uint res_azi
     free(ct_a);
 }
 
-/** \brief Generates vertices to render a sphere
+/** \brief Generates vertices to render a sphere.
  *
- * \param vsph vertex3* The output array of vertices
- * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi
- * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi
- * \param r const double The radius of the sphere
+ * \param vsph vertex3* The output array of vertices.
+ * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi.
+ * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi.
+ * \param r const double The radius of the sphere.
  * \return void
  *
- * This is called by ddraw_sphere3
- * This is similar to gen_sphere3_vertex3 but to be used with direct drawing of spheres
+ * This is called by ddraw_sphere3.
+ * This is similar to gen_sphere3_vertex3 but to be used with direct drawing of spheres.
  */
 void fgen_sphere3_vertex3(vertex3 *vsph, const uint res_polar, const uint res_azim, const double r)
 {
@@ -122,16 +122,16 @@ void fgen_sphere3_vertex3(vertex3 *vsph, const uint res_polar, const uint res_az
     free(ct_a);
 }
 
-/** \brief Generates an array of patch3s to render a sphere
+/** \brief Generates an array of patch3s to render a sphere.
  *
- * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi
- * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi
- * \param r const double The radius of the sphere
- * \param nptc uint* The total number of patches
- * \return patch3* The resulting array of patches
+ * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi.
+ * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi.
+ * \param r const double The radius of the sphere.
+ * \param nptc uint* The total number of patches.
+ * \return patch3* The resulting array of patches.
  *
- * No gl_quad_strip is used to make further addressing of the single patches easier
- * The resulting array shall be used in gl_lists
+ * No gl_quad_strip is used to make further addressing of the single patches easier.
+ * The resulting array shall be used in gl_lists.
  */
 patch3 *gen_patch3_bin_sphere3(const uint res_polar, const uint res_azim, const double r, uint *nptc)
 {
@@ -142,7 +142,7 @@ patch3 *gen_patch3_bin_sphere3(const uint res_polar, const uint res_azim, const 
     *nptc = (res_polar - 2) * res_azim + 2;
     ptc = alloc_patch3(*nptc);
     gen_sphere3_vertex3(vtc, res_polar, res_azim, r);
-    /**< North pole patch */
+    /**< North pole patch. */
     ptc[0].gl_primitive = GL_TRIANGLE_FAN;
     ptc[0].vt = alloc_vertex3(ptc[0].n_vt = (res_azim + 2));
     ptc[0].vt[0].n[0] = ptc[0].vt[0].n[1] = 0.;
@@ -152,7 +152,7 @@ patch3 *gen_patch3_bin_sphere3(const uint res_polar, const uint res_azim, const 
     for(i = 1, j = 0; i <= res_azim; i++, j++)
         memcpy(&ptc[0].vt[i], &vtc[j], sizeof(vertex3));
     memcpy(&ptc[0].vt[i], &vtc[0], sizeof(vertex3));
-    /**< Main patches */
+    /**< Main patches. */
     for(i = k = 1, l = 0; i < res_polar - 1; i++)
     {
         for(j = 0; j < res_azim - 1; j++, k++, l++)
@@ -176,7 +176,7 @@ patch3 *gen_patch3_bin_sphere3(const uint res_polar, const uint res_azim, const 
         l++;
     }
     assert(l == (res_polar - 2)*res_azim);
-    /**< South pole patch */
+    /**< South pole patch. */
     i = l = (res_polar - 1) * res_azim - 1;
     ptc[k].gl_primitive = GL_TRIANGLE_FAN;
     ptc[k].vt = alloc_vertex3(ptc[k].n_vt = (res_azim + 2));
@@ -191,16 +191,16 @@ patch3 *gen_patch3_bin_sphere3(const uint res_polar, const uint res_azim, const 
     return ptc;
 }
 
-/** \brief Generates an array of patch3s to render a sphere
+/** \brief Generates an array of patch3s to render a sphere.
  *
- * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi
- * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi
- * \param r const double The radius of the sphere
- * \param nptc uint* The total number of patches
- * \return patch3* The resulting array of patches
+ * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi.
+ * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi.
+ * \param r const double The radius of the sphere.
+ * \param nptc uint* The total number of patches.
+ * \return patch3* The resulting array of patches.
  *
- * In contrast to gen_patch3_bin_sphere3 the output is optimized for size and render speed
- * The resulting array shall be used in gl_lists
+ * In contrast to gen_patch3_bin_sphere3 the output is optimized for size and render speed.
+ * The resulting array shall be used in gl_lists.
  */
 patch3 *gen_patch3_sphere3(const uint res_polar, const uint res_azim, const double r, uint *nptc)
 {
@@ -210,7 +210,7 @@ patch3 *gen_patch3_sphere3(const uint res_polar, const uint res_azim, const doub
     vtc = alloc_vertex3((res_polar - 1) * res_azim);
     ptc = alloc_patch3(*nptc = res_polar);
     gen_sphere3_vertex3(vtc, res_polar, res_azim, r);
-    /**< North pole patch */
+    /**< North pole patch. */
     ptc[0].gl_primitive = GL_TRIANGLE_FAN;
     ptc[0].vt = alloc_vertex3(ptc[0].n_vt = (res_azim + 2));
     ptc[0].vt[0].n[0] = ptc[0].vt[0].n[1] = 0.;
@@ -220,7 +220,7 @@ patch3 *gen_patch3_sphere3(const uint res_polar, const uint res_azim, const doub
     for(i = 1, j = 0; i <= res_azim; i++, j++)
         memcpy(&ptc[0].vt[i], &vtc[j], sizeof(vertex3));
     memcpy(&ptc[0].vt[i], &vtc[0], sizeof(vertex3));
-    /**< Main patch */
+    /**< Main patch. */
     for(i = 1, l = 0; i < res_polar - 1; i++)
     {
         ptc[i].gl_primitive = GL_QUAD_STRIP;
@@ -234,7 +234,7 @@ patch3 *gen_patch3_sphere3(const uint res_polar, const uint res_azim, const doub
         memcpy(&ptc[i].vt[k], &vtc[l], sizeof(vertex3));
     }
     assert(l == (res_polar - 2)*res_azim && i == res_polar - 1);
-    /**< South pole patch */
+    /**< South pole patch. */
     k = l = (res_polar - 1) * res_azim - 1;
     ptc[i].gl_primitive = GL_TRIANGLE_FAN;
     ptc[i].vt = alloc_vertex3(ptc[i].n_vt = (res_azim + 2));
@@ -249,14 +249,14 @@ patch3 *gen_patch3_sphere3(const uint res_polar, const uint res_azim, const doub
     return ptc;
 }
 
-/** \brief Directly renders a sphere
+/** \brief Directly renders a sphere.
  *
- * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi
- * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi
- * \param r const double The radius of the sphere
+ * \param res_polar const uint The polar resolution, i.e. the steps taken from 0 to pi.
+ * \param res_azim const uint The azimuthal resolution, i.e. the steps taken from 0 to 2*pi.
+ * \param r const double The radius of the sphere.
  * \return void
  *
- * After each call of this function, the sphere has to be recalculated for another render step
+ * After each call of this function, the sphere has to be recalculated for another render step.
  */
 void ddraw_sphere3(const uint res_polar, const uint res_azim, const double r)
 {
@@ -264,7 +264,7 @@ void ddraw_sphere3(const uint res_polar, const uint res_azim, const double r)
     e = (res_azim + 1) * (res_polar - 1) + 2;
     vertex3 *vsph = (vertex3 *)malloc(e * sizeof(vertex3));
     fgen_sphere3_vertex3(vsph, res_polar, res_azim, r);
-    /**< North pole patch */
+    /**< North pole patch. */
     glBegin(GL_TRIANGLE_FAN);
     for(i = 0; i <= res_azim; i++)
     {
@@ -274,7 +274,7 @@ void ddraw_sphere3(const uint res_polar, const uint res_azim, const double r)
     glNormal3dv(vsph[1].n);
     glVertex3dv(vsph[1].x);
     glEnd();
-    /**< Main patch */
+    /**< Main patch. */
     for(i = l = 1; i < res_polar - 1; i++)
     {
         glBegin(GL_QUAD_STRIP);
@@ -287,7 +287,7 @@ void ddraw_sphere3(const uint res_polar, const uint res_azim, const double r)
         }
         glEnd();
     }
-    /**< South pole patch */
+    /**< South pole patch. */
     j = e - 1;
     glBegin(GL_TRIANGLE_FAN);
     for(i = 0; i <= res_azim; i++, j--)
@@ -301,16 +301,16 @@ void ddraw_sphere3(const uint res_polar, const uint res_azim, const double r)
     free(vsph);
 }
 
-/** \brief Directly draws a Sierpinski sponge
+/** \brief Directly draws a Sierpinski sponge.
  *
- * \param n_lvls uint The number of recursions used in the computation to hollow the sponge
- * \param offset const double* The origin of the sponge
- * \param scl double A scaling factor to control the size
+ * \param n_lvls uint The number of recursions used in the computation to hollow the sponge.
+ * \param offset const double* The origin of the sponge.
+ * \param scl double A scaling factor to control the size.
  * \return void
  *
- * Taken from freeglut
- * vertices of the triangle: r0 = (1, 0, 0), r1 = (-1/3, 2*sqrt(2)/3, 0), r2 = (-1/3, -sqrt(2)/3, sqrt(6)/3), r3 = (-1/3, -sqrt(2)/3, -sqrt(6)/3), |r0| = |r1| = |r2| = |r3| = 1
- * The distance between any two points is 2*sqrt(6)/3
+ * Taken from freeglut.
+ * vertices of the triangle: r0 = (1, 0, 0), r1 = (-1/3, 2*sqrt(2)/3, 0), r2 = (-1/3, -sqrt(2)/3, sqrt(6)/3), r3 = (-1/3, -sqrt(2)/3, -sqrt(6)/3), |r0| = |r1| = |r2| = |r3| = 1.
+ * The distance between any two points is 2*sqrt(6)/3.
  */
 void sierpinskisponge(uint n_lvls, const double *offset, double scl)
 {
@@ -328,7 +328,7 @@ void sierpinskisponge(uint n_lvls, const double *offset, double scl)
         for(i = 0; i < num_tet_fac; i++)
         {
             glBegin(GL_LINE_LOOP);
-            glNormal3d(-tet_r[i][0], -tet_r[i][1], -tet_r[i][2]); /**< The unit normals are the negative of the coordinates of the point */
+            glNormal3d(-tet_r[i][0], -tet_r[i][1], -tet_r[i][2]); /**< The unit normals are the negative of the coordinates of the point. */
             uint j;
             for(j = 0; j < 3; j++)
             {
@@ -342,7 +342,7 @@ void sierpinskisponge(uint n_lvls, const double *offset, double scl)
     }
     else
     {
-        double local_offset[3]; /**< Use a local variable to avoid buildup of roundoff errors */
+        double local_offset[3]; /**< Use a local variable to avoid buildup of roundoff errors. */
         n_lvls--;
         scl *= .5;
         for(i = 0; i < num_tet_fac; i++)
@@ -355,13 +355,13 @@ void sierpinskisponge(uint n_lvls, const double *offset, double scl)
     }
 }
 
-/** \brief Draws a 3d like line with an arrow tip
+/** \brief Draws a 3d like line with an arrow tip.
  *
- * \param x1 const double *res_pt The starting point
- * \param x2 const double *res_pt The end point
- * \param len const double The length of the tip, measured in terms of the length of the arrow
- * \param width const double The width or diameter of the tip, measured in terms of the length of the arrow
- * \param nsegs uint The number of segments of the tip
+ * \param x1 const double *res_pt The starting point.
+ * \param x2 const double *res_pt The end point.
+ * \param len const double The length of the tip, measured in terms of the length of the arrow.
+ * \param width const double The width or diameter of the tip, measured in terms of the length of the arrow.
+ * \param nsegs uint The number of segments of the tip.
  * \return void
  *
  */
@@ -445,17 +445,17 @@ void draw_arrowv(const double *res_pt x1, const double *res_pt x2, const double 
 #undef MAX_NSEGS
 }
 
-/** \brief A 'single point' version of draw_arrowv
+/** \brief A 'single point' version of draw_arrowv.
  *
- * \param x1 const double The first entry of the first point
- * \param x2 const double The second entry of the first point
- * \param x3 const double The third entry of the first point
- * \param y1 const double The first entry of the second point
- * \param y2 const double The second entry of the second point
- * \param y3 const double The third entry of the second point
- * \param len const double The length of the tip, measured in terms of the length of the arrow
- * \param width const double The width or diameter of the tip, measured in terms of the length of the arrow
- * \param nsegs uint The number of segments of the tip
+ * \param x1 const double The first entry of the first point.
+ * \param x2 const double The second entry of the first point.
+ * \param x3 const double The third entry of the first point.
+ * \param y1 const double The first entry of the second point.
+ * \param y2 const double The second entry of the second point.
+ * \param y3 const double The third entry of the second point.
+ * \param len const double The length of the tip, measured in terms of the length of the arrow.
+ * \param width const double The width or diameter of the tip, measured in terms of the length of the arrow.
+ * \param nsegs uint The number of segments of the tip.
  * \return void
  *
  */

@@ -4,18 +4,18 @@
 #include "msg.h"
 #include "tofig.h"
 
-/** \brief Calls gnuplot to print a given polar slice to a ps file
+/** \brief Calls gnuplot to print a given polar slice to a ps file.
  *
- * \param pname const char *res_pt The name of the ps file
- * \param bhs const bin_hit_screen *res_pt The pointer to the variable which stores the results
- * \param type const bin_hit_print_type The type of the information which should be printed to the ps file
- * \param showplot const char If set to 1, the system tries to open the plot file
+ * \param pname const char *res_pt The name of the ps file.
+ * \param bhs const bin_hit_screen *res_pt The pointer to the variable which stores the results.
+ * \param type const bin_hit_print_type The type of the information which should be printed to the ps file.
+ * \param showplot const char If set to 1, the system tries to open the plot file.
  * \param unattndd const char If set to 1, no warning will be displayed in case 'fname' already exists. The file will be overwritten.
- * \param slcs const uint The count of slices which are printed to the ps file
- * \param ... The number of the slices, e.g. 5,10,15
+ * \param slcs const uint The count of slices which are printed to the ps file.
+ * \param ... The number of the slices, e.g. 5,10,15.
  * \return void
  *
- * The first polar slice is index with 1 and not with 0
+ * The first polar slice is index with 1 and not with 0.
  */
 void gnuplot_bin_hit_screen(const char *res_pt pname, const bin_hit_screen *res_pt bhs, const bin_hit_print_type type, const uchar showplot, const uchar unattndd, const uint slcs, ...)
 {
@@ -51,17 +51,17 @@ void gnuplot_bin_hit_screen(const char *res_pt pname, const bin_hit_screen *res_
     for(j = 0, i = 0; j < (*bhs).nbin; j++)
         if((*bhs).idx[j].ia == az_slcs[i] - 1)
         {
-            pind[i++] = j; /**< Get the right index for each polar slice */
+            pind[i++] = j; /**< Get the right index for each polar slice. */
             if(i == slcs) break;
         }
     /**< Prepare for proper file creation: */
-    if((i = strcspn(pname, "/")) < strlen(pname)) /**< Create a directory to store the file if it doesn't exist */
+    if((i = strcspn(pname, "/")) < strlen(pname)) /**< Create a directory to store the file if it doesn't exist. */
     {
         uint k = i++;
         for(; i < strlen(pname); i++)
             if(pname[i] == '/')
                 k = i;
-        char dirname[FILENAME_MAX] = ""; /**< Due to a compiler problem on Windows in snprintf */
+        char dirname[FILENAME_MAX] = ""; /**< Due to a compiler problem on Windows in snprintf. */
         snprintf(dirname, ++k, "%s", pname);
         mkdir(dirname DIRMOD;
     }
@@ -94,7 +94,7 @@ fnaming:
                 run++;
                 goto fnaming;
             }
-            else if(yn == '\n' || yn == 'n' || yn == 'N') /**< This maybe elaborated for more security */
+            else if(yn == '\n' || yn == 'n' || yn == 'N') /**< This maybe elaborated for more security. */
             {}
             else
             {

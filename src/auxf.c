@@ -308,7 +308,7 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
         (*bhs).tir += hsc[0].tir;
         (*bhs).lam = c_lam;
         c_lam = 0.; /**< Reset the constant wavelength for a new run, e.g. for a second bundle of rays. */
-        memcpy(&(*bhs).global_info, &global_ray_info, sizeof(gen_ray_info));
+        memcpy(&(*bhs).global_info, &GLOBAL_RAY_INFO, sizeof(gen_ray_info));
     }
     else /**< ...here not, because this function is called after a certain threshold of hits was reached. */
     {
@@ -543,7 +543,7 @@ void copy_ray_to_glray_s(const ray *const res_pt rs, glray_s *res_pt glrs, const
         assert(t1 < 401);
         uint j;
         for(j = 0; j < 3; j++)
-            glrs[i].rgba[j] = &lighttocolor[t1][j];
+            glrs[i].rgba[j] = &LIGHTTOCOLOR[t1][j];
     }
 }
 

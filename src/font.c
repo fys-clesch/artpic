@@ -1,7 +1,7 @@
 #include "artpic.h"
 #include "font.h"
 
-static const uchar rasters[95][13] = /**< A mask for the letters */
+static const uchar rasters[95][13] = /**< A mask for the letters. */
 {
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00},
     {0x00, 0x00, 0x18, 0x18, 0x00, 0x00, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18, 0x18},
@@ -99,11 +99,11 @@ static const uchar rasters[95][13] = /**< A mask for the letters */
     {0x00, 0x00, 0xf0, 0x18, 0x18, 0x18, 0x1c, 0x0f, 0x1c, 0x18, 0x18, 0x18, 0xf0},
     {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x06, 0x8f, 0xf1, 0x60, 0x00, 0x00, 0x00}
 };
-static uint fontoffset; /**< Enumeration of the glList */
+static uint fontoffset; /**< Enumeration of the glList. */
 
-/** \brief Creates glLists for the bit fonts
+/** \brief Creates glLists for the bit fonts.
  *
- * \param init const uchar If set to 1, the lists are created, otherwise they are deleted
+ * \param init const uchar If set to 1, the lists are created, otherwise they are deleted.
  * \return void
  *
  */
@@ -124,9 +124,9 @@ void rasterfont(const uchar init)
     else glDeleteLists(fontoffset, 128);
 }
 
-/** \brief Prints a string at the current raster position
+/** \brief Prints a string at the current raster position.
  *
- * \param s const char* The string to be printed
+ * \param s const char* The string to be printed.
  * \return void
  *
  */
@@ -138,7 +138,7 @@ void printstring(const char *s)
     glPopAttrib();
 }
 
-/** \brief A testing function
+/** \brief A testing function.
  *
  * \param void
  * \return void

@@ -10,31 +10,31 @@
 #include "ray.h"
 
 /**
- * Definition of the surface normal according to (amongst others) E. Hecht's book 'Optics' on page 103 (4th ed.) figure 4.24
+ * Definition of the surface normal according to (amongst others) E. Hecht's book 'Optics' on page 103 (4th ed.) figure 4.24.
  */
 
-/** \brief Computes the cosine of the angle between a normal vector and the ray's vector
+/** \brief Computes the cosine of the angle between a normal vector and the ray's vector.
  *
- * \param r const ray *res_pt A pointer to a ray
- * \param nv const double *res_pt A pointer to a normal vector
- * \return double The output
+ * \param r const ray *res_pt A pointer to a ray.
+ * \param nv const double *res_pt A pointer to a normal vector.
+ * \return double The output.
  *
- * Both vectors have to be normalized which is not checked
+ * Both vectors have to be normalized which is not checked.
  */
 double cangl_in(const ray *res_pt r, const double *res_pt nv)
 {
     return (*r).v.r[0] * nv[0] + (*r).v.r[1] * nv[1] + (*r).v.r[2] * nv[2];
 }
 
-/** \brief Computes the complex cosine of the angle of the transmitted beam
+/** \brief Computes the complex cosine of the angle of the transmitted beam.
  *
- * \param ni const cdoub The refractive index of the medium the incident ray is in
- * \param nt const cdoub The refractive index of the medium the transmitted ray is in
- * \param cangl_i const double The cosine of the angle that the incident ray makes with the surface normal
- * \param tir uchar* A return value to check if TIR occurred or not
- * \return cdoub The cosine of a probably complex argument
+ * \param ni const cdoub The refractive index of the medium the incident ray is in.
+ * \param nt const cdoub The refractive index of the medium the transmitted ray is in.
+ * \param cangl_i const double The cosine of the angle that the incident ray makes with the surface normal.
+ * \param tir uchar* A return value to check if TIR occurred or not.
+ * \return cdoub The cosine of a probably complex argument.
  *
- * If the real part of t1 is less or equal than zero, TIR occurred
+ * If the real part of t1 is less or equal than zero, TIR occurred.
  * According to IEEE Std 1003.1, 2004 Edition the csqurt-function behaves as follow:
  * These functions shall return the complex square root value, in the range of the right half-plane (including the imaginary axis).
  */
@@ -43,7 +43,7 @@ cdoub ccangl_out(const cdoub ni, const cdoub nt, const double cangl_i, uchar *ti
     const double t1 = 1. - cangl_i * cangl_i;
     const cdoub t2 = 1. - ni * ni / (nt * nt) * t1;
     const double t3 = creal(t2),
-                 sign = cangl_i < 0. ? -1. : 1.; /**< This is used to set the proper orientation of the angle */
+                 sign = cangl_i < 0. ? -1. : 1.; /**< This is used to set the proper orientation of the angle. */
     if(t3 > 0.)
     {
         *tir = 0;
@@ -57,16 +57,16 @@ cdoub ccangl_out(const cdoub ni, const cdoub nt, const double cangl_i, uchar *ti
     else
     {
         *tir = 1;
-        return sign * (-csqrt(t2)); /**< See the csqrt definition */
+        return sign * (-csqrt(t2)); /**< See the csqrt definition. */
     }
 }
 
-/** \brief Computes the directional vector of the reflected ray
+/** \brief Computes the directional vector of the reflected ray.
  *
- * \param in const double *res_pt The directional vector of the incident ray
- * \param ref double *res_pt The directional vector of the reflected ray
- * \param nv const double *res_pt The surface normal
- * \param cangl_i const double The cosine of the angle between the surface normal and the incident ray
+ * \param in const double *res_pt The directional vector of the incident ray.
+ * \param ref double *res_pt The directional vector of the reflected ray.
+ * \param nv const double *res_pt The surface normal.
+ * \param cangl_i const double The cosine of the angle between the surface normal and the incident ray.
  * \return void
  *
  */
@@ -75,22 +75,22 @@ void ray_refl(const double *res_pt in, double *res_pt ref, const double *res_pt 
     double t1 = -2.*cangl_i;
     addnmul3(in, t1, nv, ref);
     if(fabs((t1 = len_squ3(ref)) - 1.) > DBL_EPSILON)
-        nvec3_ip(ref, sqrt(t1)); /**< Normalizes the vector */
+        nvec3_ip(ref, sqrt(t1)); /**< Normalises the vector. */
 }
 
-/** \brief Computes the transmitted ray
+/** \brief Computes the transmitted ray.
  *
- * \param in const double *res_pt The incident ray
- * \param trans double *res_pt The output as the transmitted ray
- * \param nv const double *res_pt The surface normal
- * \param ni const cdoub The refractive index of the medium the incident ray is in
- * \param nt const cdoub The refractive index of the medium the transmitted ray is in
- * \param cangl_i const double The cosine of the angle of the incident ray with the surface normal
- * \param cangl_o const cdoub The complex cosine of the angle of the transmitted ray with the surface normal
+ * \param in const double *res_pt The incident ray.
+ * \param trans double *res_pt The output as the transmitted ray.
+ * \param nv const double *res_pt The surface normal.
+ * \param ni const cdoub The refractive index of the medium the incident ray is in.
+ * \param nt const cdoub The refractive index of the medium the transmitted ray is in.
+ * \param cangl_i const double The cosine of the angle of the incident ray with the surface normal.
+ * \param cangl_o const cdoub The complex cosine of the angle of the transmitted ray with the surface normal.
  * \return void
  *
- * nv points inwards object
- * Multiply t2 by -1. if the definition of nv is different from E. Hecht's
+ * nv points inwards object.
+ * Multiply t2 by -1. if the definition of nv is different from E. Hecht's.
  */
 void ray_trans(const double *res_pt in, double *res_pt trans, const double *res_pt nv, const cdoub ni, const cdoub nt, const double cangl_i, const cdoub cangl_o)
 {
@@ -126,21 +126,21 @@ void ray_trans(const double *res_pt in, double *res_pt trans, const double *res_
 #endif
 }
 
-/** \brief Handles the reflection of a ray at an intersection
+/** \brief Handles the reflection of a ray at an intersection.
  *
- * \param ri const ray *res_pt A pointer to a ray
- * \param rrefl ray *res_pt The output
- * \param isec const intrsec *res_pt A pointer to an intersection
- * \param ccangl_f const cdoub The complex cosine of the angle between the surface normal and the transmitted ray
- * \return uchar If the Fresnel coefficients for both polarisations are smaller than MINI_REFLECTION_COEF, return 0
+ * \param ri const ray *res_pt A pointer to a ray.
+ * \param rrefl ray *res_pt The output.
+ * \param isec const intrsec *res_pt A pointer to an intersection.
+ * \param ccangl_f const cdoub The complex cosine of the angle between the surface normal and the transmitted ray.
+ * \return uchar If the Fresnel coefficients for both polarisations are smaller than MINI_REFLECTION_COEF, return 0.
  *
  */
 uchar handle_refl(const ray *res_pt ri, ray *res_pt rrefl, const intrsec *res_pt isec, const cdoub ccangl_f)
 {
     double t1 = fabs((*isec).cangl), t2;
     const cdoub cabs_cangl_f = cabs_real(ccangl_f),
-                cro = cfres_refl_opol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, t1, cabs_cangl_f), /**< TE component */
-                crp = cfres_refl_ppol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, t1, cabs_cangl_f); /**< TM component */
+                cro = cfres_refl_opol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, t1, cabs_cangl_f), /**< TE component. */
+                crp = cfres_refl_ppol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, t1, cabs_cangl_f); /**< TM component. */
     t1 = cabs(cro);
     if(t1 < MINI_REFLECTION_COEF) t1 = 0.;
     t2 = cabs(crp);
@@ -149,7 +149,7 @@ uchar handle_refl(const ray *res_pt ri, ray *res_pt rrefl, const intrsec *res_pt
     {
         fprintf(stderr, "\novershoot of the reflection coefficient\n"
                 "- orthogonal (TE): %g\n- parallel (TM)  : %g", t1 - 1., t2 - 1.);
-        error_msg("this is probably due to the use of complex refractive indices and a tir event", ERR_ARG);
+        error_msg("this is probably due to the use of complex refractive indices and a TIR event", ERR_ARG);
     }
     if(t1 == 0. && t2 == 0.) return 0;
     else
@@ -168,26 +168,26 @@ uchar handle_refl(const ray *res_pt ri, ray *res_pt rrefl, const intrsec *res_pt
     }
 }
 
-/** \brief Handles the transmission of a ray at an intersection
+/** \brief Handles the transmission of a ray at an intersection.
  *
- * \param ri const ray *res_pt A pointer to a ray
- * \param rtrans ray *res_pt The output
- * \param isec const intrsec *res_pt A pointer to an intersection
- * \param ccangl_f const cdoub The complex cosine of the angle between the surface normal and the transmitted ray
+ * \param ri const ray *res_pt A pointer to a ray.
+ * \param rtrans ray *res_pt The output.
+ * \param isec const intrsec *res_pt A pointer to an intersection.
+ * \param ccangl_f const cdoub The complex cosine of the angle between the surface normal and the transmitted ray.
  * \return uchar Refer to the description:
  *
- * If the amplitude of the Fresnel coefficients are smaller than MINI_TRANSMISSION_COEF, a fp-error may have occurred
- * In this case, return 0
- * If a polarisation of the ray is not transmitted, ('half-tir') return 1
- * If both polarizations are transmitted, return 2
+ * If the amplitude of the Fresnel coefficients are smaller than MINI_TRANSMISSION_COEF, a fp-error may have occurred.
+ * In this case, return 0.
+ * If a polarisation of the ray is not transmitted, ('half-TIR') return 1.
+ * If both polarizations are transmitted, return 2.
  */
 uchar handle_trans(const ray *res_pt ri, ray *res_pt rtrans, const intrsec *res_pt isec, const cdoub ccangl_f)
 {
     const double fabs_cangl_i = fabs((*isec).cangl);
     double t1, t2;
     const cdoub cabs_cangl_f = cabs_real(ccangl_f),
-                cto = cfres_trans_opol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, fabs_cangl_i, cabs_cangl_f), /**< TE component */
-                ctp = cfres_trans_ppol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, fabs_cangl_i, cabs_cangl_f); /**< TM component */
+                cto = cfres_trans_opol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, fabs_cangl_i, cabs_cangl_f), /**< TE component. */
+                ctp = cfres_trans_ppol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, fabs_cangl_i, cabs_cangl_f); /**< TM component. */
     t1 = cabs(cto);
     if(t1 < MINI_TRANSMISSION_COEF) t1 = 0.;
     t2 = cabs(ctp);
@@ -199,11 +199,11 @@ uchar handle_trans(const ray *res_pt ri, ray *res_pt rtrans, const intrsec *res_
                 "- parallel (TM)  : %g\n"
                 "- orthogonal (TE) - 2.: %g",
                 t1, t2, t1 - 2.);
-        error_msg("this is probably due to the use of complex refractive indices and a tir event", ERR_ARG);
+        error_msg("this is probably due to the use of complex refractive indices and a TIR event", ERR_ARG);
     }
     if(t1 == 0. && t2 == 0.)
     {
-        error_msg("unexpected result. this event should have been handled by the detection of tir before.", ERR_ARG);
+        error_msg("unexpected result. this event should have been handled by the detection of TIR before.", ERR_ARG);
         return 0;
     }
     else
@@ -220,7 +220,7 @@ uchar handle_trans(const ray *res_pt ri, ray *res_pt rtrans, const intrsec *res_
             ray_trans((*ri).v.r, (*rtrans).v.r, (*isec).normal, (*ri).n_i, (*isec).n_f, (*isec).cangl, ccangl_f);
         else
             cp3((*rtrans).v.r, (*ri).v.r);
-        assert(dot3((*rtrans).v.r, (*ri).v.r) > 0.); /**< The transmitted ray should point in the same half-sphere as the primary one */
+        assert(dot3((*rtrans).v.r, (*ri).v.r) > 0.); /**< The transmitted ray should point in the same half-sphere as the primary one. */
         (*rtrans).n_i = (*isec).n_f;
         (*rtrans).mu_i = (*isec).mu_f;
         normedcross3((*rtrans).v.r, (*rtrans).opol, (*rtrans).ppol);
@@ -229,12 +229,12 @@ uchar handle_trans(const ray *res_pt ri, ray *res_pt rtrans, const intrsec *res_
     }
 }
 
-/** \brief Handles both the transmission and reflection of a ray at an intersection
+/** \brief Handles both the transmission and reflection of a ray at an intersection.
  *
  * \param ri ray *res_pt The incoming ray. It will be used as the reflected ray.
  * \param rsec ray *res_pt The secondary ray. It will be used as the transmitted ray in case of no TIR.
- * \param isec const intrsec *res_pt A pointer to an intersection
- * \return uchar Returns 1 if the secondary ray is created, 0 otherwise
+ * \param isec const intrsec *res_pt A pointer to an intersection.
+ * \return uchar Returns 1 if the secondary ray is created, 0 otherwise.
  *
  */
 uchar handle_reflntrans(ray *res_pt ri, ray *res_pt rsec, const intrsec *res_pt isec)
@@ -248,7 +248,7 @@ uchar handle_reflntrans(ray *res_pt ri, ray *res_pt rsec, const intrsec *res_pt 
     {
         uchar ctrans = handle_trans(ri, rsec, isec, cangl_f);
         if(ctrans != 2)
-            (*ri).tir++; /**< One polarisation was not transmitted ('half-tir') */
+            (*ri).tir++; /**< One polarisation was not transmitted ('half-TIR') */
         uchar crefl = handle_refl(ri, &rswap, isec, cangl_f);
         if(crefl) memcpy(ri, &rswap, sizeof(ray));
         if(!ctrans && !crefl) /**< No transmission and no reflection: */
@@ -257,14 +257,14 @@ uchar handle_reflntrans(ray *res_pt ri, ray *res_pt rsec, const intrsec *res_pt 
             (*ri).oamp = (*ri).pamp = 0.;
             goto sec_dead;
         }
-        else if(!ctrans && crefl) /**< N transmission: */
+        else if(!ctrans && crefl) /**< No transmission: */
         {
             error_msg("unexpected case in handle_reflntrans, most likely due to a fp error", ERR_ARG);
             goto sec_dead;
         }
         else if(ctrans && !crefl) /**< No reflection: */
         {
-            memcpy(ri, rsec, sizeof(ray)); /**< Overwrite the ingoing ray with the secondary */
+            memcpy(ri, rsec, sizeof(ray)); /**< Overwrite the ingoing ray with the secondary. */
             goto sec_dead;
         }
         else /**< Both rays are active. get away from the interface: */
@@ -279,7 +279,7 @@ uchar handle_reflntrans(ray *res_pt ri, ray *res_pt rsec, const intrsec *res_pt 
         }
 sec_dead:
         propagate_ray_eps(ri);
-        (*rsec).lam = 0xDEAD; /**< The ray is not occupied yet and can be used for another intersection */
+        (*rsec).lam = 0xDEAD; /**< The ray is not occupied yet and can be used for another intersection. */
         assert_ray(ri, "transmitted, no reflection", ERR_ARG);
         return 0;
     }
@@ -317,20 +317,20 @@ void map_pol_to_lc(ray *r, const double alpha)
     (*r).ophase = atan2_up(Ax * calpha * spx - Ay * salpha * spy, Ax * calpha * cpx - Ay * cpy * salpha);
     (*r).pphase = atan2_up(Ax * salpha * spx + Ay * calpha * spy, Ay * calpha * cpy + Ax * cpx * salpha);
     double m[9];
-    gen_mat_rot3_n(m, (*r).v.r, -alpha); /**< The rotation of the polarisation vector has to compensate for the rotation of the amplitude and phase */
+    gen_mat_rot3_n(m, (*r).v.r, -alpha); /**< The rotation of the polarisation vector has to compensate for the rotation of the amplitude and phase. */
     inner_product3_mat_vec_ip(m, (*r).opol);
     inner_product3_mat_vec_ip(m, (*r).ppol);
 }
 
-/** \brief Rotates a ray's polarisation according to a new angle alpha to match the local coordinate system at an intersection
+/** \brief Rotates a ray's polarisation according to a new angle alpha to match the local coordinate system at an intersection.
  *
- * \param r ray* A pointer to the ray variable
- * \param alpha const double The angle between a tangential vector of the intersection and the orthogonal polarisation
+ * \param r ray* A pointer to the ray variable.
+ * \param alpha const double The angle between a tangential vector of the intersection and the orthogonal polarisation.
  * \return void
  *
- * This is a unitary transform and does not change the polarisation state of the ray
- * This function should not be called when the angle is 0 or +/- pi
- * The angle is counted positively in a counter-clockwise sense
+ * This is a unitary transform and does not change the polarisation state of the ray.
+ * This function should not be called when the angle is 0 or +/- pi.
+ * The angle is counted positively in a counter-clockwise sense.
  */
 void map_pol_to_lc_opt(ray *r, const double alpha)
 {
@@ -358,16 +358,16 @@ void map_pol_to_lc_opt(ray *r, const double alpha)
     (*r).ophase = atan2_up(t3 * calpha - t4 * salpha, t6 * calpha - t5 * salpha);
     (*r).pphase = atan2_up(t3 * salpha + t4 * calpha, t5 * calpha + t6 * salpha);
     double m[9];
-    gen_mat_rot3_n(m, (*r).v.r, -alpha); /**< The rotation of the polarisation vector has to compensate for the rotation of the amplitude and phase */
+    gen_mat_rot3_n(m, (*r).v.r, -alpha); /**< The rotation of the polarisation vector has to compensate for the rotation of the amplitude and phase. */
     inner_product3_mat_vec_ip(m, (*r).opol);
     inner_product3_mat_vec_ip(m, (*r).ppol);
 }
 
-/** \brief Maps an ingoing ray into the orthogonal and the parallel component with respect to the plane spanned by the ray vector and the surface normal
+/** \brief Maps an ingoing ray into the orthogonal and the parallel component with respect to the plane spanned by the ray vector and the surface normal.
  *
- * \param ri ray *res_pt The ingoing ray
- * \param isec const intrsec *res_pt The intersection
- * \return uchar Returns 0 if the components are already aligned with the local coordinates and 1 if not
+ * \param ri ray *res_pt The ingoing ray.
+ * \param isec const intrsec *res_pt The intersection.
+ * \return uchar Returns 0 if the components are already aligned with the local coordinates and 1 if not.
  *
  */
 uchar orthogo_ray_at_intersec(ray *res_pt ri, const intrsec *res_pt isec)
@@ -380,16 +380,16 @@ uchar orthogo_ray_at_intersec(ray *res_pt ri, const intrsec *res_pt isec)
         print_intrsec(isec, "orthogo-start");
     const double c1 = get_ray_phased_amp(ri);
 #endif
-    normedcross3((*ri).v.r, (*isec).normal, tang); /**< tang is tangential to the surface */
-    const double tcangl = save_dot3(tang, (*ri).opol); /**< The cosine of the angle between tang and the orthogonal polarisation */
+    normedcross3((*ri).v.r, (*isec).normal, tang); /**< tang is tangential to the surface. */
+    const double tcangl = save_dot3(tang, (*ri).opol); /**< The cosine of the angle between tang and the orthogonal polarisation. */
     tswap[0] = fabs(tcangl);
-    if(fabs(tswap[0] - 1.) <= DBL_EPSILON2) /**< The orthogonal polarisation is (anti-)parallel to tang */
+    if(fabs(tswap[0] - 1.) <= DBL_EPSILON2) /**< The orthogonal polarisation is (anti-)parallel to tang. */
         return 0;
-    else if(tswap[0] <= DBL_EPSILON2) /**< The parallel polarisation is (anti-)parallel to tang */
+    else if(tswap[0] <= DBL_EPSILON2) /**< The parallel polarisation is (anti-)parallel to tang. */
     {
         cp3(tswap, (*ri).opol);
-        rev3_ip(tswap); /**< Reverse to keep to the correct orientation between p, o and the directional vector */
-        (*ri).ophase += M_PI; /**< Compensate the prior step with pi */
+        rev3_ip(tswap); /**< Reverse to keep to the correct orientation between p, o and the directional vector. */
+        (*ri).ophase += M_PI; /**< Compensate the prior step with pi. */
         /**< Swap the polarisation vectors: */
         cp3((*ri).opol, (*ri).ppol);
         cp3((*ri).ppol, tswap);
@@ -406,7 +406,7 @@ uchar orthogo_ray_at_intersec(ray *res_pt ri, const intrsec *res_pt isec)
         tc &= assert_parallel(tang, (*ri).opol, "tang", "o", ERR_ARG);
         if(!tc) print_intrsec(isec, "orthogo-special");
     }
-    else /**< The general case */
+    else /**< The general case. */
     {
         tswap[0] = dot3(tang, (*ri).ppol);
         if(tswap[0] > 0.)

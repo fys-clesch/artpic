@@ -7,17 +7,19 @@
 #include "viewer.h"
 #include "draw.h"
 
-extern double const rotY, norY, rotX;
+extern double const rotY,
+                    norY,
+                    rotX;
 extern double const bin_sphere3_alpha;
 extern const uchar use_light;
 extern uint draw_ray_n;
 
-/** \brief Draw a character string
+/** \brief Draw a character string.
  *
- * \param s const char* The string
+ * \param s const char* The string.
  * \return void
  *
- * glutBitmapString() can be used instead but it requires a typecast
+ * glutBitmapString() can be used instead but it requires a typecast.
  */
 void drawstring(const char *s)
 {
@@ -27,11 +29,11 @@ void drawstring(const char *s)
         glutBitmapCharacter(GLUT_BITMAP_8_BY_13, s[i]);
 }
 
-/** \brief Draw the minimum and maximum value at the colourbox
+/** \brief Draw the minimum and maximum value at the colourbox.
  *
- * \param vmin const double* The maximum value mapped to the colourbox
- * \param vmax const double* The minimum value mapped to the colourbox
- * \param slen const uint Maximum string length
+ * \param vmin const double* The maximum value mapped to the colourbox.
+ * \param vmax const double* The minimum value mapped to the colourbox.
+ * \param slen const uint Maximum string length.
  * \return void
  *
  */
@@ -50,14 +52,14 @@ void drawstring_cb(const double *vmin, const double *vmax, const uint slen)
     free(c);
 }
 
-/** \brief Draw a character string in block setting
+/** \brief Draw a character string in block setting.
  *
- * \param s const char* The character string
- * \param linewidth const uint The width of the line in characters
- * \param sx double The initial x position to start drawing
- * \param sy double The initial y position to start drawing
- * \param ix const double The x increment after a linebreak
- * \param iy const double The y increment after a linebreak
+ * \param s const char* The character string.
+ * \param linewidth const uint The width of the line in characters.
+ * \param sx double The initial x position to start drawing.
+ * \param sy double The initial y position to start drawing.
+ * \param ix const double The x increment after a linebreak.
+ * \param iy const double The y increment after a linebreak.
  * \return void
  *
  */
@@ -71,10 +73,10 @@ void drawblockstring2d(const char *s, const uint linewidth, double sx, double sy
         strncpy(buf, &s[i], linewidth);
         if(isspace(buf[0]))
         {
-            memmove(buf, &buf[1], linewidth - 1); /**< Clear spaces at the first position */
+            memmove(buf, &buf[1], linewidth - 1); /**< Clear spaces at the first position. */
             if(i + linewidth < len)
             {
-                buf[linewidth - 1] = s[i + linewidth]; /**< Get one additional character due to removing the first position */
+                buf[linewidth - 1] = s[i + linewidth]; /**< Get one additional character due to removing the first position. */
                 i++;
             }
         }
@@ -95,7 +97,7 @@ void drawblockstring2d(const char *s, const uint linewidth, double sx, double sy
     free(buf);
 }
 
-/** \brief Draws a xyz coordinate system in the lower left corner
+/** \brief Draws a xyz coordinate system in the lower left corner.
  *
  * \param void
  * \return void
@@ -129,15 +131,15 @@ void draw_coord_ov(void)
     glPopMatrix();
 }
 
-/** \brief draws A colorbox in the upper right corner
+/** \brief draws A colourbox in the upper right corner.
  *
- * \param free_cb const uchar Frees the allocated memory for the colourbox if set to 1
+ * \param free_cb const uchar Frees the allocated memory for the colourbox if set to 1.
  * \return void
  *
  */
 void draw_cb(const uchar free_cb)
 {
-    static colorval *cb_stripe;
+    static colourval *cb_stripe;
     static uchar allocd = 0;
     if(free_cb && allocd)
         free(cb_stripe);
@@ -148,7 +150,7 @@ void draw_cb(const uchar free_cb)
         uint i;
         if(!allocd)
         {
-            cb_stripe = alloc_colorval(res);
+            cb_stripe = alloc_colourval(res);
             allocd = 1;
         }
         if(chg)
@@ -176,7 +178,7 @@ void draw_cb(const uchar free_cb)
         }
         glEnd();
         /**< Draw a boundary: */
-        glColor3dv(cwhite);
+        glColor3dv(CWHITE);
         glBegin(GL_LINE_LOOP);
         glVertex2d(0., cbheight);
         glVertex2d(0., 0.);
@@ -188,13 +190,13 @@ void draw_cb(const uchar free_cb)
     }
 }
 
-/** \brief Handles the drawing of rays traced through the system
+/** \brief Handles the drawing of rays traced through the system.
  *
- * \param rs const glray* The array of rays which are used in the viewer
- * \param bundles const uint The number of bundles of rays, e.g. for different wavelength
- * \param opt const draw_opt A flag which tells this function what to do
- * \param n_rs const uint The number of rays to draw
- * \param ... A list of integers to identify the rays
+ * \param rs const glray* The array of rays which are used in the viewer.
+ * \param bundles const uint The number of bundles of rays, e.g. for different wavelength.
+ * \param opt const draw_opt A flag which tells this function what to do.
+ * \param n_rs const uint The number of rays to draw.
+ * \param ... A list of integers to identify the rays.
  * \return void
  *
  */
@@ -218,38 +220,38 @@ void handle_glray(const glray *rs, const uint bundles, const draw_opt opt, const
         uint i, crs_i[n_rs];
         va_start(vl, n_rs);
         for(i = 0; i < n_rs; i++)
-            crs_i[i] = va_arg(vl, uint); /**< Get the ray children to draw */
+            crs_i[i] = va_arg(vl, uint); /**< Get the ray children to draw. */
         va_end(vl);
         for(i = 0; i < allocdbundles; i++)
         {
             uint j;
             for(j = 0; j < n_rs; j++)
             {
-                uint jr = crs_i[j], /**< jr is the specific ray child to draw */
-                     k, ks = 0, kt = 0; /**< ks counts the number of segments in a child, kt the total number of segments */
+                uint jr = crs_i[j], /**< jr is the specific ray child to draw. */
+                     k, ks = 0, kt = 0; /**< ks counts the number of segments in a child, kt the total number of segments. */
                 if(jr >= (*crs[i]).n_glrs)
                 {
                     jr %= (*crs[i]).n_glrs;
                     uint ji;
                     uchar skip = 0;
                     for(ji = 0; ji < n_rs; ji++)
-                        if(jr == crs_i[ji]) /**< Check if this ray was drawn before */
+                        if(jr == crs_i[ji]) /**< Check if this ray was drawn before. */
                         {
                             skip = 1;
                             break;
                         }
                     if(skip)
-                        continue; /**< Do not draw a ray twice */
+                        continue; /**< Do not draw a ray twice. */
                     else
                     {
-                        crs_i[j] = jr; /**< Insert this ray in the list */
+                        crs_i[j] = jr; /**< Insert this ray in the list. */
                         draw_ray_n = crs_i[j];
                     }
                 }
                 for(k = 0; k <= (*crs[i]).glrs[jr].n_child; k++)
                 {
                     uint l;
-                    glBegin(GL_LINE_STRIP);/**< Draw a strip for each ray child */
+                    glBegin(GL_LINE_STRIP);/**< Draw a strip for each ray child. */
                     glColor3dv(*((*crs[i]).glrs[jr].rgba));
                     for(l = 0; l < (*crs[i]).glrs[jr].child[ks]; l++)
                         glVertex3dv((*crs[i]).glrs[jr].trace[kt++].x);
@@ -281,7 +283,7 @@ void handle_glray(const glray *rs, const uint bundles, const draw_opt opt, const
                     for(l = 0; l < (*crs[i]).glrs[j].child[ks]; l++) /**< Run through the children: */
                         glVertex3dv((*crs[i]).glrs[j].trace[kt++].x);
                     glEnd();
-                    ks++; /**< Go to the next index of children */
+                    ks++; /**< Go to the next index of children. */
                 }
                 if(kt != (*crs[i]).glrs[j].n_trace)
                 {
@@ -299,16 +301,16 @@ void handle_glray(const glray *rs, const uint bundles, const draw_opt opt, const
 #undef MAX_BUNDLES
 }
 
-/** \brief This handles the drawing of a simple sphere
+/** \brief This handles the drawing of a simple sphere.
  *
- * \param res_polar const uint The polar resolution of the sphere
- * \param res_azim const uint The azimuthal resolution of the sphere
- * \param rad const double The radius of the sphere
- * \param rgba const double* The colour which should be used to paint the sphere
- * \param opt const draw_opt a flag which tells this function what to do
+ * \param res_polar const uint The polar resolution of the sphere.
+ * \param res_azim const uint The azimuthal resolution of the sphere.
+ * \param rad const double The radius of the sphere.
+ * \param rgba const double* The colour which should be used to paint the sphere.
+ * \param opt const draw_opt a flag which tells this function what to do.
  * \return void
  *
- * Draws and creates a sphere by a list functionality of OpenGL
+ * Draws and creates a sphere by a list functionality of OpenGL.
  * At the moment, only for testing purposes. shouldn't be called more than once.
  */
 void handle_sphere3(const uint res_polar, const uint res_azim, const double rad, const double *rgba, const draw_opt opt)
@@ -358,16 +360,16 @@ void handle_sphere3(const uint res_polar, const uint res_azim, const double rad,
         error_msg("wrong specifier", ERR_ARG);
 }
 
-/** \brief Handles the drawing of a bin_hit_screen variable
+/** \brief Handles the drawing of a bin_hit_screen variable.
  *
- * \param *bhs const bin_hit_screenconst The input, i.e. the results of the ray tracing
- * \param opt const draw_opt A flag which tells this function what to do
- * \param cfun const colorfun The function which will be used to map the scalar results into rgb space
- * \param ptype const bin_hit_print_type The physical quantity which should be printed on the screen/sphere
+ * \param *bhs const bin_hit_screenconst The input, i.e. the results of the ray tracing.
+ * \param opt const draw_opt A flag which tells this function what to do.
+ * \param cfun const colourfun The function which will be used to map the scalar results into RGB space.
+ * \param ptype const bin_hit_print_type The physical quantity which should be printed on the screen/sphere.
  * \return void
  *
  */
-void handle_bin_sphere3(const bin_hit_screen *const bhs, const draw_opt opt, const colorfun cfun, const bin_hit_print_type ptype)
+void handle_bin_sphere3(const bin_hit_screen *const bhs, const draw_opt opt, const colourfun cfun, const bin_hit_print_type ptype)
 {
     static patch3 *ptc;
     static bin_hit_screen const *cbhs;
@@ -387,7 +389,7 @@ void handle_bin_sphere3(const bin_hit_screen *const bhs, const draw_opt opt, con
             error_msg("there are more bins than patches. exiting.", ERR_ARG);
             exit(EXIT_FAILURE);
         }
-        color_bin_patch3(ptc, ptc_count, bhs, cfun, bin_sphere3_alpha, ptype);
+        colour_bin_patch3(ptc, ptc_count, bhs, cfun, bin_sphere3_alpha, ptype);
         allocd = 1;
     }
     else if(opt == GEN_LISTS && !initdlist)
@@ -436,7 +438,7 @@ gen_list_clause:
         {
             assert(allocd);
             glDeleteLists(listid, 1);
-            color_bin_patch3(ptc, ptc_count, cbhs, cfun, bin_sphere3_alpha, ptype);
+            colour_bin_patch3(ptc, ptc_count, cbhs, cfun, bin_sphere3_alpha, ptype);
             t_alpha = bin_sphere3_alpha;
             goto gen_list_clause;
         }
@@ -458,12 +460,12 @@ gen_list_clause:
         error_msg("wrong specifier", ERR_ARG);
 }
 
-/** \brief Handles the drawing of spherical particles
+/** \brief Handles the drawing of spherical particles.
  *
- * \param spp const sphrcl_prtcl *const res_pt An array of particles
- * \param bbox const boundingbox *res_pt The box which encloses all particles
- * \param np const uint The number of particles
- * \param opt const draw_opt A flag which tells this function what to do
+ * \param spp const sphrcl_prtcl *const res_pt An array of particles.
+ * \param bbox const boundingbox *res_pt The box which encloses all particles.
+ * \param np const uint The number of particles.
+ * \param opt const draw_opt A flag which tells this function what to do.
  * \return void
  *
  * When called the first time, the address of spp and bbox are copied for the later drawing procedure. no memory has to be allocated.
@@ -498,7 +500,7 @@ void handle_prtcls_boxed(const sphrcl_prtcl *const res_pt spp, const boundingbox
             if(!listid)
                 error_msg("no empty display list", ERR_ARG);
             glNewList(listid, GL_COMPILE);
-            glColor4dv(cgrey);
+            glColor4dv(CGREY);
             glMatrixMode(GL_MODELVIEW);
             for(i = 0; i < pcount; i++)
             {
@@ -509,7 +511,7 @@ void handle_prtcls_boxed(const sphrcl_prtcl *const res_pt spp, const boundingbox
             }
             if(use_light)
                 glDisable(GL_LIGHTING);
-            glColor3dv(clightgrey);
+            glColor3dv(CLIGHTGREY);
             glBegin(GL_LINE_LOOP);
             for(i = 0; i < 4; i++)
                 glVertex3dv((*cbbox).rect[i].x);
@@ -550,13 +552,13 @@ void handle_prtcls_boxed(const sphrcl_prtcl *const res_pt spp, const boundingbox
         error_msg("wrong specifier", ERR_ARG);
 }
 
-/** \brief Handles the drawing of spherical particles
+/** \brief Handles the drawing of spherical particles.
  *
- * \param const sphrcl_prtcl *const res_pt spp The single particle
- * \param opt const draw_opt A flag which tells this function what to do
+ * \param const sphrcl_prtcl *const res_pt spp The single particle.
+ * \param opt const draw_opt A flag which tells this function what to do.
  * \return void
  *
- * Can be called multiple times to draw multiple particles
+ * Can be called multiple times to draw multiple particles.
  */
 void handle_prtcls(const sphrcl_prtcl *const res_pt spp, const draw_opt opt)
 {
@@ -580,7 +582,7 @@ void handle_prtcls(const sphrcl_prtcl *const res_pt spp, const draw_opt opt)
             if(!listid)
                 error_msg("no empty display list", ERR_ARG);
             glNewList(listid, GL_COMPILE);
-            glColor4dv(cgrey);
+            glColor4dv(CGREY);
             glMatrixMode(GL_MODELVIEW);
             for(i = 0; i < pcount; i++)
             {

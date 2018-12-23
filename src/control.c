@@ -2,18 +2,30 @@
 #include "viewer.h"
 #include "control.h"
 
-uchar lmouse_down = 0, rmouse_down = 0, stop_rot = 0, translate = 0, esc_pressed = 0;
+uchar lmouse_down = 0,
+      rmouse_down = 0,
+      stop_rot = 0,
+      translate = 0,
+      esc_pressed = 0;
 uint draw_ray_n = 0;
 double bin_sphere3_alpha = DEFAULT_BIN_SPHERE3_ALPHA;
 
-extern const uint main_width, main_height, init_main_width, init_main_height;
-extern double rotY, norY, rotX, movX, movY, zoom;
+extern const uint main_width,
+                  main_height,
+                  init_main_width,
+                  init_main_height;
+extern double rotY,
+              norY,
+              rotX,
+              movX,
+              movY,
+              zoom;
 
-/** \brief Handles keyboard events
+/** \brief Handles keyboard events.
  *
- * \param key const uchar An identifier of the key
- * \param x int The current x position of the cursor
- * \param y int The current y position of the cursor
+ * \param key const uchar An identifier of the key.
+ * \param x int The current x position of the cursor.
+ * \param y int The current y position of the cursor.
  * \return void
  *
  */
@@ -21,7 +33,7 @@ void keyboard(const uchar key, int x, int y)
 {
     switch(key)
     {
-    case 27: /**< Esc */
+    case 27: /**< Esc. */
         esc_pressed = 1;
         close_all();
         break;
@@ -39,11 +51,11 @@ void keyboard(const uchar key, int x, int y)
     }
 }
 
-/** \brief Handles special keyboard events
+/** \brief Handles special keyboard events.
  *
- * \param a_keys const int An identifier of the special key
- * \param x int The current x position of the cursor
- * \param y int The current y position of the cursor
+ * \param a_keys const int An identifier of the special key.
+ * \param x int The current x position of the cursor.
+ * \param y int The current y position of the cursor.
  * \return void
  *
  */
@@ -79,13 +91,13 @@ void arrow_keys(const int a_keys, int x, int y)
     }
 }
 
-/** \brief Handles mouse events
+/** \brief Handles mouse events.
  *
- * \param mode const int The mode of the mouse, i.e. a motion with a pressed button
- * \param button const int An identifier of the mousebutton
- * \param state const int An identifier of the state of a mousebutton
- * \param x const int The current x position of the cursor
- * \param y const int The current y position of the cursor
+ * \param mode const int The mode of the mouse, i.e. a motion with a pressed button.
+ * \param button const int An identifier of the mousebutton.
+ * \param state const int An identifier of the state of a mousebutton.
+ * \param x const int The current x position of the cursor.
+ * \param y const int The current y position of the cursor.
  * \return void
  *
  */
@@ -95,8 +107,8 @@ void trackball(const int mode, const int button, const int state, const int x, c
     double deltaMX = 0., deltaMY = 0.;
     switch(mode)
     {
-    case KNOWMOUSEBUTTON: /**< Handle the buttons */
-        if(!button && !state && !translate && !rmouse_down) /**< Rotate */
+    case KNOWMOUSEBUTTON: /**< Handle the buttons. */
+        if(!button && !state && !translate && !rmouse_down) /**< Rotate. */
         {
             lmouse_down = 1;
             startMY = x;
@@ -104,7 +116,7 @@ void trackball(const int mode, const int button, const int state, const int x, c
             startMX = y;
             startMX -= rotX;
         }
-        else if(!button && !state && translate && !rmouse_down) /**< Translate */
+        else if(!button && !state && translate && !rmouse_down) /**< Translate. */
         {
             lmouse_down = 1;
             startMY = y;
@@ -113,29 +125,29 @@ void trackball(const int mode, const int button, const int state, const int x, c
             startMX -= movX * main_width / 4.;
         }
         else if(!button && state) lmouse_down = 0;
-        else if(button == 2 && !state && !lmouse_down) /**< Zoom */
+        else if(button == 2 && !state && !lmouse_down) /**< Zoom. */
         {
             rmouse_down = 1;
             startMY = y;
         }
         else if(button == 2 && state) rmouse_down = 0;
         break;
-    case MOUSEMOTION: /**< Handle the effect of a mouse motion */
-        if(lmouse_down && !translate && !rmouse_down) /**< Rotate */
+    case MOUSEMOTION: /**< Handle the effect of a mouse motion. */
+        if(lmouse_down && !translate && !rmouse_down) /**< Rotate. */
         {
             deltaMX = y - startMX;
             deltaMY = x - startMY;
             rotX = deltaMX;
             rotY = deltaMY;
         }
-        else if(lmouse_down && translate && !rmouse_down) /**< Translate */
+        else if(lmouse_down && translate && !rmouse_down) /**< Translate. */
         {
             deltaMX = x - startMX;
             deltaMY = y - startMY;
             movX = deltaMX / main_width * 4.;
             movY = -deltaMY / main_height * 4.;
         }
-        else if(rmouse_down && !lmouse_down) /**< Zoom */
+        else if(rmouse_down && !lmouse_down) /**< Zoom. */
         {
             deltaMY = y - startMY;
             const double minzoom = .02;
@@ -155,10 +167,10 @@ void trackball(const int mode, const int button, const int state, const int x, c
     }
 }
 
-/** \brief Handles the pure motion of the mouse for glutMotionFunc
+/** \brief Handles the pure motion of the mouse for glutMotionFunc.
  *
- * \param x const int The current x position of the cursor
- * \param y const int The current y position of the cursor
+ * \param x const int The current x position of the cursor.
+ * \param y const int The current y position of the cursor.
  * \return void
  *
  */
@@ -170,13 +182,13 @@ void motion(const int x, const int y)
     trackball(MOUSEMOTION, 0, 0, x, y);
 }
 
-/** \brief Handles the pure motion of the mouse for glutPassiveMotionFunc
+/** \brief Handles the pure motion of the mouse for glutPassiveMotionFunc.
  *
- * \param x const int The current x position of the cursor
- * \param y const int The current y position of the cursor
+ * \param x const int The current x position of the cursor.
+ * \param y const int The current y position of the cursor.
  * \return void
  *
- * Not necessary, but it creates a valid handle for glutPassiveMotionFunc
+ * Not necessary, but it creates a valid handle for glutPassiveMotionFunc.
  */
 void passivemotion(const int x, const int y)
 {
@@ -185,12 +197,12 @@ void passivemotion(const int x, const int y)
 #endif
 }
 
-/** \brief Handles and initiates the interaction with the mouse
+/** \brief Handles and initiates the interaction with the mouse.
  *
- * \param button const int An identifier of the button pressed
- * \param state const int An identifier of the state of the button
- * \param x const int The current x position of the cursor
- * \param y const int The current y position of the cursor
+ * \param button const int An identifier of the button pressed.
+ * \param state const int An identifier of the state of the button.
+ * \param x const int The current x position of the cursor.
+ * \param y const int The current y position of the cursor.
  * \return void
  *
  */

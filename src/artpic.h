@@ -202,11 +202,11 @@ typedef enum draw_opt_enum
     FREE_EM_ALL
 }draw_opt; /**< An option identifier to be used for the drawing function to specify what has to be done. */
 
-typedef enum colorfun_enum
+typedef enum colourfun_enum
 {
     SINCOS_MAP,
     VISIBLE_LIGHT
-}colorfun; /**< An identifier of the function used to colour the output. */
+}colourfun; /**< An identifier of the function used to colour the output. */
 
 typedef enum trackball_mode_enum
 {
@@ -388,19 +388,19 @@ typedef struct patch3_struct
     double rgba[4]; /**< The normal colour of all patches. */
 }patch3; /**< A structure to describe a patch of an object used in the OpenGL viewer, e.g. the bins of a sphere. */
 
-typedef struct colorval_struct
+typedef struct colourval_struct
 {
     double rgba[4],
            val;
-}colorval; /**< A structure which contains a double value and its map into rgba space. */
+}colourval; /**< A structure which contains a double value and its map into RGBA space. */
 
-typedef struct colorbox_struct
+typedef struct colourbox_struct
 {
-    colorval *cval; /**< An array of colorval variables to store the lines that fill up the colorbox. */
-    double max, /**< The maximum double value of the colorscale. */
-           min; /**< The minimum double value of the colorscale. */
+    colourval *cval; /**< An array of colourval variables to store the lines that fill up the colourbox. */
+    double max, /**< The maximum double value of the colourscale. */
+           min; /**< The minimum double value of the colourscale. */
     uint ncval; /**< The number of the lines in the cval array. */
-}colorbox; /**< A structure to describe the colorbox in the OpenGL viewer. */
+}colourbox; /**< A structure to describe the colourbox in the OpenGL viewer. */
 
 typedef struct boundingbox_struct
 {
