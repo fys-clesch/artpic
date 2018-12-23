@@ -3,39 +3,39 @@
 #include "auxf.h"
 #include "refr_data.h"
 
-uint allocated_tir_event_memory, /**< Counts the allocated memory for TIR. To be considered for reallocation. */
-     allocated_exhausted_event_memory, /**< Counts the allocated memory for exhausted rays. To be considered for reallocation. */
-     allocated_lost_event_memory; /**< Counts the allocated memory for lost rays. To be considered for reallocation. */
+uint ALLOCATED_TIR_EVENT_MEMORY, /**< Counts the allocated memory for TIR. To be considered for reallocation. */
+     ALLOCATED_EXHAUSTED_EVENT_MEMORY, /**< Counts the allocated memory for exhausted rays. To be considered for reallocation. */
+     ALLOCATED_LOST_EVENT_MEMORY; /**< Counts the allocated memory for lost rays. To be considered for reallocation. */
 
 #if MEMORY_COUNTER
-/** \brief Sums the allocated memory and stores it in memcounter
+/** \brief Sums the allocated memory and stores it in MEMCOUNTER.
  *
- * \param i const uint The allocated memory measured in byte
+ * \param i const uint The allocated memory measured in byte.
  * \return void
  *
  */
-double memcounter;
+double MEMCOUNTER;
 #define MEMCOUNTER_FLAG_LEN 16u
-char memcounter_flag[MEMCOUNTER_FLAG_LEN];
+char MEMCOUNTER_FLAG[MEMCOUNTER_FLAG_LEN];
 void count_mem_(const uint i)
 {
     static uint j = 0;
     static double k = 1.;
-    memcounter += (((double)i) * k);
-    if(memcounter > 1e3)
+    MEMCOUNTER += (((double)i) * k);
+    if(MEMCOUNTER > 1e3)
     {
-        memcounter /= 1e3;
+        MEMCOUNTER /= 1e3;
         k /= 1e3;
         j += 3;
     }
-    snprintf(memcounter_flag, MEMCOUNTER_FLAG_LEN, "10^%u byte", j);
+    snprintf(MEMCOUNTER_FLAG, MEMCOUNTER_FLAG_LEN, "10^%u byte", j);
 }
 #define count_mem(x) count_mem_(x)
 #else
 #define count_mem(x) ((void)0)
 #endif
 
-/** \brief Initializes the memory counter
+/** \brief Initialises the memory counter.
  *
  * \param void
  * \return void
@@ -44,8 +44,8 @@ void count_mem_(const uint i)
 void init_allocations(void)
 {
 #if MEMORY_COUNTER
-    memcounter = 0.;
-    strncpy(memcounter_flag, "10^0 byte", MEMCOUNTER_FLAG_LEN);
+    MEMCOUNTER = 0.;
+    strncpy(MEMCOUNTER_FLAG, "10^0 byte", MEMCOUNTER_FLAG_LEN);
 #else
     fprintf(stdout, "\nmemory counter not active\n");
 #endif
@@ -54,7 +54,7 @@ void init_allocations(void)
 #undef MEMCOUNTER_FLAG_LEN
 #endif
 
-/** \brief Prints the allocated memory to the screen
+/** \brief Prints the allocated memory to the screen.
  *
  * \param void
  * \return void
@@ -66,14 +66,14 @@ void print_used_mem(void)
     fprintf(stdout,
             "\nallocated %.3f * %s (decimal interpretation) by functions in file %s during the execution. "
             "1 byte equals %i bit on the machine this version was built.\n",
-            memcounter, memcounter_flag, __FILE__, CHAR_BIT);
+            MEMCOUNTER, MEMCOUNTER_FLAG, __FILE__, CHAR_BIT);
 #endif
 }
 
-/** \brief Allocates memory for a char array
+/** \brief Allocates memory for a char array.
  *
- * \param len const uint The length of the array
- * \return char* The array
+ * \param len const uint The length of the array.
+ * \return char* The array.
  *
  */
 char *alloc_char(const uint len)
@@ -89,10 +89,10 @@ char *alloc_char(const uint len)
     return m;
 }
 
-/** \brief Allocates memory for an unsigned char array
+/** \brief Allocates memory for an unsigned char array.
  *
- * \param len const uint The length of the array
- * \return uchar* The array
+ * \param len const uint The length of the array.
+ * \return uchar* The array.
  *
  */
 uchar *alloc_uchar(const uint len)
@@ -108,10 +108,10 @@ uchar *alloc_uchar(const uint len)
     return m;
 }
 
-/** \brief Allocates memory for a complex double array
+/** \brief Allocates memory for a complex double array.
  *
- * \param len const uint The length of the array
- * \return cdoub* The array
+ * \param len const uint The length of the array.
+ * \return cdoub* The array.
  *
  */
 cdoub *alloc_cdoub(const uint len)
@@ -130,10 +130,10 @@ cdoub *alloc_cdoub(const uint len)
     return m;
 }
 
-/** \brief Allocates memory for a double array
+/** \brief Allocates memory for a double array.
  *
- * \param len const uint The length of the array
- * \return double* The array
+ * \param len const uint The length of the array.
+ * \return double* The array.
  *
  */
 double *alloc_double(const uint len)
@@ -152,10 +152,10 @@ double *alloc_double(const uint len)
     return m;
 }
 
-/** \brief Allocates memory for an unsigned int array
+/** \brief Allocates memory for an unsigned int array.
  *
- * \param len const uint The length of the array
- * \return uint* The array
+ * \param len const uint The length of the array.
+ * \return uint* The array.
  *
  */
 uint *alloc_uint(const uint len)
@@ -174,12 +174,12 @@ uint *alloc_uint(const uint len)
     return m;
 }
 
-/** \brief Reallocates memory for a uint array
+/** \brief Reallocates memory for a uint array.
  *
- * \param m uint* The existing array
- * \param n const uint The length of the existing array
- * \param plus const uint The additional length of the array
- * \return uint* The array
+ * \param m uint* The existing array.
+ * \param n const uint The length of the existing array.
+ * \param plus const uint The additional length of the array.
+ * \return uint* The array.
  *
  */
 uint *realloc_uint(uint *m, const uint n, const uint plus)
@@ -204,10 +204,10 @@ uint *realloc_uint(uint *m, const uint n, const uint plus)
     return m;
 }
 
-/** \brief Allocates memory for an index2 array
+/** \brief Allocates memory for an index2 array.
  *
- * \param len const uint The length of the array
- * \return index2* The array
+ * \param len const uint The length of the array.
+ * \return index2* The array.
  *
  */
 index2 *alloc_index2(const uint len)
@@ -226,10 +226,10 @@ index2 *alloc_index2(const uint len)
     return m;
 }
 
-/** \brief Allocates memory for a ray array
+/** \brief Allocates memory for a ray array.
  *
- * \param n const uint The length of the array
- * \return ray* The array
+ * \param n const uint The length of the array.
+ * \return ray* The array.
  *
  */
 ray *alloc_ray(const uint n)
@@ -276,15 +276,15 @@ ray *alloc_ray(const uint n)
     return m;
 }
 
-/** \brief Reallocates memory for a ray array
+/** \brief Reallocates memory for a ray array.
  *
- * \param m ray* The existing array
- * \param lam const double The wavelength of the existing ray array
- * \param n const uint The length of the existing array
- * \param plus const uint The additional length of the array
- * \return ray* The array
+ * \param m ray* The existing array.
+ * \param lam const double The wavelength of the existing ray array.
+ * \param n const uint The length of the existing array.
+ * \param plus const uint The additional length of the array.
+ * \return ray* The array.
  *
- * The new ray variables in the arrays will be initialized with the given wavelength
+ * The new ray variables in the arrays will be initialized with the given wavelength.
  */
 ray *realloc_ray(ray *m, const double lam, const uint n, const uint plus)
 {
@@ -333,10 +333,10 @@ ray *realloc_ray(ray *m, const double lam, const uint n, const uint plus)
     return m;
 }
 
-/** \brief Allocates memory for a glray_s array
+/** \brief Allocates memory for a glray_s array.
  *
- * \param n const uint The length of the array
- * \return glray_s* The array
+ * \param n const uint The length of the array.
+ * \return glray_s* The array.
  *
  */
 glray_s *alloc_glray_s(const uint n)
@@ -372,13 +372,13 @@ glray_s *alloc_glray_s(const uint n)
     return m;
 }
 
-/** \brief Allocates memory for a glray array
+/** \brief Allocates memory for a glray array.
  *
- * \param n const uint The length of the array
- * \param rs const uint The rays inside of this array
+ * \param n const uint The length of the array.
+ * \param rs const uint The rays inside of this array.
  * \return glray* The array
  *
- * Is to be used as a container for multiple rays in OpenGL
+ * Is to be used as a container for multiple rays in OpenGL.
  */
 glray *alloc_glray(const uint n, const uint rs)
 {
@@ -399,10 +399,10 @@ glray *alloc_glray(const uint n, const uint rs)
     return m;
 }
 
-/** \brief Frees an allocated glray array
+/** \brief Frees an allocated glray array.
  *
- * \param m glray* The array
- * \param n const uint The number of rays inside the array
+ * \param m glray* The array.
+ * \param n const uint The number of rays inside the array.
  * \return void
  *
  */
@@ -423,10 +423,10 @@ void free_glray(glray *m, const uint n)
     free(m);
 }
 
-/** \brief Allocates memory for a gen_ray_info variable
+/** \brief Allocates memory for a gen_ray_info variable.
  *
  * \param void
- * \return gen_ray_info* The pointer to the variable
+ * \return gen_ray_info* The pointer to the variable.
  *
  */
 gen_ray_info *alloc_gen_ray_info(void)
@@ -447,10 +447,10 @@ gen_ray_info *alloc_gen_ray_info(void)
     return m;
 }
 
-/** \brief Allocates memory for a point3 array
+/** \brief Allocates memory for a point3 array.
  *
- * \param n const uint The length of the array
- * \return point3* The array
+ * \param n const uint The length of the array.
+ * \return point3* The array.
  *
  */
 point3 *alloc_point3(const uint n)
@@ -469,12 +469,12 @@ point3 *alloc_point3(const uint n)
     return m;
 }
 
-/** \brief Reallocates memory for a point3 array
+/** \brief Reallocates memory for a point3 array.
  *
- * \param m point3* The existing array
- * \param n const uint The length of the existing array
- * \param plus const uint The additional length of the array
- * \return point3* The array
+ * \param m point3* The existing array.
+ * \param n const uint The length of the existing array.
+ * \param plus const uint The additional length of the array.
+ * \return point3* The array.
  *
  */
 point3 *realloc_point3(point3 *m, const uint n, const uint plus)
@@ -499,10 +499,10 @@ point3 *realloc_point3(point3 *m, const uint n, const uint plus)
     return m;
 }
 
-/** \brief Allocates memory for a line3 array
+/** \brief Allocates memory for a line3 array.
  *
- * \param n const uint The length of the array
- * \return line3* The array
+ * \param n const uint The length of the array.
+ * \return line3* The array.
  *
  */
 line3 *alloc_line3(const uint n)
@@ -521,10 +521,10 @@ line3 *alloc_line3(const uint n)
     return m;
 }
 
-/** \brief Allocates memory for a plane3 array
+/** \brief Allocates memory for a plane3 array.
  *
- * \param n const uint The length of the array
- * \return plane3* The array
+ * \param n const uint The length of the array.
+ * \return plane3* The array.
  *
  */
 plane3 *alloc_plane3(const uint n)
@@ -543,10 +543,10 @@ plane3 *alloc_plane3(const uint n)
     return m;
 }
 
-/** \brief Allocates memory for a sphere3 array
+/** \brief Allocates memory for a sphere3 array.
  *
- * \param n const uint The length of the array
- * \return sphere3* The array
+ * \param n const uint The length of the array.
+ * \return sphere3* The array.
  *
  */
 sphere3 *alloc_sphere3(const uint n)
@@ -565,10 +565,10 @@ sphere3 *alloc_sphere3(const uint n)
     return m;
 }
 
-/** \brief Allocates memory for an intrsec array
+/** \brief Allocates memory for an intrsec array.
  *
- * \param n const uint The length of the array
- * \return intrsec* The array
+ * \param n const uint The length of the array.
+ * \return intrsec* The array.
  *
  */
 intrsec *alloc_intrsec(const uint n)
@@ -584,17 +584,22 @@ intrsec *alloc_intrsec(const uint n)
     }
     for(i = 0; i < n; i++)
         m[i] = (intrsec){
-            .p = {0., 0., 0.}, .normal = {0., 0., 0.},
-            .angl = 0., .cangl = 0., .mu_f = mu_vac, .n_f = n_vac, .incdnc = NONE};
+            .p = {0., 0., 0.},
+            .normal = {0., 0., 0.},
+            .angl = 0.,
+            .cangl = 0.,
+            .mu_f = mu_vac,
+            .n_f = n_vac,
+            .incdnc = NONE};
     return m;
 }
 
-/** \brief Reallocates memory for an intrsec array
+/** \brief Reallocates memory for an intrsec array.
  *
- * \param m intrsec* The existing array
- * \param n const uint The length of the existing array
- * \param plus const uint The additional length of the array
- * \return intrsec* The array
+ * \param m intrsec* The existing array.
+ * \param n const uint The length of the existing array.
+ * \param plus const uint The additional length of the array.
+ * \return intrsec* The array.
  *
  */
 intrsec *realloc_intrsec(intrsec *m, const uint n, const uint plus)
@@ -626,10 +631,10 @@ intrsec *realloc_intrsec(intrsec *m, const uint n, const uint plus)
     return m;
 }
 
-/** \brief Frees an allocated double matrix
+/** \brief Frees an allocated double matrix.
  *
- * \param m double** The matrix
- * \param row const uint The range of the first index
+ * \param m double** The matrix.
+ * \param row const uint The range of the first index.
  * \return void
  *
  */
@@ -641,11 +646,11 @@ void free_omatrix(double **m, const uint row)
     free(m);
 }
 
-/** \brief Allocates memory for a double matrix
+/** \brief Allocates memory for a double matrix.
  *
- * \param row const uint The length of the first index
- * \param col const uint The length of the second index
- * \return double** The matrix
+ * \param row const uint The length of the first index.
+ * \param col const uint The length of the second index.
+ * \return double** The matrix.
  *
  */
 double **alloc_omatrix(const uint row, const uint col)
@@ -676,14 +681,14 @@ double **alloc_omatrix(const uint row, const uint col)
     return m;
 }
 
-/** \brief Allocates memory for a double matrix used for a bin_sphere3
+/** \brief Allocates memory for a double matrix used for a bin_sphere3.
  *
- * \param pol const uint The polar slices of the bin_sphere3 variable
- * \param azi const uint The azimuthal slices of the bin_sphere3 variable
- * \param field const uint The number of azimuthal elements in the 'most polar' slices
- * \return double** The matrix
+ * \param pol const uint The polar slices of the bin_sphere3 variable.
+ * \param azi const uint The azimuthal slices of the bin_sphere3 variable.
+ * \param field const uint The number of azimuthal elements in the 'most polar' slices.
+ * \return double** The matrix.
  *
- * Same functionality as alloc_omatrix, but specially designed for the usage in alloc_bin_hit_screen
+ * Same functionality as alloc_omatrix, but specially designed for the usage in alloc_bin_hit_screen.
  */
 double **alloc_omatrix_for_bin_sphere3(const uint pol, const uint azi, const uint field)
 {
@@ -716,10 +721,10 @@ double **alloc_omatrix_for_bin_sphere3(const uint pol, const uint azi, const uin
     return m;
 }
 
-/** \brief Frees an allocated complex double matrix
+/** \brief Frees an allocated complex double matrix.
  *
- * \param m cdoub** The matrix
- * \param row const uint The range of the first index
+ * \param m cdoub** The matrix.
+ * \param row const uint The range of the first index.
  * \return void
  *
  */
@@ -731,11 +736,11 @@ void free_ocmatrix(cdoub **m, const uint row)
     free(m);
 }
 
-/** \brief Allocates memory for a double matrix
+/** \brief Allocates memory for a complex double matrix.
  *
- * \param row const uint The length of the first index
- * \param col const uint The length of the second index
- * \return cdoub** The matrix
+ * \param row const uint The length of the first index.
+ * \param col const uint The length of the second index.
+ * \return cdoub** The matrix.
  *
  */
 cdoub **alloc_ocmatrix(const uint row, const uint col)
@@ -766,14 +771,14 @@ cdoub **alloc_ocmatrix(const uint row, const uint col)
     return m;
 }
 
-/** \brief Allocates memory for a complex double matrix used for a bin_sphere3
+/** \brief Allocates memory for a complex double matrix used for a bin_sphere3.
  *
- * \param pol const uint The polar slices of the bin_sphere3 variable
- * \param azi const uint The azimuthal slices of the bin_sphere3 variable
- * \param field const uint The number of azimuthal elements in the 'most polar' slices
- * \return cdoub** The matrix
+ * \param pol const uint The polar slices of the bin_sphere3 variable.
+ * \param azi const uint The azimuthal slices of the bin_sphere3 variable.
+ * \param field const uint The number of azimuthal elements in the 'most polar' slices.
+ * \return cdoub** The matrix.
  *
- * Same functionality as alloc_omatrix, but specially designed for the usage in alloc_bin_hit_screen
+ * Same functionality as alloc_omatrix, but specially designed for the usage in alloc_bin_hit_screen.
  */
 cdoub **alloc_ocmatrix_for_bin_sphere3(const uint pol, const uint azi, const uint field)
 {
@@ -806,10 +811,10 @@ cdoub **alloc_ocmatrix_for_bin_sphere3(const uint pol, const uint azi, const uin
     return m;
 }
 
-/** \brief Allocates memory for a hit_screen array
+/** \brief Allocates memory for a hit_screen array.
  *
- * \param n const uint The length of the array
- * \return hit_screen* The array
+ * \param n const uint The length of the array.
+ * \return hit_screen* The array.
  *
  */
 hit_screen *alloc_hit_screen(const uint n)
@@ -848,12 +853,12 @@ hit_screen *alloc_hit_screen(const uint n)
     return m;
 }
 
-/** \brief Reallocates memory for a hit_screen array
+/** \brief Reallocates memory for a hit_screen array.
  *
- * \param m hit_screen* The existing array
- * \param n const uint The length of the existing array
- * \param plus const uint The additional length of the array
- * \return hit_screen* The array
+ * \param m hit_screen* The existing array.
+ * \param n const uint The length of the existing array.
+ * \param plus const uint The additional length of the array.
+ * \return hit_screen* The array.
  *
  */
 hit_screen *realloc_hit_screen(hit_screen *m, const uint n, const uint plus)
@@ -890,18 +895,18 @@ hit_screen *realloc_hit_screen(hit_screen *m, const uint n, const uint plus)
     return m;
 }
 
-/** \brief Allocates memory for a bin_hit_screen array
+/** \brief Allocates memory for a bin_hit_screen array.
  *
- * \param n const uint The length of the array
- * \param rad const double The radius of the sphere
- * \param res_polar const uint The polar resolution of the sphere
- * \param res_azim const uint The azimuthal resolution of the sphere
- * \return bin_hit_screen* The array
+ * \param n const uint The length of the array.
+ * \param rad const double The radius of the sphere.
+ * \param res_polar const uint The polar resolution of the sphere.
+ * \param res_azim const uint The azimuthal resolution of the sphere.
+ * \return bin_hit_screen* The array.
  *
  * Also sets the initial value for
- * - allocated_tir_event_memory
- * - allocated_lost_event_memory
- * - allocated_exhausted_event_memory
+ * - ALLOCATED_TIR_EVENT_MEMORY
+ * - ALLOCATED_LOST_EVENT_MEMORY
+ * - ALLOCATED_EXHAUSTED_EVENT_MEMORY
  */
 bin_hit_screen *alloc_bin_hit_screen(const uint n, const double rad, const uint res_polar, const uint res_azim)
 {
@@ -919,9 +924,9 @@ bin_hit_screen *alloc_bin_hit_screen(const uint n, const double rad, const uint 
         free(m);
         exit(EXIT_FAILURE);
     }
-    allocated_tir_event_memory =
-    allocated_lost_event_memory =
-    allocated_exhausted_event_memory = 1000;
+    ALLOCATED_TIR_EVENT_MEMORY =
+    ALLOCATED_LOST_EVENT_MEMORY =
+    ALLOCATED_EXHAUSTED_EVENT_MEMORY = 1000;
     for(i = 0; i < n; i++)
     {
         m[i] = (bin_hit_screen){
@@ -947,13 +952,13 @@ bin_hit_screen *alloc_bin_hit_screen(const uint n, const double rad, const uint 
         m[i].amp = alloc_omatrix_for_bin_sphere3(res_polar, res_azim, 1);
         m[i].mod_amp = alloc_omatrix_for_bin_sphere3(res_polar, res_azim, 1);
         m[i].ray_int = alloc_omatrix_for_bin_sphere3(res_polar, res_azim, 1);
-        m[i].pol_dist = alloc_omatrix_for_bin_sphere3(res_polar, res_azim, 3); /**< At each coordinate there are 3 entries to account for the polarization in x, y and z */
+        m[i].pol_dist = alloc_omatrix_for_bin_sphere3(res_polar, res_azim, 3); /**< At each coordinate there are 3 entries to account for the polarisation in x, y and z. */
         m[i].pol_dens = alloc_omatrix_for_bin_sphere3(res_polar, res_azim, 1);
-        m[i].tir_coor = alloc_point3(allocated_tir_event_memory);
-        m[i].exhstd_coor = alloc_point3(allocated_exhausted_event_memory);
-        m[i].lost_coor = alloc_point3(allocated_lost_event_memory);
+        m[i].tir_coor = alloc_point3(ALLOCATED_TIR_EVENT_MEMORY);
+        m[i].exhstd_coor = alloc_point3(ALLOCATED_EXHAUSTED_EVENT_MEMORY);
+        m[i].lost_coor = alloc_point3(ALLOCATED_LOST_EVENT_MEMORY);
         m[i].camp = alloc_ocmatrix_for_bin_sphere3(res_polar, res_azim, 3);
-        m[i].nbin = (res_polar - 2) * res_azim + 2; /**< The poles do not have an azimuthal spacing */
+        m[i].nbin = (res_polar - 2) * res_azim + 2; /**< The poles do not have an azimuthal spacing. */
         m[i].idx = alloc_index2(m[i].nbin);
         set_index2_bin_sphere3(m[i].idx, m[i].res_polar, m[i].res_azim);
         memset(m[i].global_info.info, 0, L_INFOLENGTH + 1);
@@ -961,10 +966,10 @@ bin_hit_screen *alloc_bin_hit_screen(const uint n, const double rad, const uint 
     return m;
 }
 
-/** \brief Frees an allocated bin_hit_screen array
+/** \brief Frees an allocated bin_hit_screen array.
  *
- * \param m bin_hit_screen* The array
- * \param n const uint The length of the array
+ * \param m bin_hit_screen* The array.
+ * \param n const uint The length of the array.
  * \return void
  *
  */
@@ -987,12 +992,12 @@ void free_bin_hit_screen(bin_hit_screen *m, const uint n)
     free(m);
 }
 
-/** \brief Allocates memory and initializes a sphere3 array
+/** \brief Allocates memory and initialises a sphere3 array.
  *
- * \param ss sphere3* A sphere3 pointer
- * \param ps const point3* A point3 array to set the centre of each sphere3
- * \param rs const double* A double array to set the radius of each sphere3
- * \param n const uint The length of the array
+ * \param ss sphere3* A sphere3 pointer.
+ * \param ps const point3* A point3 array to set the centre of each sphere3.
+ * \param rs const double* A double array to set the radius of each sphere3.
+ * \param n const uint The length of the array.
  * \return void
  *
  */
@@ -1008,10 +1013,10 @@ sphere3 *alloc_nsphere3(const point3 *ps, const double *rs, const uint n)
     return m;
 }
 
-/** \brief Allocates memory for a sphrcl_prtcl array
+/** \brief Allocates memory for a sphrcl_prtcl array.
  *
- * \param n const uint The length of the array
- * \return sphrcl_prtcl* The array
+ * \param n const uint The length of the array.
+ * \return sphrcl_prtcl* The array.
  *
  */
 sphrcl_prtcl *alloc_sphrcl_prtcl(const uint n)
@@ -1042,10 +1047,10 @@ sphrcl_prtcl *alloc_sphrcl_prtcl(const uint n)
     return m;
 }
 
-/** \brief Allocates memory for a vertex3 array
+/** \brief Allocates memory for a vertex3 array.
  *
- * \param n const uint The length of the array
- * \return vertex3* The array
+ * \param n const uint The length of the array.
+ * \return vertex3* The array.
  *
  */
 vertex3 *alloc_vertex3(const uint n)
@@ -1066,12 +1071,12 @@ vertex3 *alloc_vertex3(const uint n)
     return m;
 }
 
-/** \brief Allocates memory for a patch3 array
+/** \brief Allocates memory for a patch3 array.
  *
- * \param n const uint The length of the array
- * \return patch3* The array
+ * \param n const uint The length of the array.
+ * \return patch3* The array.
  *
- * Mind that the member .vt still has to be allocated
+ * Mind that the member .vt still has to be allocated.
  */
 patch3 *alloc_patch3(const uint n)
 {
@@ -1092,10 +1097,10 @@ patch3 *alloc_patch3(const uint n)
     return m;
 }
 
-/** \brief Frees an allocated patch3 array
+/** \brief Frees an allocated patch3 array.
  *
- * \param m patch3* The array
- * \param n const uint The length of the array
+ * \param m patch3* The array.
+ * \param n const uint The length of the array.
  * \return void
  *
  */
@@ -1107,10 +1112,10 @@ void free_patch3(patch3 *m, const uint n)
     free(m);
 }
 
-/** \brief Allocates memory for a colorval array
+/** \brief Allocates memory for a colorval array.
  *
- * \param n const uint The length of the array
- * \return colorval* The array
+ * \param n const uint The length of the array.
+ * \return colorval* The array.
  *
  */
 colorval *alloc_colorval(const uint n)
@@ -1131,11 +1136,11 @@ colorval *alloc_colorval(const uint n)
     return m;
 }
 
-/** \brief Allocates memory for a colorbox array
+/** \brief Allocates memory for a colorbox array.
  *
- * \param n const uint The length of the array
- * \param ncval const uint The number of colorvals inside the colorbox
- * \return colorbox* The array
+ * \param n const uint The length of the array.
+ * \param ncval const uint The number of colorvals inside the colorbox.
+ * \return colorbox* The array.
  *
  */
 colorbox *alloc_colorbox(const uint n, const uint ncval)
@@ -1160,10 +1165,10 @@ colorbox *alloc_colorbox(const uint n, const uint ncval)
     return m;
 }
 
-/** \brief Allocates memory for a boundingbox array
+/** \brief Allocates memory for a boundingbox array.
  *
- * \param n const uint The length of the array
- * \return boundingbox* The array
+ * \param n const uint The length of the array.
+ * \return boundingbox* The array.
  *
  */
 boundingbox *alloc_boundingbox(const uint n)

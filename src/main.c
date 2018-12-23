@@ -44,7 +44,7 @@
  * record where TIR occurred (in the particle variable)
  * record how much energy is lost during the propagation in the particles
  * handle the lists in OpenGL in an explicit function for a better overview
- * polarization density: change to compute the stokes vector
+ * polarisation density: change to compute the stokes vector
  *
  ** TODO:
  * check multiple scattering, as some error was detected in the main loop with uninitialized rays

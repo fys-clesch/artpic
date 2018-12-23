@@ -37,7 +37,7 @@ uchar compare_media(const cdoub n1, const double mu1, const cdoub n2, const doub
  * \return void
  *
  * Generates a bundle of rays which point from i to f, i.e. they start from one plane (with point i) and end up on in parallel one (with point f)
- * The polarization is homogeneous and linear and has to be entered in the xy plane
+ * The polarisation is homogeneous and linear and has to be entered in the xy plane
  * The rays generated rays are coherent
  */
 void gen_startrays_straight(ray *res_pt rs, const double lam,
@@ -151,7 +151,7 @@ void gen_startrays_straight(ray *res_pt rs, const double lam,
  * \param r const ray* A pointer to a ray
  * \return double The output
  *
- * This function does not consider a non-linear state of polarization
+ * This function does not consider a non-linear state of polarisation
  */
 double get_ray_max_amp(const ray *r)
 {

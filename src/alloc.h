@@ -39,6 +39,6 @@ colorval *alloc_colorval(const uint n);
 colorbox *alloc_colorbox(const uint n, const uint ncval);
 boundingbox *alloc_boundingbox(const uint n);
 
-extern uint allocated_tir_event_memory,
-            allocated_exhausted_event_memory,
-            allocated_lost_event_memory;
+extern uint ALLOCATED_TIR_EVENT_MEMORY,
+            ALLOCATED_EXHAUSTED_EVENT_MEMORY,
+            ALLOCATED_LOST_EVENT_MEMORY;

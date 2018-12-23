@@ -21,7 +21,7 @@
         if(!j) fprintf(stderr,"anyways, this function was tested %u times before",tested[i]);\
         else fprintf(stderr,"anyways, this function was not tested before");
 
-/** \brief Checks a ray for proper (orthogonal) polarization
+/** \brief Checks a ray for proper (orthogonal) polarisation
  *
  * \param r const ray *res_pt The ray to be checked
  * \param info const char *res_pt Something to identify the ray

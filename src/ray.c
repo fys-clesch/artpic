@@ -178,7 +178,7 @@ uchar handle_refl(const ray *res_pt ri, ray *res_pt rrefl, const intrsec *res_pt
  *
  * If the amplitude of the Fresnel coefficients are smaller than MINI_TRANSMISSION_COEF, a fp-error may have occurred
  * In this case, return 0
- * If a polarization of the ray is not transmitted, ('half-tir') return 1
+ * If a polarisation of the ray is not transmitted, ('half-tir') return 1
  * If both polarizations are transmitted, return 2
  */
 uchar handle_trans(const ray *res_pt ri, ray *res_pt rtrans, const intrsec *res_pt isec, const cdoub ccangl_f)

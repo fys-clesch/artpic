@@ -7,15 +7,16 @@
 #include "msg.h"
 #include "auxf.h"
 
-/** \brief Gets the maximum number of digits of a double
+/** \brief Gets the maximum number of digits of a double.
  *
- * \param x double The input double
- * \return uint The maximum number of digits
+ * \param x double The input double.
+ * \return uint The maximum number of digits.
  *
  */
 uint get_nodd(double x)
 {
-    char strf[128], stre[128];
+    char strf[128],
+         stre[128];
     snprintf(strf, 128, "%f", x);
     snprintf(stre, 128, "%e", x);
     uint f = strlen(strf),
@@ -23,10 +24,10 @@ uint get_nodd(double x)
     return MAXOF(f, e);
 }
 
-/** \brief Gets the maximum number of digits of an integer
+/** \brief Gets the maximum number of digits of an integer.
  *
- * \param x int The input int
- * \return uint The maximum number of digits
+ * \param x int The input int.
+ * \return uint The maximum number of digits.
  *
  */
 uint get_nodi(int x)
@@ -36,10 +37,10 @@ uint get_nodi(int x)
     return strlen(str);
 }
 
-/** \brief Gets the maximum number of digits of an unsigned integer
+/** \brief Gets the maximum number of digits of an unsigned integer.
  *
- * \param x uint The input uint
- * \return uint The maximum number of digits
+ * \param x uint The input uint.
+ * \return uint The maximum number of digits.
  *
  */
 uint get_nodui(uint x)
@@ -49,13 +50,13 @@ uint get_nodui(uint x)
     return strlen(str);
 }
 
-/** \brief Copy a 3*double array
+/** \brief Copy a 3*double array.
  *
- * \param dest double *res_pt Pointer to the destination
- * \param source const double *res_pt Pointer to the source
+ * \param dest double *res_pt Pointer to the destination.
+ * \param source const double *res_pt Pointer to the source.
  * \return void
  *
- * Source and destination are not allowed to overlap - this might cause problems when called in other functions
+ * Source and destination are not allowed to overlap - this might cause problems when called in other functions.
  */
 void cp3(double *res_pt dest, const double *res_pt source)
 {
@@ -63,11 +64,11 @@ void cp3(double *res_pt dest, const double *res_pt source)
     memcpy(dest, source, i);
 }
 
-/** \brief An integer exponentiation function
+/** \brief An integer exponentiation function.
  *
- * \param x int The base
- * \param n uint The power
- * \return int The result
+ * \param x int The base.
+ * \param n uint The power.
+ * \return int The result.
  *
  */
 int int_pow(int x, uint n)
@@ -76,17 +77,17 @@ int int_pow(int x, uint n)
     if(n)
         for(;;)
         {
-            if(n & 1) pow *= x; /**< n is odd */
+            if(n & 1) pow *= x; /**< n is odd. */
             if(n >>= 1) x *= x;
             else break;
         }
     return pow;
 }
 
-/** \brief Returns the absolute of the real part of a complex number
+/** \brief Returns the absolute of the real part of a complex number.
  *
- * \param z const cdoub A complex number
- * \return double The absolute real
+ * \param z const cdoub A complex number.
+ * \return double The absolute real.
  *
  */
 double cabs_real(const cdoub z)
@@ -94,10 +95,10 @@ double cabs_real(const cdoub z)
     return fabs(creal(z));
 }
 
-/** \brief Returns the absolute of the imaginary part of a complex number
+/** \brief Returns the absolute of the imaginary part of a complex number.
  *
- * \param z const cdoub A complex number
- * \return double The absolute imaginary
+ * \param z const cdoub A complex number.
+ * \return double The absolute imaginary.
  *
  */
 double cabs_imag(const cdoub z)
@@ -105,11 +106,11 @@ double cabs_imag(const cdoub z)
     return fabs(cimag(z));
 }
 
-/** \brief Computes the case-sensitive arctan function in the interval [0,2*pi)
+/** \brief Computes the case-sensitive arctan function in the interval [0,2*pi).
  *
- * \param x double The numerator
- * \param y const double The denominator
- * \return double The return value
+ * \param x double The numerator.
+ * \param y const double The denominator.
+ * \return double The return value.
  *
  */
 double atan2_up(double x, const double y)
@@ -120,13 +121,13 @@ double atan2_up(double x, const double y)
     return x;
 }
 
-/** \brief Compares two pointers to an int
+/** \brief Compares two pointers to an int.
  *
- * \param p1 const void* The first pointer to an int
- * \param p2 const void* The second pointer to an int
- * \return int States whether the pointers are equal or unequal
+ * \param p1 const void* The first pointer to an int.
+ * \param p2 const void* The second pointer to an int.
+ * \return int States whether the pointers are equal or unequal.
  *
- * In case that the first int is greater than the second one, return 1, if both are equal, return 0, otherwise -1
+ * In case that the first int is greater than the second one, return 1, if both are equal, return 0, otherwise -1.
  */
 int comp_int(const void *p1, const void *p2)
 {
@@ -135,13 +136,13 @@ int comp_int(const void *p1, const void *p2)
     return 0;
 }
 
-/** \brief Compares two pointers to a double
+/** \brief Compares two pointers to a double.
  *
- * \param p1 const void* The first pointer to a double
- * \param p2 const void* The second pointer to a double
- * \return int States whether the pointers are equal or unequal
+ * \param p1 const void* The first pointer to a double.
+ * \param p2 const void* The second pointer to a double.
+ * \return int States whether the pointers are equal or unequal.
  *
- * In case that the first double is greater than the second one, return 1, if both are equal, return 0, otherwise -1
+ * In case that the first double is greater than the second one, return 1, if both are equal, return 0, otherwise -1.
  */
 int comp_double(const void *p1, const void *p2)
 {
@@ -150,17 +151,17 @@ int comp_double(const void *p1, const void *p2)
     return 0;
 }
 
-/** \brief Finds the maximum value in a double array
+/** \brief Finds the maximum value in a double array.
  *
- * \param m const double *res_pt The array
- * \param xm uint *res_pt The first index where the maximum value is found
- * \param ym uint *res_pt The second index where the maximum value is found
- * \param row const uint The range of the first index
- * \param col const uint The range of the second index
- * \return double The maximum value
+ * \param m const double *res_pt The array.
+ * \param xm uint *res_pt The first index where the maximum value is found.
+ * \param ym uint *res_pt The second index where the maximum value is found.
+ * \param row const uint The range of the first index.
+ * \param col const uint The range of the second index.
+ * \return double The maximum value.
  *
- * Only the first occurrence of the maximum value is returned
- * row and col are used to help indexing
+ * Only the first occurrence of the maximum value is returned.
+ * row and col are used to help indexing.
  */
 double find_max(const double *res_pt m, uint *res_pt xm, uint *res_pt ym, const uint row, const uint col)
 {
@@ -182,15 +183,15 @@ double find_max(const double *res_pt m, uint *res_pt xm, uint *res_pt ym, const 
 
 /** \brief Finds the minimum value in a double array
  *
- * \param m const double *res_pt The array
- * \param xm uint *res_pt The first index where the minimum value is found
- * \param ym uint *res_pt The first index where the minimum value is found
- * \param row const uint The range of the first index
- * \param col const uint The range of the first index
- * \return double The minimum value
+ * \param m const double *res_pt The array.
+ * \param xm uint *res_pt The first index where the minimum value is found.
+ * \param ym uint *res_pt The first index where the minimum value is found.
+ * \param row const uint The range of the first index.
+ * \param col const uint The range of the first index.
+ * \return double The minimum value.
  *
- * Only the first occurance of the minimum value is returned
- * Row and col are used to help indexing
+ * Only the first occurrence of the minimum value is returned.
+ * Row and col are used to help indexing.
  */
 double find_min(const double *res_pt m, uint *res_pt xm, uint *res_pt ym, const uint row, const uint col)
 {
@@ -210,14 +211,14 @@ double find_min(const double *res_pt m, uint *res_pt xm, uint *res_pt ym, const 
     return t1;
 }
 
-/** \brief Solve ax^2+bx+c=0 for x
+/** \brief Solve ax^2+bx+c=0 for x.
  *
- * \param a const double The parameter of x^2
- * \param b double The parameter of x^1
- * \param c const double The parameter of x^0
- * \param r[] double The solution
- * \param warn_complex const uchar If(i) then print a warning to the screen in case of complex solution
- * \return uchar If two solutions are found, return 2, if one solution is found, return 1, if a complex solution is found, return 0
+ * \param a const double The parameter of x^2.
+ * \param b double The parameter of x^1.
+ * \param c const double The parameter of x^0.
+ * \param r[] double The solution.
+ * \param warn_complex const uchar If(i) then print a warning to the screen in case of complex solution.
+ * \return uchar If two solutions are found, return 2, if one solution is found, return 1, if a complex solution is found, return 0.
  *
  */
 uchar solve_pq(const double a, double b, const double c, double r[2], const uchar warn_complex)
@@ -249,10 +250,10 @@ uchar solve_pq(const double a, double b, const double c, double r[2], const ucha
     }
 }
 
-/** \brief Gets the sign of a double
+/** \brief Gets the sign of a double.
  *
- * \param x const double The float to get the sign from
- * \return double The sign in front of unity
+ * \param x const double The float to get the sign from.
+ * \return double The sign in front of unity.
  *
  * Returns 0. if x is 0.
  */
@@ -261,20 +262,20 @@ double sign(const double x)
     return (x > 0.) ? 1. : ((x < 0.) ? -1. : 0.);
 }
 
-/** \brief Takes an array of hit_screen variables and sorts it into a bin_hit_screen variable
+/** \brief Takes an array of hit_screen variables and sorts it into a bin_hit_screen variable.
  *
- * \param hso const hit_screen *res_pt The hit_screen array
- * \param no const uint The length of the hit_screen array
- * \param bhs bin_hit_screen *res_pt The variable used to store the hits
- * \param sumup const uchar A flag used to control the summation of the electric field in each bin
+ * \param hso const hit_screen *res_pt The hit_screen array.
+ * \param no const uint The length of the hit_screen array.
+ * \param bhs bin_hit_screen *res_pt The variable used to store the hits.
+ * \param sumup const uchar A flag used to control the summation of the electric field in each bin.
  * \return void
  *
- * All the detections in the array have to be of the same wavelength (tested for security reasons) and a Cartesian coordinate system (not tested)
- * Also updates the variable global_info of 'bhs'
+ * All the detections in the array have to be of the same wavelength (tested for security reasons) and a Cartesian coordinate system (not tested).
+ * Also updates the variable global_info of 'bhs'.
  */
 void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen *res_pt bhs, const uchar sumup)
 {
-    hit_screen *hsc = alloc_hit_screen(no); /**< Copy of hs due to coordinate- and some sign changes */
+    hit_screen *hsc = alloc_hit_screen(no); /**< Copy of hs due to coordinate- and some sign changes. */
     memcpy(hsc, hso, no * sizeof(hit_screen));
     const double ra = M_PI2 / ((double)(*bhs).res_azim),
                  rp = M_PI / ((double)(*bhs).res_polar);
@@ -291,7 +292,7 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
             {
                 t1 = hsc[i].lam;
                 if(c_lam == 0.)
-                    c_lam = t1; /**< In this case, all rays have hit the screen but no particle, because this function shouldn't be called before */
+                    c_lam = t1; /**< In this case, all rays have hit the screen but no particle, because this function shouldn't be called before. */
                 break;
             }
         for(i = 1; i < no; i++) /**< Test if there's another wavelength in the array: */
@@ -306,10 +307,10 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
                 (*bhs).tir += hsc[i].tir;
         (*bhs).tir += hsc[0].tir;
         (*bhs).lam = c_lam;
-        c_lam = 0.; /**< Reset the constant wavelength for a new run, e.g. for a second bundle of rays */
+        c_lam = 0.; /**< Reset the constant wavelength for a new run, e.g. for a second bundle of rays. */
         memcpy(&(*bhs).global_info, &global_ray_info, sizeof(gen_ray_info));
     }
-    else /**< ...here not, because this function is called after a certain threshold of hits was reached */
+    else /**< ...here not, because this function is called after a certain threshold of hits was reached. */
     {
         if(c_lam == 0.)
             c_lam = hsc[0].lam;
@@ -327,23 +328,23 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
     }
     for(i = 0; i < no; i++) /**< Scan through the different rays and store them according to their state: */
         if(hsc[i].state == REGULAR_HIT_STATE || hsc[i].state == FIRSTTIME_HIT_STATE)
-            c_to_s3_ip(hsc[i].p); /**< Transform the coordinate system to a spherical one */
+            c_to_s3_ip(hsc[i].p); /**< Transform the coordinate system to a spherical one. */
         else if(hsc[i].state == EXCEPTION_STATE || hsc[i].state == LOST_RAY_STATE)
         {
-            if(i_lost == allocated_lost_event_memory) /**< Check if there are already too many lost rays stored */
+            if(i_lost == ALLOCATED_LOST_EVENT_MEMORY) /**< Check if there are already too many lost rays stored. */
             {
-                (*bhs).lost_coor = realloc_point3((*bhs).lost_coor, i_lost, allocated_lost_event_memory);
-                allocated_lost_event_memory += allocated_lost_event_memory;
+                (*bhs).lost_coor = realloc_point3((*bhs).lost_coor, i_lost, ALLOCATED_LOST_EVENT_MEMORY);
+                ALLOCATED_LOST_EVENT_MEMORY += ALLOCATED_LOST_EVENT_MEMORY;
             }
             cp3((*bhs).lost_coor[i_lost].x, hsc[i].p);
             i_lost++;
         }
         else if(hsc[i].state == EXHAUSTED_RAY_STATE)
         {
-            if(i_exhstd == allocated_exhausted_event_memory) /**< Check if there are already too many exhausted rays stored */
+            if(i_exhstd == ALLOCATED_EXHAUSTED_EVENT_MEMORY) /**< Check if there are already too many exhausted rays stored. */
             {
-                (*bhs).exhstd_coor = realloc_point3((*bhs).exhstd_coor, i_exhstd, allocated_exhausted_event_memory);
-                allocated_exhausted_event_memory += allocated_exhausted_event_memory;
+                (*bhs).exhstd_coor = realloc_point3((*bhs).exhstd_coor, i_exhstd, ALLOCATED_EXHAUSTED_EVENT_MEMORY);
+                ALLOCATED_EXHAUSTED_EVENT_MEMORY += ALLOCATED_EXHAUSTED_EVENT_MEMORY;
             }
             cp3((*bhs).exhstd_coor[i_exhstd].x, hsc[i].p);
             i_exhstd++;
@@ -359,7 +360,7 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
             if(tpi == 0 || tpi == (*bhs).res_polar - 1 || tai == (*bhs).res_azim) tai = 0;
             assert(tai < (*bhs).res_azim && tpi < (*bhs).res_polar);
             uint j,
-                 tai3 = tai * 3; /**< There are 3 entries in each bin, to step from one to another, multiply the address by 3 */
+                 tai3 = tai * 3; /**< There are 3 entries in each bin, to step from one to another, multiply the address by 3. */
             /**< Compute and sum the complex e-field at a bin, weighted by the polarisation. thus Cartesian coordinates have to be used: */
             for(j = 0; j < 3; j++)
                 (*bhs).camp[tpi][tai3 + j] += hso[i].coamp * hso[i].opol[j] +
@@ -367,7 +368,7 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
             /**< Compute and sum the intensity at each bin: */
             assert(hso[i].cos_incdnc != 0xDEAD && hso[i].cos_incdnc < 0.);
             (*bhs).ray_int[tpi][tai] += ((hso[i].oint + hso[i].pint) * fabs(hso[i].cos_incdnc));
-            /**< Compute distribution of polarization vectors, weighted by the e-field amplitude: */
+            /**< Compute distribution of polarisation vectors, weighted by the e-field amplitude: */
             //        if(hsc[i].opol[0]<0.) hsc[i].opol[0]=-hsc[i].opol[0]; /**< Map opol[0] to positive half sphere */
             //        if(hsc[i].opol[0]<DBL_EPSILON) hsc[i].opol[1]=-hsc[i].opol[1];
             //        if(hsc[i].ppol[0]<0.) hsc[i].ppol[0]=-hsc[i].ppol[0]; /**< Map ppol[0] ... */
@@ -408,14 +409,14 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
             if((*bhs).ray_int[j][k] > m_i)
                 m_i = (*bhs).ray_int[j][k];
             s_i += (*bhs).ray_int[j][k];
-            /**< Norm the distribution of the polarization in one bin: */
+            /**< Norm the distribution of the polarisation in one bin: */
             double t1 = MAXOF(fabs((*bhs).pol_dist[j][l0]), MAXOF(fabs((*bhs).pol_dist[j][l1]), fabs((*bhs).pol_dist[j][l2])));
             if(t1 != 0.)
             {
                 (*bhs).pol_dist[j][l0] /= t1;
                 (*bhs).pol_dist[j][l1] /= t1;
                 (*bhs).pol_dist[j][l2] /= t1;
-                /**< Compute the mean deviation of the polarization: */
+                /**< Compute the mean deviation of the polarisation: */
                 polnorm = POW2((*bhs).pol_dist[j][l0]) + POW2((*bhs).pol_dist[j][l1]) + POW2((*bhs).pol_dist[j][l2]);
                 (*bhs).pol_dens[j][k] = (polnorm > DBL_MIN ? sqrt(polnorm) : 0.);
                 if((*bhs).pol_dens[j][k] > m_p)
@@ -431,17 +432,17 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
         (*bhs).ray_int_sum = s_i;
         (*bhs).pol_max = m_p;
         (*bhs).pol_sum = s_p;
-        i_exhstd = i_lost = 0; /**< Reset these values for a new run */
+        i_exhstd = i_lost = 0; /**< Reset these values for a new run. */
     }
     free(hsc);
 }
 
-/** \brief Sets a point3 variable
+/** \brief Sets a point3 variable.
  *
- * \param p point3* The pointer to a point3 variable
- * \param x0 const double The first coordinate
- * \param x1 const double The second coordinate
- * \param x2 const double The third coordinate
+ * \param p point3* The pointer to a point3 variable.
+ * \param x0 const double The first coordinate.
+ * \param x1 const double The second coordinate.
+ * \param x2 const double The third coordinate.
  * \return void
  *
  */
@@ -450,13 +451,13 @@ void set_point3(point3 *p, const double x0, const double x1, const double x2)
     (*p) = (point3){.x = {x0, x1, x2}};
 }
 
-/** \brief Sets a sphere3 variable
+/** \brief Sets a sphere3 variable.
  *
- * \param p sphere3* The pointer to a sphere3 variable
- * \param x0 const double The first coordinate
- * \param x1 const double The second coordinate
- * \param x2 const double The third coordinate
- * \param r const double The radius
+ * \param p sphere3* The pointer to a sphere3 variable.
+ * \param x0 const double The first coordinate.
+ * \param x1 const double The second coordinate.
+ * \param x2 const double The third coordinate.
+ * \param r const double The radius.
  * \return void
  *
  */
@@ -465,15 +466,15 @@ void set_sphere3(sphere3 *p, const double x0, const double x1, const double x2, 
     (*p) = (sphere3){.o = {x0, x1, x2}, .r = r};
 }
 
-/** \brief Sets a sphrcl_prtcl variable
+/** \brief Sets a sphrcl_prtcl variable.
  *
- * \param p sphrcl_prtcl* The pointer to a sphrcl_prtcl variable
- * \param n const cdoub The refractive index of the particle
- * \param mu const double The permeability of the particle
- * \param x0 const double The first coordinate
- * \param x1 const double The second coordinate
- * \param x2 const double The third coordinate
- * \param r const double The radius of the particle
+ * \param p sphrcl_prtcl* The pointer to a sphrcl_prtcl variable.
+ * \param n const cdoub The refractive index of the particle.
+ * \param mu const double The permeability of the particle.
+ * \param x0 const double The first coordinate.
+ * \param x1 const double The second coordinate.
+ * \param x2 const double The third coordinate.
+ * \param r const double The radius of the particle.
  * \return void
  *
  */
@@ -485,11 +486,11 @@ void set_sphrcl_prtcl(sphrcl_prtcl *p, const cdoub n, const double mu, const dou
              (*p).no, x0, x1, x2, creal(n), cimag(n), mu, r);
 }
 
-/** \brief Sets an index2 variable for a proper indexing of a sphere
+/** \brief Sets an index2 variable for a proper indexing of a sphere.
  *
- * \param indx index2* The output variable via pointer
- * \param pol const uint The polar resolution of the sphere
- * \param azi const uint The azimuthal resolution of the sphere
+ * \param indx index2* The output variable via pointer.
+ * \param pol const uint The polar resolution of the sphere.
+ * \param azi const uint The azimuthal resolution of the sphere.
  * \return void
  *
  */
@@ -514,14 +515,14 @@ void set_index2_bin_sphere3(index2 *indx, const uint pol, const uint azi)
     assert(k == (pol - 2)*azi + 2);
 }
 
-/** \brief Copy an array of rays to a glray_s array to display them in the OpenGL viewer
+/** \brief Copy an array of rays to a glray_s array to display them in the OpenGL viewer.
  *
- * \param rs const ray *const res_pt The array of rays used in the calculation
- * \param glrs glray_s *res_pt The arrays of rays used in the viewer
- * \param nors const uint The number of rays
+ * \param rs const ray *const res_pt The array of rays used in the calculation.
+ * \param glrs glray_s *res_pt The arrays of rays used in the viewer.
+ * \param nors const uint The number of rays.
  * \return void
  *
- * Just to be used for the initial state of rays, i.e. before the actual tracing
+ * Just to be used for the initial state of rays, i.e. before the actual tracing.
  */
 void copy_ray_to_glray_s(const ray *const res_pt rs, glray_s *res_pt glrs, const uint nors)
 {
@@ -536,7 +537,7 @@ void copy_ray_to_glray_s(const ray *const res_pt rs, glray_s *res_pt glrs, const
             .opol = {rs[i].opol[0], rs[i].opol[1], rs[i].opol[2]},
             .ppol = {rs[i].ppol[0], rs[i].ppol[1], rs[i].ppol[2]}};
         add3(glrs[i].v.o, glrs[i].v.r, glrs[i].v.r);
-        ulong t1 = lrint(floor(rs[i].lam * 1e6)); /**< Using a uint cast brings at least valgrind into trouble */
+        ulong t1 = lrint(floor(rs[i].lam * 1e6)); /**< Using a uint cast brings at least valgrind into trouble. */
         assert(t1 >= 380);
         t1 -= 380;
         assert(t1 < 401);
@@ -546,11 +547,11 @@ void copy_ray_to_glray_s(const ray *const res_pt rs, glray_s *res_pt glrs, const
     }
 }
 
-/** \brief Writes the data from the current ray into a glray variable for visualization
+/** \brief Writes the data from the current ray into a glray variable for visualization.
  *
- * \param const ray *const res_pt r The current ray to be traced
- * \param glr glray *res_pt The glray-variable where the data is stored in
- * \param n_glr const uint The number of the specific variable in glr
+ * \param const ray *const res_pt r The current ray to be traced.
+ * \param glr glray *res_pt The glray-variable where the data is stored in.
+ * \param n_glr const uint The number of the specific variable in glr.
  * \return void
  *
  * Pointers are used to facilitate the addressing of the counters.
@@ -559,7 +560,7 @@ void copy_ray_to_glray_s(const ray *const res_pt rs, glray_s *res_pt glrs, const
 void make_trace(const ray *const res_pt r, glray *res_pt glr, const uint n_glr)
 {
     {
-        /**< First, make the trace: */
+        /**< First, make the trace. */
         static const uint noi = 64;
         uint *i = &((*glr).glrs[n_glr].n_trace);
         if(!(*i))
@@ -570,7 +571,6 @@ void make_trace(const ray *const res_pt r, glray *res_pt glr, const uint n_glr)
         }
         else if(!(*i % noi))
         {
-            /** @todo starting here: */
             (*glr).glrs[n_glr].trace = realloc_point3((*glr).glrs[n_glr].trace, (*glr).glrs[n_glr].trace_len, noi);
             (*glr).glrs[n_glr].trace_len += noi;
         }
@@ -587,35 +587,35 @@ void make_trace(const ray *const res_pt r, glray *res_pt glr, const uint n_glr)
             (*glr).glrs[n_glr].child = alloc_uint(noj);
             (*glr).glrs[n_glr].child_len = noj;
         }
-        else if(*j == noj)
+        else if(!(*j % noj))
         {
-            (*glr).glrs[n_glr].child = realloc_uint((*glr).glrs[n_glr].child, noj, noj);
+            (*glr).glrs[n_glr].child = realloc_uint((*glr).glrs[n_glr].child, (*glr).glrs[n_glr].child_len, noj);
             (*glr).glrs[n_glr].child_len += noj;
         }
         if(*j != (*r).trans_child)
-            (*j)++; /**< Add a new child */
-        (*glr).glrs[n_glr].child[*j]++; /**< Count the rays of this child */
+            (*j)++; /**< Add a new child. */
+        (*glr).glrs[n_glr].child[*j]++; /**< Count the rays of this child. */
     }
 }
 
-/** \brief Reads only one char and discards the rest until a newline or EOF occurred
+/** \brief Reads only one char and discards the rest until a newline or EOF occurred.
  *
  * \param void
- * \return int Returns the char like getchar in terms of an int
+ * \return int Returns the char like getchar in terms of an int.
  *
  */
 int getchar_dscrd_rmng(void)
 {
-    const int first = getchar(); /**< Very pedantic */
+    const int first = getchar(); /**< Very pedantic. */
     int c = first;
     while(c != '\n' && c != EOF)
-        c = getchar(); /**< Keep getting more */
+        c = getchar(); /**< Keep getting more. */
     return first;
 }
 
-/** \brief Pause the program for some seconds
+/** \brief Pause the program for some seconds.
  *
- * \param sec uint The pause time in seconds
+ * \param sec uint The pause time in seconds.
  * \return void
  *
  */
@@ -625,14 +625,14 @@ void wait(uint sec)
     while(clock() < endwait) {}
 }
 
-/** \brief Compute the sine and cosine of an angle alpha in one step
+/** \brief Compute the sine and cosine of an angle alpha in one step.
  *
- * \param alpha const double The angle in radian
- * \param cosd double *res_pt The cosine of alpha
- * \param sind double *res_pt The sine of alpha
+ * \param alpha const double The angle in radian.
+ * \param cosd double *res_pt The cosine of alpha.
+ * \param sind double *res_pt The sine of alpha.
  * \return void
  *
- * If available, uses assembler code to compute the sine and cosine in one step
+ * If available, uses assembler code to compute the sine and cosine in one step.
  */
 void sincosd(const double alpha, double *res_pt cosd, double *res_pt sind)
 {
@@ -655,14 +655,14 @@ void sincosd(const double alpha, double *res_pt cosd, double *res_pt sind)
 #endif
 }
 
-/** \brief Fall-back function for sincosd
+/** \brief Fall-back function for sincosd.
  *
- * \param alpha double The angle in radians
- * \param cosd double *res_pt The cosine of alpha
- * \param sind double *res_pt The sine of alpha
+ * \param alpha double The angle in radians.
+ * \param cosd double *res_pt The cosine of alpha.
+ * \param sind double *res_pt The sine of alpha.
  * \return void
  *
- * Safes about 25 percent compared to a standard call of cos and sin
+ * Safes about 25 percent compared to a standard call of cos and sin.
  */
 void sincos_sqrt(double alpha, double *res_pt cosd, double *res_pt sind)
 {
@@ -683,16 +683,16 @@ void sincos_sqrt(double alpha, double *res_pt cosd, double *res_pt sind)
     }
 }
 
-/** \brief Initializes a plane from three distinct points in R^3
+/** \brief Initialises a plane from three distinct points in R^3.
  *
- * \param p1 const double *res_pt The pointer to the first point3 variable
- * \param p2 const double *res_pt The pointer to the second point3 variable
- * \param p3 const double *res_pt The pointer to the third point3 variable
- * \param r plane3 *res_pt The pointer to the output variable
+ * \param p1 const double *res_pt The pointer to the first point3 variable.
+ * \param p2 const double *res_pt The pointer to the second point3 variable.
+ * \param p3 const double *res_pt The pointer to the third point3 variable.
+ * \param r plane3 *res_pt The pointer to the output variable.
  * \return void
  *
- * The arrays are not allowed to overlap
- * The points have to given in Cartesian coordinates
+ * The arrays are not allowed to overlap.
+ * The points have to given in Cartesian coordinates.
  */
 void init_plane3_pform(const double *res_pt p1, const double *res_pt p2, const double *res_pt p3, plane3 *res_pt r)
 {
@@ -704,14 +704,14 @@ void init_plane3_pform(const double *res_pt p1, const double *res_pt p2, const d
     cp3((*r).o, p1);
 }
 
-/** \brief Initializes a plane from a given normal vector and a point within the plane in R^3
+/** \brief Initialises a plane from a given normal vector and a point within the plane in R^3.
  *
- * \param n const point3 *res_pt The pointer to the normal vector
- * \param o const point3 *res_pt The pointer to the point within the plane
- * \param r plane3 *res_pt The pointer to the output variable
+ * \param n const point3 *res_pt The pointer to the normal vector.
+ * \param o const point3 *res_pt The pointer to the point within the plane.
+ * \param r plane3 *res_pt The pointer to the output variable.
  * \return void
  *
- * The arrays are not allowed to overlap
+ * The arrays are not allowed to overlap.
  */
 void init_plane3(const point3 *res_pt n, const point3 *res_pt o, plane3 *res_pt r)
 {
