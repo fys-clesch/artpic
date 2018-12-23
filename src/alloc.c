@@ -288,10 +288,6 @@ ray *alloc_ray(const uint n)
  */
 ray *realloc_ray(ray *m, const double lam, const uint n, const uint plus)
 {
-    #ifndef NDEBUG
-        fprintf(stdout, "\n>> reallocating ray\n");
-    #endif
-
     uint np = n + plus;
     if(np < n)
         error_msg("integer overflow. continuing will likely be erroneous, at least data will be lost", ERR_ARG);

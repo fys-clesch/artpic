@@ -468,7 +468,7 @@ gen_list_clause:
  * \param opt const draw_opt A flag which tells this function what to do.
  * \return void
  *
- * When called the first time, the address of spp and bbox are copied for the later drawing procedure. no memory has to be allocated.
+ * When called the first time, the address of spp and bbox are copied for the later drawing procedure. No memory has to be allocated.
  */
 void handle_prtcls_boxed(const sphrcl_prtcl *const res_pt spp, const boundingbox *res_pt bbox, const uint np, const draw_opt opt)
 {

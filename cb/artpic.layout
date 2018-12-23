@@ -2,36 +2,6 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="..\src\control.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="258" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\src\tofig.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4081" topLine="217" />
-		</Cursor>
-	</File>
-	<File name="..\src\draw.c" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="240" topLine="593" />
-		</Cursor>
-	</File>
-	<File name="..\src\draw.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="603" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\src\tofile.c" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="4846" topLine="243" />
-		</Cursor>
-	</File>
-	<File name="..\src\font.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="40" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="..\src\fresnel.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="62" topLine="0" />
@@ -52,19 +22,14 @@
 			<Cursor1 position="828" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="..\src\viewer.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2610" topLine="90" />
-		</Cursor>
-	</File>
 	<File name="..\src\lina.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="16992" topLine="57" />
 		</Cursor>
 	</File>
-	<File name="..\src\main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\src\main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3320" topLine="103" />
+			<Cursor1 position="3667" topLine="102" />
 		</Cursor>
 	</File>
 	<File name="..\src\msg.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -97,9 +62,14 @@
 			<Cursor1 position="737" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="..\src\alloc.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\src\alloc.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="28642" topLine="1017" />
+			<Cursor1 position="7362" topLine="628" />
+		</Cursor>
+	</File>
+	<File name="..\src\viewer.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2610" topLine="90" />
 		</Cursor>
 	</File>
 	<File name="..\src\refr_data.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -159,7 +129,37 @@
 	</File>
 	<File name="..\src\tests.c" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="0" topLine="15" />
+			<Cursor1 position="9600" topLine="225" />
+		</Cursor>
+	</File>
+	<File name="..\src\control.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1213" topLine="38" />
+		</Cursor>
+	</File>
+	<File name="..\src\tofig.c" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="4081" topLine="217" />
+		</Cursor>
+	</File>
+	<File name="..\src\draw.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="15599" topLine="14" />
+		</Cursor>
+	</File>
+	<File name="..\src\draw.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="603" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\src\tofile.c" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="9949" topLine="196" />
+		</Cursor>
+	</File>
+	<File name="..\src\font.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="40" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

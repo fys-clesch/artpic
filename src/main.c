@@ -37,19 +37,19 @@
 
 /**
  ** long-term TODO:
- * substitute assertions with error messages (only run time errors)
- * look for a clean printing structure
+ * substitute assertions with error messages (only run time errors).
+ * look for a clean printing structure.
  *
  ** maybe TODO:
- * record where TIR occurred (in the particle variable)
- * record how much energy is lost during the propagation in the particles
- * handle the lists in OpenGL in an explicit function for a better overview
- * polarisation density: change to compute the stokes vector
+ * record where TIR occurred (in the particle variable).
+ * record how much energy is lost during the propagation in the particles.
+ * handle the lists in OpenGL in an explicit function for a better overview.
+ * polarisation density: change to compute the stokes vector.
  *
  ** TODO:
- * check multiple scattering, as some error was detected in the main loop with uninitialized rays
- * problem with the tracing visualization: the start of a transmitted ray isn't stored properly
- * -> add make trace when updating i1
+ * check multiple scattering, as some error was detected in the main loop with uninitialised rays.
+ * problem with the tracing visualization: the start of a transmitted ray isn't stored properly.
+ * -> add make trace when updating i1.
  */
 
 int main(int argc, char **argv)
@@ -87,8 +87,8 @@ int main(int argc, char **argv)
     /**< Set the rays and some detection containers: */
     lambda = 632.8e-6;
     max_rad = 3.95e-1;
-    res_rad = 2; /* 80 */
-    res_azim = 2;
+    res_rad = 4;
+    res_azim = 4;
     if(res_azim < MAX_NUMBER_OF_RAYS / res_rad)
         nors = res_azim * res_rad;
     else
@@ -99,10 +99,9 @@ int main(int argc, char **argv)
     nprtcls = 3;
     mu_prtcl = 1.;
     sphrcl_prtcl *prtcls = alloc_sphrcl_prtcl(nprtcls);
-//  set_sphrcl_prtcl(&prtcls[0],rfrct_indx_h2o(lambda,"mm"),mu_prtcl,0.,0.,0.,.4);
-    set_sphrcl_prtcl(&prtcls[0], 1.4 + 0.i, mu_prtcl, 0., 0., 0., .4);
-    set_sphrcl_prtcl(&prtcls[1], N_VAC, mu_prtcl, 0., 1., 0., .42);
-    set_sphrcl_prtcl(&prtcls[2], N_VAC, mu_prtcl, 0., 0., 1., .41);
+    set_sphrcl_prtcl(&prtcls[0], /*rfrct_indx_h2o(lambda, "mm")*/ 1.4 + 0.i, mu_prtcl, 0., 0., 0., .4);
+    set_sphrcl_prtcl(&prtcls[1], 1.4 + 0.i, mu_prtcl, 0., .9, .25, .42);
+    set_sphrcl_prtcl(&prtcls[2], 1.4 + 0.i, mu_prtcl, 0., 0., 1., .41);
     set_sphere3(&screen, 0., 0., 0., b_htscrn[0].rad);
     /**< Initiate the bundle of rays: */
     set_point3(&polarisation, 1., 0., 0.);
@@ -149,7 +148,7 @@ int main(int argc, char **argv)
         * beginning with the inner loop, but if the ray hits no particle,
         * this procedure would cost unnecessary memory allocations.
         */
-        for(uj = 0, min_l = DBL_MAX; uj < nprtcls; uj++) /**< Check for the nearest intersection with a particle */
+        for(uj = 0, min_l = DBL_MAX; uj < nprtcls; uj++) /**< Check for the nearest intersection with a particle. */
         {
             if(intersec_lin_sph(&prtcls[uj].s, &first.v, 0, &isec))
                 if(first.v.l < min_l)
@@ -158,7 +157,7 @@ int main(int argc, char **argv)
                     min_l_ind = uj;
                 }
         }
-        if(intersec_lin_sph(&screen, &first.v, 1, &isec)) /**< Check for the intersection with the screen */
+        if(intersec_lin_sph(&screen, &first.v, 1, &isec)) /**< Check for the intersection with the screen. */
         {
             if(first.v.l < min_l)
             {
@@ -175,7 +174,7 @@ int main(int argc, char **argv)
                 }
                 #pragma omp atomic
                 GLOBAL_RAY_INFO.count_hit++;
-                continue; /**< If the screen was hit, proceed with the next ray */
+                continue; /**< If the screen was hit, proceed with the next ray. */
             }
         }
         else
@@ -217,20 +216,20 @@ int main(int argc, char **argv)
         memcpy(&subrs[0], &first, sizeof(ray));
         i4 = i2 + 1;
         subrs[i4].lam = 0xDEAD;
-        /**< Now, we have at maximum 2 rays from the initial one */
-        for(i1 = 0, i3 = n_subrs, j1 = 0, j2 = n_subhtscrn, n_move = 0; i1 <= i2;) /**< --> Start inner loop */
+        /**< Now, we have at maximum 2 rays from the initial one. */
+        for(i1 = 0, i3 = n_subrs, j1 = 0, j2 = n_subhtscrn, n_move = 0; i1 <= i2;) /**< --> Start inner loop. */
         {
             /**
-            * i1: current ray index
-            * i2: total rays to work out minus 1
-            * i3: allocated rays
-            * i4: rays to work out and the next ray to be saved by handle_reflntrans
-            * n_move: times of moving subrs by n_subrs
-            * j1: current hit_screen index
-            * j2: allocated hit_screen variables
+            * i1: current ray index.
+            * i2: total rays to work out minus 1.
+            * i3: allocated rays.
+            * i4: rays to work out and the next ray to be saved by handle_reflntrans.
+            * n_move: times of moving subrs by n_subrs.
+            * j1: current hit_screen index.
+            * j2: allocated hit_screen variables.
             */
             assert(subrs[i1].lam != 0.);
-            if(i1 == n_subrs) /**< Save precious memory by overwriting the already handled rays */
+            if(i1 == n_subrs) /**< Save precious memory by overwriting the already handled rays. */
             {
                 assert(i1 <= i4 && (i1 + i4) <= i3);
                 memmove(&subrs[0], &subrs[i1], i4 * sizeof(ray));
@@ -239,12 +238,12 @@ int main(int argc, char **argv)
                 i4 -= n_subrs;
                 n_move++;
             }
-            if(i1 + i4 == i3) /**< Check for memory re-allocation of rays */
+            if(i1 + i4 == i3) /**< Check for memory re-allocation of rays. */
             {
                 subrs = realloc_ray(subrs, 0., i3, n_subrs);
                 i3 += n_subrs;
             }
-            if(j1 == j2) /**< Check for memory re-allocation of hit detection */
+            if(j1 == j2) /**< Check for memory re-allocation of hit detection. */
             {
                 if(j2 > max_subhtscrn - n_subhtscrn)
                 {
@@ -260,7 +259,7 @@ int main(int argc, char **argv)
                     j2 += n_subhtscrn;
                 }
             }
-            if(get_ray_int(&subrs[i1]) < MINI_INTENSITY) /**< Check boundary condition for intensity drop-out */
+            if(get_ray_int(&subrs[i1]) < MINI_INTENSITY) /**< Check boundary condition for intensity drop-out. */
             {
                 if(use_ogl)
                     make_trace(&subrs[i1], &glrays[0], ui);
@@ -327,7 +326,7 @@ int main(int argc, char **argv)
                 assert(subrs[i4].lam == 0xDEAD);
                 if(handle_reflntrans(&subrs[i1], &subrs[i4], &isec))
                 {
-                    if(get_ray_int(&subrs[i4]) < MINI_INTENSITY) /**< This is to increment the event-counter of the particle */
+                    if(get_ray_int(&subrs[i4]) < MINI_INTENSITY) /**< This is to increment the event-counter of the particle. */
                     {
                         #pragma omp atomic
                         prtcls[min_l_ind].exhstds++;
@@ -343,7 +342,7 @@ int main(int argc, char **argv)
                 propagate_ray_eps(&subrs[i1]);
             if(use_ogl)
                 make_trace(&subrs[i1], &glrays[0], ui);
-            if(get_ray_int(&subrs[i1]) < MINI_INTENSITY) /**< This is to increment the event-counter of the particle */
+            if(get_ray_int(&subrs[i1]) < MINI_INTENSITY) /**< This is to increment the event-counter of the particle. */
             {
                 #pragma omp atomic
                 prtcls[min_l_ind].exhstds++;
@@ -359,7 +358,7 @@ int main(int argc, char **argv)
         }
         #pragma omp critical(prog_of_rays)
         {
-            prog_of_rays(i2 + 1 + n_move * n_subrs, PRINT_PROG); /**< +1 due to the first ray */
+            prog_of_rays(i2 + 1 + n_move * n_subrs, PRINT_PROG); /**< +1 due to the first ray. */
         }
         free(subrs);
         free(subhtscrn);
@@ -388,9 +387,9 @@ int main(int argc, char **argv)
     {
         handle_glray(glrays, 1, COPY_RAYS, 0);
         handle_bin_sphere3(&b_htscrn[0], ALLOC_DATA, SINCOS_MAP, INTENSITY);
-        handle_prtcls_boxed(mat_prtcls, &bbox, nprtcls, ALLOC_DATA);
-        handle_prtcls(&prtcls[0], ALLOC_DATA);
-        handle_prtcls(&prtcls[1], ALLOC_DATA);
+//        handle_prtcls_boxed(mat_prtcls, &bbox, nprtcls, ALLOC_DATA);
+        for(uint i = 0; i < nprtcls; i++)
+            handle_prtcls(&prtcls[i], ALLOC_DATA);
         go_freeglut(argc, argv);
     }
     if(use_ogl)
