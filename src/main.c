@@ -100,8 +100,8 @@ int main(int argc, char **argv)
     mu_prtcl = 1.;
     sphrcl_prtcl *prtcls = alloc_sphrcl_prtcl(nprtcls);
     set_sphrcl_prtcl(&prtcls[0], /*rfrct_indx_h2o(lambda, "mm")*/ 1.4 + 0.i, mu_prtcl, 0., 0., 0., .4);
-    set_sphrcl_prtcl(&prtcls[1], 1.4 + 0.i, mu_prtcl, 0., .9, .25, .42);
-    set_sphrcl_prtcl(&prtcls[2], 1.4 + 0.i, mu_prtcl, 0., 0., 1., .41);
+    set_sphrcl_prtcl(&prtcls[1], 1. + 0.i, mu_prtcl, 0., .9, .25, .42);
+    set_sphrcl_prtcl(&prtcls[2], 1. + 0.i, mu_prtcl, 0., 0., 1., .41);
     set_sphere3(&screen, 0., 0., 0., b_htscrn[0].rad);
     /**< Initiate the bundle of rays: */
     set_point3(&polarisation, 1., 0., 0.);
@@ -376,12 +376,9 @@ int main(int argc, char **argv)
     }
     boundingbox bbox;
     line3 trans_prtcls;
-    trans_prtcls = (line3)
-    {
-        .o = {0., 0., 0.},
-        .r = {1., 1., 0.},
-        .l = 0.
-    };
+    trans_prtcls = (line3){.o = {0., 0., 0.},
+                           .r = {1., 1., 0.},
+                           .l = 0.};
     mat_prtcls = load_prtcls("mat.dat", rfrct_indx_h2o, lambda, 1., 1., &trans_prtcls, &nprtcls, &bbox, 1);
     if(use_ogl)
     {

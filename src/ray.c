@@ -19,7 +19,7 @@
  * \param nv const double *res_pt A pointer to a normal vector.
  * \return double The output.
  *
- * Both vectors have to be normalized which is not checked.
+ * Both vectors have to be normalised which is not checked.
  */
 double cangl_in(const ray *res_pt r, const double *res_pt nv)
 {
@@ -35,7 +35,7 @@ double cangl_in(const ray *res_pt r, const double *res_pt nv)
  * \return cdoub The cosine of a probably complex argument.
  *
  * If the real part of t1 is less or equal than zero, TIR occurred.
- * According to IEEE Std 1003.1, 2004 Edition the csqurt-function behaves as follow:
+ * According to IEEE Std 1003.1, 2004 Edition the csqrt-function behaves as follow:
  * These functions shall return the complex square root value, in the range of the right half-plane (including the imaginary axis).
  */
 cdoub ccangl_out(const cdoub ni, const cdoub nt, const double cangl_i, uchar *tir)
@@ -43,21 +43,21 @@ cdoub ccangl_out(const cdoub ni, const cdoub nt, const double cangl_i, uchar *ti
     const double t1 = 1. - cangl_i * cangl_i;
     const cdoub t2 = 1. - ni * ni / (nt * nt) * t1;
     const double t3 = creal(t2),
-                 sign = cangl_i < 0. ? -1. : 1.; /**< This is used to set the proper orientation of the angle. */
+                 sgn = cangl_i < 0. ? -1. : 1.; /**< This is used to set the proper orientation of the angle. */
     if(t3 > 0.)
     {
         *tir = 0;
-        return sign * csqrt(t2);
+        return sgn * csqrt(t2);
     }
     else if(t3 == 0.)
     {
         *tir = 1;
-        return sign * csqrt(t2);
+        return sgn * csqrt(t2);
     }
     else
     {
         *tir = 1;
-        return sign * (-csqrt(t2)); /**< See the csqrt definition. */
+        return sgn * (-csqrt(t2)); /**< See the csqrt definition. */
     }
 }
 
@@ -72,7 +72,7 @@ cdoub ccangl_out(const cdoub ni, const cdoub nt, const double cangl_i, uchar *ti
  */
 void ray_refl(const double *res_pt in, double *res_pt ref, const double *res_pt nv, const double cangl_i)
 {
-    double t1 = -2.*cangl_i;
+    double t1 = -2. * cangl_i;
     addnmul3(in, t1, nv, ref);
     if(fabs((t1 = len_squ3(ref)) - 1.) > DBL_EPSILON)
         nvec3_ip(ref, sqrt(t1)); /**< Normalises the vector. */
@@ -103,7 +103,8 @@ void ray_trans(const double *res_pt in, double *res_pt trans, const double *res_
 #ifndef NDEBUG
     if(fabs(dot3(nv, trans) - creal(cangl_o)) > DBL_EPSILON4)
     {
-        fprintf(stderr, "fabs(dot3(nv,trans)-creal(cangl_o)): %g\n"
+        fprintf(stderr,
+                "fabs(dot3(nv,trans) - creal(cangl_o)): %g\n"
                 "incoming vector: (%15g, %15g, %15g)\n"
                 "normal         : (%15g, %15g, %15g)\n"
                 "outgoing       : (%15g, %15g, %15g)\n"
@@ -120,8 +121,9 @@ void ray_trans(const double *res_pt in, double *res_pt trans, const double *res_
                 nv[0], nv[1], nv[2],
                 trans[0], trans[1], trans[2],
                 dot3(in, nv), cangl_i, dot3(trans, nv), creal(cangl_o),
-                dot3(trans, nv) - creal(cangl_o), cabs(cangl_o), dot3(trans, nv) - cabs(cangl_o), cimag(cangl_o));
-        error_msg("this is probably due to a not detected tir event or due to an intersection of particles with different refractive indices.", ERR_ARG);
+                dot3(trans, nv) - creal(cangl_o), cabs(cangl_o),
+                dot3(trans, nv) - cabs(cangl_o), cimag(cangl_o));
+        error_msg("this is probably due to a not detected TIR event or due to an intersection of particles with different refractive indices.", ERR_ARG);
     }
 #endif
 }
@@ -142,27 +144,35 @@ uchar handle_refl(const ray *res_pt ri, ray *res_pt rrefl, const intrsec *res_pt
                 cro = cfres_refl_opol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, t1, cabs_cangl_f), /**< TE component. */
                 crp = cfres_refl_ppol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, t1, cabs_cangl_f); /**< TM component. */
     t1 = cabs(cro);
-    if(t1 < MINI_REFLECTION_COEF) t1 = 0.;
+    if(t1 < MINI_REFLECTION_COEF)
+        t1 = 0.;
     t2 = cabs(crp);
-    if(t2 < MINI_REFLECTION_COEF) t2 = 0.;
+    if(t2 < MINI_REFLECTION_COEF)
+        t2 = 0.;
     if(t1 > (1. + DBL_EPSILON) && t2 > (1. + DBL_EPSILON))
     {
-        fprintf(stderr, "\novershoot of the reflection coefficient\n"
+        fprintf(stderr,
+                "\novershoot of the reflection coefficient\n"
                 "- orthogonal (TE): %g\n- parallel (TM)  : %g", t1 - 1., t2 - 1.);
         error_msg("this is probably due to the use of complex refractive indices and a TIR event", ERR_ARG);
     }
-    if(t1 == 0. && t2 == 0.) return 0;
+    if(t1 == 0. && t2 == 0.)
+        return 0;
     else
     {
         memcpy(rrefl, ri, sizeof(ray));
-        if((*rrefl).oamp > 0.)(*rrefl).oamp *= t1;
+        if((*rrefl).oamp > 0.)
+            (*rrefl).oamp *= t1;
         (*rrefl).ophase += atan2_up(cimag(cro), creal(cro));
-        if((*rrefl).pamp > 0.)(*rrefl).pamp *= t2;
+        if((*rrefl).pamp > 0.)
+            (*rrefl).pamp *= t2;
         (*rrefl).pphase += atan2_up(cimag(crp), creal(crp));
         (*rrefl).oint *= (t1 * t1);
         (*rrefl).pint *= (t2 * t2);
-        if((*isec).incdnc == OBLIQUE) ray_refl((*ri).v.r, (*rrefl).v.r, (*isec).normal, (*isec).cangl);
-        else rev3((*ri).v.r, (*rrefl).v.r);
+        if((*isec).incdnc == OBLIQUE)
+            ray_refl((*ri).v.r, (*rrefl).v.r, (*isec).normal, (*isec).cangl);
+        else
+            rev3((*ri).v.r, (*rrefl).v.r);
         normedcross3((*rrefl).v.r, (*rrefl).opol, (*rrefl).ppol);
         return 1;
     }
@@ -189,9 +199,11 @@ uchar handle_trans(const ray *res_pt ri, ray *res_pt rtrans, const intrsec *res_
                 cto = cfres_trans_opol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, fabs_cangl_i, cabs_cangl_f), /**< TE component. */
                 ctp = cfres_trans_ppol((*ri).n_i, (*isec).n_f, (*ri).mu_i, (*isec).mu_f, fabs_cangl_i, cabs_cangl_f); /**< TM component. */
     t1 = cabs(cto);
-    if(t1 < MINI_TRANSMISSION_COEF) t1 = 0.;
+    if(t1 < MINI_TRANSMISSION_COEF)
+        t1 = 0.;
     t2 = cabs(ctp);
-    if(t2 < MINI_TRANSMISSION_COEF) t2 = 0.;
+    if(t2 < MINI_TRANSMISSION_COEF)
+        t2 = 0.;
     if(t1 > (2. + DBL_EPSILON))
     {
         fprintf(stderr, "\novershoot of the transmission coefficient\n"
@@ -209,9 +221,11 @@ uchar handle_trans(const ray *res_pt ri, ray *res_pt rtrans, const intrsec *res_
     else
     {
         memcpy(rtrans, ri, sizeof(ray));
-        if((*rtrans).oamp > 0.)(*rtrans).oamp *= t1;
+        if((*rtrans).oamp > 0.)
+            (*rtrans).oamp *= t1;
         (*rtrans).ophase += atan2_up(cimag(cto), creal(cto));
-        if((*rtrans).pamp > 0.)(*rtrans).pamp *= t2;
+        if((*rtrans).pamp > 0.)
+            (*rtrans).pamp *= t2;
         (*rtrans).pphase += atan2_up(cimag(ctp), creal(ctp));
         const double t3 = cabs((*isec).n_f * cabs_cangl_f / ((*ri).n_i * fabs_cangl_i));
         (*rtrans).oint *= (t1 * t1 * t3);
@@ -224,8 +238,10 @@ uchar handle_trans(const ray *res_pt ri, ray *res_pt rtrans, const intrsec *res_
         (*rtrans).n_i = (*isec).n_f;
         (*rtrans).mu_i = (*isec).mu_f;
         normedcross3((*rtrans).v.r, (*rtrans).opol, (*rtrans).ppol);
-        if(t2 == 0. || t1 == 0.) return 1; /**< 'half-TIR' */
-        else return 2;
+        if(t2 == 0. || t1 == 0.)
+            return 1; /**< 'half-TIR' */
+        else
+            return 2;
     }
 }
 
@@ -274,7 +290,8 @@ uchar handle_reflntrans(ray *res_pt ri, ray *res_pt rsec, const intrsec *res_pt 
             (*rsec).trans_child++;
             uchar tc = assert_ray(ri, "reflected", ERR_ARG);
             tc &= assert_ray(rsec, "secondary", ERR_ARG);
-            if(!tc) print_intrsec(isec, "standard");
+            if(!tc)
+                print_intrsec(isec, "standard");
             return 1;
         }
 sec_dead:
@@ -288,16 +305,26 @@ sec_dead:
         printf("TIR occurred\n");
         getchar();
         if(!handle_refl(ri, &rswap, isec, cangl_f))
-            error_msg("tir occurred, but reflection coefficients are near 0. "
+            error_msg("TIR occurred, but reflection coefficients are near 0. "
                       "check ccangl_out in handle_refl (or before) for rounding errors.", ERR_ARG);
         memcpy(ri, &rswap, sizeof(ray));
         propagate_ray_eps(ri);
         (*ri).tir++;
-        assert_ray(ri, "reflected, tir", ERR_ARG);
+        assert_ray(ri, "reflected, TIR", ERR_ARG);
         return 0;
     }
 }
 
+/** \brief Rotates a ray's polarisation according to a new angle alpha to match the local coordinate system at an intersection.
+ *
+ * \param r ray* A pointer to the ray variable.
+ * \param alpha const double The angle between a tangential vector of the intersection and the orthogonal polarisation.
+ * \return void
+ *
+ * This is a unitary transform and does not change the polarisation state of the ray.
+ * This function should not be called when the angle is 0 or +/- pi.
+ * The angle is counted positively in a counter-clockwise sense.
+ */
 void map_pol_to_lc(ray *r, const double alpha)
 {
     const double Ax = (*r).oamp,
@@ -340,14 +367,14 @@ void map_pol_to_lc_opt(ray *r, const double alpha)
                  ay2 = POW2(ay),
                  salpha = sin(alpha),
                  calpha = cos(alpha),
-                 s2alpha = sin(2.*alpha),
-                 c2alpha = cos(2.*alpha),
+                 s2alpha = sin(2. * alpha),
+                 c2alpha = cos(2. * alpha),
                  cpdiff = cos((*r).ophase - (*r).pphase),
                  spx = sin((*r).ophase),
                  cpx = cos((*r).ophase),
                  spy = sin((*r).pphase),
                  cpy = cos((*r).pphase),
-                 t1 = 2.*ax * ay * cpdiff * s2alpha,
+                 t1 = 2. * ax * ay * cpdiff * s2alpha,
                  t2 = ax2 + ay2,
                  t3 = ax * spx,
                  t4 = ay * spy,
@@ -358,7 +385,8 @@ void map_pol_to_lc_opt(ray *r, const double alpha)
     (*r).ophase = atan2_up(t3 * calpha - t4 * salpha, t6 * calpha - t5 * salpha);
     (*r).pphase = atan2_up(t3 * salpha + t4 * calpha, t5 * calpha + t6 * salpha);
     double m[9];
-    gen_mat_rot3_n(m, (*r).v.r, -alpha); /**< The rotation of the polarisation vector has to compensate for the rotation of the amplitude and phase. */
+    /**< The rotation of the polarisation vector has to compensate for the rotation of the amplitude and phase: */
+    gen_mat_rot3_n(m, (*r).v.r, -alpha);
     inner_product3_mat_vec_ip(m, (*r).opol);
     inner_product3_mat_vec_ip(m, (*r).ppol);
 }
@@ -374,7 +402,8 @@ uchar orthogo_ray_at_intersec(ray *res_pt ri, const intrsec *res_pt isec)
 {
     assert(fabs((*isec).cangl) > DBL_EPSILON);
     assert((*isec).incdnc != VERTICAL);
-    double tang[3], tswap[3];
+    double tang[3],
+           tswap[3];
 #ifndef NDEBUG
     if(!assert_ray(ri, "before orthogonalization", ERR_ARG))
         print_intrsec(isec, "orthogo-start");
@@ -404,7 +433,8 @@ uchar orthogo_ray_at_intersec(ray *res_pt ri, const intrsec *res_pt isec)
         uchar tc = assert_orthogo(tang, (*ri).ppol, "tang", "p", ERR_ARG);
         tc &= assert_orthogo(tang, (*ri).v.r, "tang", "r", ERR_ARG);
         tc &= assert_parallel(tang, (*ri).opol, "tang", "o", ERR_ARG);
-        if(!tc) print_intrsec(isec, "orthogo-special");
+        if(!tc)
+            print_intrsec(isec, "orthogo-special");
     }
     else /**< The general case. */
     {
@@ -431,7 +461,8 @@ uchar orthogo_ray_at_intersec(ray *res_pt ri, const intrsec *res_pt isec)
     {
         error_msg("numerical deviation. press enter to check it.", ERR_ARG);
         fprintf(stderr, "%g - %g = %g\n", c1, c2, fabs(c1 - c2));
-        if(STOP_AT_ERR) getchar();
+        if(STOP_AT_ERR)
+            getchar();
     }
 #endif
     return 1;

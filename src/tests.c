@@ -21,14 +21,14 @@
         if(!j) fprintf(stderr,"anyways, this function was tested %u times before",tested[i]);\
         else fprintf(stderr,"anyways, this function was not tested before");
 
-/** \brief Checks a ray for proper (orthogonal) polarisation
+/** \brief Checks a ray for proper (orthogonal) polarisation.
  *
- * \param r const ray *res_pt The ray to be checked
- * \param info const char *res_pt Something to identify the ray
- * \param file const char *res_pt The file in which this function was called
- * \param line int The line where this functions was called
- * \param fname const char *res_pt The name of the function where this functions was called
- * \return uchar Returns 0 if something went wrong
+ * \param r const ray *res_pt The ray to be checked.
+ * \param info const char *res_pt Something to identify the ray.
+ * \param file const char *res_pt The file in which this function was called.
+ * \param line int The line where this functions was called.
+ * \param fname const char *res_pt The name of the function where this functions was called.
+ * \return uchar Returns 0 if something went wrong.
  *
  */
 uchar assert_ray(const ray *res_pt r, const char *res_pt info, const char *res_pt file, int line, const char *res_pt fname)
@@ -72,16 +72,16 @@ uchar assert_ray(const ray *res_pt r, const char *res_pt info, const char *res_p
     return 1;
 }
 
-/** \brief Checks two vectors for proper orthogonality and their unity norm
+/** \brief Checks two vectors for proper orthogonality and their unity norm.
  *
- * \param x const double *res_pt The first vector
- * \param y const double *res_pt The second vector
- * \param infox const char *res_pt Something to identify the test
- * \param infoy const char *res_pt Something to identify the test
- * \param file const char *res_pt The file in which this function was called
- * \param line int The line where this functions was called
- * \param fname const char *res_pt The name of the function where this functions was called
- * \return uchar Returns 0 if something went wrong
+ * \param x const double *res_pt The first vector.
+ * \param y const double *res_pt The second vector.
+ * \param infox const char *res_pt Something to identify the test.
+ * \param infoy const char *res_pt Something to identify the test.
+ * \param file const char *res_pt The file in which this function was called.
+ * \param line int The line where this functions was called.
+ * \param fname const char *res_pt The name of the function where this functions was called.
+ * \return uchar Returns 0 if something went wrong.
  *
  */
 uchar assert_orthogo(const double *res_pt x, const double *res_pt y, const char *res_pt infox, const char *res_pt infoy, const char *res_pt file, int line, const char *res_pt fname)
@@ -99,8 +99,8 @@ uchar assert_orthogo(const double *res_pt x, const double *res_pt y, const char 
     CHECK_OCCURANCE
     if(c1 | c2 | c3) fprintf(stderr, "%s: news from vectors '%s' and '%s'\n", __func__, infox, infoy);
     if(c1) fprintf(stderr, "- expected less than %g, got: (%c) %g\n-> '%s' and '%s' are not orthogonal\n", cd2, t1 < 0. ? '-' : '+', t2, infox, infoy);
-    if(c2) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalized\n", cd3, t3, infox);
-    if(c3) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalized\n", cd4, t4, infoy);
+    if(c2) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalised\n", cd3, t3, infox);
+    if(c3) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalised\n", cd4, t4, infoy);
     if(c1 | c2 | c3)
     {
         PRINT_OCCURANCE
@@ -110,16 +110,16 @@ uchar assert_orthogo(const double *res_pt x, const double *res_pt y, const char 
     return 1;
 }
 
-/** \brief Checks two vectors for proper (anti-)parallelity and their unity norm
+/** \brief Checks two vectors for proper (anti-)parallelity and their unity norm.
  *
- * \param x const double *res_pt The first vector
- * \param y const double *res_pt The second vector
- * \param infox const char *res_pt Something to identify the test
- * \param infoy const char *res_pt Something to identify the test
- * \param file const char *res_pt The file in which this function was called
- * \param line int The line where this functions was called
- * \param fname const char *res_pt The name of the function where this functions was called
- * \return uchar Returns 0 if something went wrong
+ * \param x const double *res_pt The first vector.
+ * \param y const double *res_pt The second vector.
+ * \param infox const char *res_pt Something to identify the test.
+ * \param infoy const char *res_pt Something to identify the test.
+ * \param file const char *res_pt The file in which this function was called.
+ * \param line int The line where this functions was called.
+ * \param fname const char *res_pt The name of the function where this functions was called.
+ * \return uchar Returns 0 if something went wrong.
  *
  */
 uchar assert_parallel(const double *res_pt x, const double *res_pt y, const char *res_pt infox, const char *res_pt infoy, const char *res_pt file, int line, const char *res_pt fname)
@@ -137,8 +137,8 @@ uchar assert_parallel(const double *res_pt x, const double *res_pt y, const char
     CHECK_OCCURANCE
     if(c1 | c2 | c3) fprintf(stderr, "%s: news from vectors '%s' and '%s'\n", __func__, infox, infoy);
     if(c1) fprintf(stderr, "- expected less than %g, got: (%c) %g\n-> '%s' and '%s' are not parallel\n", cd2, t1 < 0. ? '-' : '+', t2, infox, infoy);
-    if(c2) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalized\n", cd3, t3, infox);
-    if(c3) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalized\n", cd4, t4, infoy);
+    if(c2) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalised\n", cd3, t3, infox);
+    if(c3) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalised\n", cd4, t4, infoy);
     if(c1 | c2 | c3)
     {
         PRINT_OCCURANCE
@@ -148,16 +148,16 @@ uchar assert_parallel(const double *res_pt x, const double *res_pt y, const char
     return 1;
 }
 
-/** \brief Checks two vectors for proper directional parallelity and their unity norm
+/** \brief Checks two vectors for proper directional parallelity and their unity norm.
  *
- * \param x const double *res_pt The first vector
- * \param y const double *res_pt The second vector
- * \param infox const char *res_pt Something to identify the test
- * \param infoy const char *res_pt Something to identify the test
- * \param file const char *res_pt The file in which this function was called
- * \param line int The line where this functions was called
- * \param fname const char *res_pt The name of the function where this functions was called
- * \return uchar Returns 0 if something went wrong
+ * \param x const double *res_pt The first vector.
+ * \param y const double *res_pt The second vector.
+ * \param infox const char *res_pt Something to identify the test.
+ * \param infoy const char *res_pt Something to identify the test.
+ * \param file const char *res_pt The file in which this function was called.
+ * \param line int The line where this functions was called.
+ * \param fname const char *res_pt The name of the function where this functions was called.
+ * \return uchar Returns 0 if something went wrong.
  *
  */
 uchar assert_direct_parallel(const double *res_pt x, const double *res_pt y, const char *res_pt infox, const char *res_pt infoy, const char *res_pt file, int line, const char *res_pt fname)
@@ -175,8 +175,8 @@ uchar assert_direct_parallel(const double *res_pt x, const double *res_pt y, con
     CHECK_OCCURANCE
     if(c1 | c2 | c3) fprintf(stderr, "%s: news from vectors '%s' and '%s'\n", __func__, infox, infoy);
     if(c1) fprintf(stderr, "- expected less than %g, got: (%c) %g\n-> '%s' and '%s' are not parallel\n", cd2, t1 < 0. ? '-' : '+', t2, infox, infoy);
-    if(c2) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalized\n", cd3, t3, infox);
-    if(c3) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalized\n", cd4, t4, infoy);
+    if(c2) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalised\n", cd3, t3, infox);
+    if(c3) fprintf(stderr, "- expected less than %g, got: %g\n-> '%s' is not normalised\n", cd4, t4, infoy);
     if(c1 | c2 | c3)
     {
         PRINT_OCCURANCE
@@ -186,7 +186,7 @@ uchar assert_direct_parallel(const double *res_pt x, const double *res_pt y, con
     return 1;
 }
 
-/** \brief Testing various functions
+/** \brief Testing various functions.
  *
  * \param void
  * \return void
@@ -266,52 +266,52 @@ void testing(void)
         getchar();
         FP_ERR_CHECK;
     }
-    /*cdoub ni=1.5+(0.*1.i),
-          no=1.+(0.*1.i);
-    //cdoub no=1.5+(0.*1.i),
-    //      ni=1.+(0.*1.i);
-    double c_in,t1,t2,tep,teo,abs_c_out;
+    /*cdoub ni = 1.5+(0.*1.i),
+          no = 1.+(0.*1.i);
+    //cdoub no = 1.5+(0.*1.i),
+    //      ni = 1.+(0.*1.i);
+    double c_in, t1, t2, tep, teo, abs_c_out;
     uchar tir;
 
     printf("   %12s %12s %12s %12s\n"
            "   %12s %12s %12s %12s\n"
            ,"c_in","ref","trans","sum","----","---","-----","---");
     printf("OPOL: \n");
-    for(c_in=.745;c_in<.76;c_in+=.0005)
+    for(c_in = .745; c_in < .76; c_in += .0005)
     {
-        cdoub c_out=ccangl_out(ni,no,c_in,&tir);
-        abs_c_out=cabs_real(c_out);
-        if(tir!=1)
+        cdoub c_out = ccangl_out(ni,no,c_in,&tir);
+        abs_c_out = cabs_real(c_out);
+        if(tir! = 1)
         {
-            t1=fres_refl_opol_int(ni,no,1.,1.,c_in,abs_c_out);
-            t2=fres_trans_opol_int(ni,no,1.,1.,c_in,abs_c_out);
-            teo=cabs(cfres_trans_opol(ni,no,1.,1.,c_in,abs_c_out));
+            t1 = fres_refl_opol_int(ni,no,1.,1.,c_in,abs_c_out);
+            t2 = fres_trans_opol_int(ni,no,1.,1.,c_in,abs_c_out);
+            teo = cabs(cfres_trans_opol(ni,no,1.,1.,c_in,abs_c_out));
             printf("   %12g %12g %12g %12g %g\n",acos(c_in)*180./M_PI,t1,t2,t1+t2,c_in);
             printf("   %12g %12s %12g\n",abs_c_out*180./M_PI,"",teo);
         }
         else
         {
-            t1=fres_refl_opol_int(ni,no,1.,1.,c_in,abs_c_out);
+            t1 = fres_refl_opol_int(ni,no,1.,1.,c_in,abs_c_out);
             printf("   %12g %12g %12s %12s %g\n",acos(c_in)*180./M_PI,t1,"TIR","TIR",c_in);
         }
     }
     getchar();
     printf("PPOL: \n");
-    for(c_in=.745;c_in<.76;c_in+=.0005)
+    for(c_in = .745;c_in<.76;c_in += .0005)
     {
-        cdoub c_out=ccangl_out(ni,no,c_in,&tir);
-        abs_c_out=cabs_real(c_out);
-        if(tir!=1)
+        cdoub c_out = ccangl_out(ni,no,c_in,&tir);
+        abs_c_out = cabs_real(c_out);
+        if(tir != 1)
         {
-            t1=fres_refl_ppol_int(ni,no,1.,1.,c_in,c_out);
-            t2=fres_trans_ppol_int(ni,no,1.,1.,c_in,c_out);
-            tep=cabs(cfres_trans_ppol(ni,no,1.,1.,c_in,abs_c_out));
+            t1 = fres_refl_ppol_int(ni,no,1.,1.,c_in,c_out);
+            t2 = fres_trans_ppol_int(ni,no,1.,1.,c_in,c_out);
+            tep = cabs(cfres_trans_ppol(ni,no,1.,1.,c_in,abs_c_out));
             printf("   %12g %12g %12g %12g %g\n",acos(c_in),t1,t2,t1+t2,c_in);
             printf("   %12g %12s %12g\n",abs_c_out*180./M_PI,"",tep);
         }
         else
         {
-            t1=fres_refl_opol_int(ni,no,1.,1.,c_in,c_out);
+            t1 = fres_refl_opol_int(ni,no,1.,1.,c_in,c_out);
             printf("   %12g %12g %12s %12s %g\n",acos(c_in),t1,"TIR","TIR",c_in);
         }
     }*/
@@ -324,42 +324,42 @@ void testing(void)
     intrsec isec;
 
     point3 p;
-    p.x[0]=-2.;
-    p.x[1]=1.;
-    p.x[2]=3.;
+    p.x[0] = -2.;
+    p.x[1] = 1.;
+    p.x[2] = 3.;
 
-    l1.o[0]=1.;
-    l1.o[1]=1.;
-    l1.o[2]=0.;
-    l1.r[0]=3.;l1.r[1]=2.;l1.r[2]=5.;
-    l1.l=1.;
+    l1.o[0] = 1.;
+    l1.o[1] = 1.;
+    l1.o[2] = 0.;
+    l1.r[0] = 3.;l1.r[1] = 2.;l1.r[2] = 5.;
+    l1.l = 1.;
 
-    e.n[0]=1/5.;
-    e.n[1]=1/3.;
-    e.n[2]=1/2.;
-    e.o[0]=5.;e.o[1]=0;e.o[2]=0;
+    e.n[0] = 1/5.;
+    e.n[1] = 1/3.;
+    e.n[2] = 1/2.;
+    e.o[0] = 5.;e.o[1] = 0;e.o[2] = 0;
 
-    s.o[0]=2.;s.o[1]=2.;s.o[2]=2.;
-    s.r=1.;
+    s.o[0] = 2.;s.o[1] = 2.;s.o[2] = 2.;
+    s.r = 1.;
 
-    //t1=dist_pla_pla(&e,&e2);
+    //t1 = dist_pla_pla(&e,&e2);
     intersec_lin_sph(&s,&l1,1,&isec);
     intersec_lin_pla(&e,&l1,&p);
 
     print_point3(&p,2);
     print_line3(&l1,2);
     print_plane3(&e,2);*/
-    /*cdoub cp1=5+4*_Complex_I,cp2=0.5+8*_Complex_I;
+    /*cdoub cp1 = 5+4*_Complex_I,cp2 = 0.5+8*_Complex_I;
     cp1/=cp2;
     printf("%g + I * %g\n",creal(cp1),cimag(cp1));*/
     /*line3 l1;
-    l1.o[0]=1.;
-    l1.o[1]=1.;
-    l1.o[2]=0.;
-    l1.r[0]=3.;
-    l1.r[1]=2.;
-    l1.r[2]=5.;
-    l1.l=1.;
+    l1.o[0] = 1.;
+    l1.o[1] = 1.;
+    l1.o[2] = 0.;
+    l1.r[0] = 3.;
+    l1.r[1] = 2.;
+    l1.r[2] = 5.;
+    l1.l = 1.;
     uint n;
     boundingbox bndngbox;
     load_prtcls("E:/Programming/Mie/artpic/mat.dat",rfrct_indx_h2o,632.8e-6,20.,20.,&l1,&n,&bndngbox,1);*/

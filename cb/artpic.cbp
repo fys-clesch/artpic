@@ -133,6 +133,7 @@ clemens schaefermeier]]>
 		<Unit filename="../Makefile">
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
+		<Unit filename="../README.md" />
 		<Unit filename="../src/alloc.c">
 			<Option compilerVar="CC" />
 		</Unit>

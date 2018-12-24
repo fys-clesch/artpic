@@ -241,7 +241,7 @@ typedef struct line3_struct
 typedef struct plane3_struct
 {
     double o[3], /**< A point in the plane. */
-           n[3]; /**< The normalized normal vector. */
+           n[3]; /**< The normalised normal vector. */
 }plane3; /**< A plane in R^3. */
 
 typedef struct sphere3_struct
@@ -253,7 +253,7 @@ typedef struct sphere3_struct
 typedef struct intrsec_struct
 {
     double p[3], /**< The point of the intersection. */
-           normal[3], /**< The (normalized) normal vector with respect to the surface, pointing outwards. */
+           normal[3], /**< The (normalised) normal vector with respect to the surface, pointing outwards. */
            angl, /**< The angle between the surface normal and the ray vector. */
            cangl, /**< The cosine of angl. */
            mu_f; /**< The permeability of the medium the ray is going to enter. */
@@ -266,8 +266,8 @@ typedef struct hit_screen_struct
     double p[3], /**< The point of the intersection. */
            lam, /**< The wavelength of the ray. */
            cos_incdnc, /**< The cosine of the angle of incidence. */
-           opol[3], /**< The 'o' (normalized) polarisation-vector of the ray. */
-           ppol[3]; /**< The 'p' (normalized) polarisation-vector of the ray. */
+           opol[3], /**< The 'o' (normalised) polarisation-vector of the ray. */
+           ppol[3]; /**< The 'p' (normalised) polarisation-vector of the ray. */
     cdoub coamp, /**< The complex amplitude of the 'o' polarisation. */
           cpamp, /**< The complex amplitude of the 'p' polarisation. */
           oint, /**< The intensity of the 'o' polarisation. */
@@ -326,8 +326,8 @@ typedef struct ray_struct
            pphase, /**< The 'p' phase. */
            oint, /**< The 'o' (or TE) intensity. */
            pint, /**< The 'p' intensity. */
-           opol[3], /**< The 'o' (normalized) polarisation-vector of the ray. */
-           ppol[3], /**< The 'p' (normalized) polarisation-vector of the ray. It is always orthogonal to 'o' and the directional vector in a right-handed sense. */
+           opol[3], /**< The 'o' (normalised) polarisation-vector of the ray. */
+           ppol[3], /**< The 'p' (normalised) polarisation-vector of the ray. It is always orthogonal to 'o' and the directional vector in a right-handed sense. */
            mu_i, /**< The permeability of the medium the ray is in. */
            travel; /**< The optical path travelled by the ray. */
     cdoub n_i; /**< The refractive index of the medium the ray is in. */
@@ -347,8 +347,8 @@ typedef struct glray_s_struct
            pphase, /**< The 'p' phase. */
            oint, /**< The 'o' (or TE) intensity. */
            pint, /**< The 'p' intensity. */
-           opol[3], /**< The initial 'o' (normalized) polarisation-vector of the ray. */
-           ppol[3]; /**< The initial 'p' (normalized) polarisation-vector of the ray. */
+           opol[3], /**< The initial 'o' (normalised) polarisation-vector of the ray. */
+           ppol[3]; /**< The initial 'p' (normalised) polarisation-vector of the ray. */
     const double *rgba[4]; /**< The colour to be used for drawing the ray. */
     uint n_trace, /**< Number of trace points. */
          n_child, /**< Number of ray children a.k.a. segments. */

@@ -7,12 +7,12 @@
 #include "viewer.h"
 #include "draw.h"
 
-extern double const rotY,
-                    norY,
-                    rotX;
-extern double const bin_sphere3_alpha;
-extern const uchar use_light;
-extern uint draw_ray_n;
+extern double const ROT_Y,
+                    NOR_Y,
+                    ROT_X;
+extern double const BIN_SPHERE3_ALPHA;
+extern const uchar USE_LIGHT;
+extern uint DRAW_RAY_N;
 
 /** \brief Draw a character string.
  *
@@ -31,8 +31,8 @@ void drawstring(const char *s)
 
 /** \brief Draw the minimum and maximum value at the colourbox.
  *
- * \param vmin const double* The maximum value mapped to the colourbox.
- * \param vmax const double* The minimum value mapped to the colourbox.
+ * \param vmin const double* The minimum value mapped to the colourbox.
+ * \param vmax const double* The maximum value mapped to the colourbox.
  * \param slen const uint Maximum string length.
  * \return void
  *
@@ -80,8 +80,9 @@ void drawblockstring2d(const char *s, const uint linewidth, double sx, double sy
                 i++;
             }
         }
-        if(isalpha(buf[linewidth - 1]) && isalpha(s[i + linewidth]) &&
-                i + linewidth < len)
+        if(isalpha(buf[linewidth - 1]) &&
+           isalpha(s[i + linewidth]) &&
+           i + linewidth < len)
         {
             buf[linewidth - 1] = '-';
             i += (linewidth - 1);
@@ -106,9 +107,9 @@ void drawblockstring2d(const char *s, const uint linewidth, double sx, double sy
 void draw_coord_ov(void)
 {
     const double origin[3] = {0., 0., 0.},
-                             x[3] = {.5, 0., 0.},
-                                    y[3] = {0., .5, 0.},
-                                           z[3] = {0., 0., .5};
+                 x[3] = {.5, 0., 0.},
+                 y[3] = {0., .5, 0.},
+                 z[3] = {0., 0., .5};
     glMatrixMode(GL_PROJECTION);
     glPushMatrix();
     glLoadIdentity();
@@ -116,8 +117,8 @@ void draw_coord_ov(void)
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
     glTranslated(1.1, 1.1, 0.);
-    glRotated(rotX, 1., 0., 0.);
-    glRotated(rotY, norY, 1., 0.);
+    glRotated(ROT_X, 1., 0., 0.);
+    glRotated(ROT_Y, NOR_Y, 1., 0.);
     draw_arrowv(origin, x, .1, .05, 6);
     draw_arrowv(origin, y, .1, .05, 6);
     draw_arrowv(origin, z, .1, .05, 6);
@@ -228,7 +229,8 @@ void handle_glray(const glray *rs, const uint bundles, const draw_opt opt, const
             for(j = 0; j < n_rs; j++)
             {
                 uint jr = crs_i[j], /**< jr is the specific ray child to draw. */
-                     k, ks = 0, kt = 0; /**< ks counts the number of segments in a child, kt the total number of segments. */
+                     k,
+                     ks = 0, kt = 0; /**< ks counts the number of segments in a child, kt the total number of segments. */
                 if(jr >= (*crs[i]).n_glrs)
                 {
                     jr %= (*crs[i]).n_glrs;
@@ -245,7 +247,7 @@ void handle_glray(const glray *rs, const uint bundles, const draw_opt opt, const
                     else
                     {
                         crs_i[j] = jr; /**< Insert this ray in the list. */
-                        draw_ray_n = crs_i[j];
+                        DRAW_RAY_N = crs_i[j];
                     }
                 }
                 for(k = 0; k <= (*crs[i]).glrs[jr].n_child; k++)
@@ -376,7 +378,7 @@ void handle_bin_sphere3(const bin_hit_screen *const bhs, const draw_opt opt, con
     static uchar allocd = 0, initdlist = 0, update = 0;
     static uint listid, ptc_count;
     static double t_alpha = DEFAULT_BIN_SPHERE3_ALPHA;
-    if(t_alpha != bin_sphere3_alpha)
+    if(t_alpha != BIN_SPHERE3_ALPHA)
         update = 1;
     if(opt == ALLOC_DATA && !allocd)
     {
@@ -389,7 +391,7 @@ void handle_bin_sphere3(const bin_hit_screen *const bhs, const draw_opt opt, con
             error_msg("there are more bins than patches. exiting.", ERR_ARG);
             exit(EXIT_FAILURE);
         }
-        colour_bin_patch3(ptc, ptc_count, bhs, cfun, bin_sphere3_alpha, ptype);
+        colour_bin_patch3(ptc, ptc_count, bhs, cfun, BIN_SPHERE3_ALPHA, ptype);
         allocd = 1;
     }
     else if(opt == GEN_LISTS && !initdlist)
@@ -438,8 +440,8 @@ gen_list_clause:
         {
             assert(allocd);
             glDeleteLists(listid, 1);
-            colour_bin_patch3(ptc, ptc_count, cbhs, cfun, bin_sphere3_alpha, ptype);
-            t_alpha = bin_sphere3_alpha;
+            colour_bin_patch3(ptc, ptc_count, cbhs, cfun, BIN_SPHERE3_ALPHA, ptype);
+            t_alpha = BIN_SPHERE3_ALPHA;
             goto gen_list_clause;
         }
     }
@@ -475,7 +477,8 @@ void handle_prtcls_boxed(const sphrcl_prtcl *const res_pt spp, const boundingbox
     static const sphrcl_prtcl *cspp;
     static const boundingbox *cbbox;
     static uchar initdlist = 0;
-    static uint listid, pcount = 0;
+    static uint listid,
+                pcount = 0;
     if(opt == ALLOC_DATA)
     {
         cspp = spp;
@@ -509,7 +512,7 @@ void handle_prtcls_boxed(const sphrcl_prtcl *const res_pt spp, const boundingbox
                 ddraw_sphere3(30, 30, cspp[i].s.r);
                 glPopMatrix();
             }
-            if(use_light)
+            if(USE_LIGHT)
                 glDisable(GL_LIGHTING);
             glColor3dv(CLIGHTGREY);
             glBegin(GL_LINE_LOOP);
@@ -565,7 +568,8 @@ void handle_prtcls(const sphrcl_prtcl *const res_pt spp, const draw_opt opt)
 #define MAX_SINGLE_PARTICLES 20u
     static const sphrcl_prtcl *cspp[MAX_SINGLE_PARTICLES];
     static uchar initdlist = 0;
-    static uint listid, pcount = 0;
+    static uint listid,
+                pcount = 0;
     if(opt == ALLOC_DATA)
     {
         if(pcount < MAX_SINGLE_PARTICLES)

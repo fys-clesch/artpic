@@ -20,10 +20,14 @@ const double MU_VAC = 1.;
  */
 cdoub rfrct_indx_h2o(double lam, const char *s)
 {
-    if(!strcmp(s, "pm")) lam *= 1e-6;
-    else if(!strcmp(s, "nm")) lam *= 1e-3;
-    else if(!strcmp(s, "um")) {}
-    else if(!strcmp(s, "mm")) lam *= 1e3;
+    if(!strcmp(s, "pm"))
+        lam *= 1e-6;
+    else if(!strcmp(s, "nm"))
+        lam *= 1e-3;
+    else if(!strcmp(s, "um"))
+        {}
+    else if(!strcmp(s, "mm"))
+        lam *= 1e3;
     else
     {
         error_msg("wrong unit. setting to 500 nm.", ERR_ARG);
@@ -44,7 +48,8 @@ cdoub rfrct_indx_h2o(double lam, const char *s)
         error_msg("imaginary value, returning 1.", ERR_ARG);
         return 1. + 0.i;
     }
-    else return (sqrt(n) + 1.1e-7 * 1.i);
+    else
+        return (sqrt(n) + 1.1e-7 * 1.i);
 }
 
 /** \brief Computes the refractive index of air.
@@ -53,9 +58,9 @@ cdoub rfrct_indx_h2o(double lam, const char *s)
  * \param s const char* The unit of lam.
  * \return cdoub The output.
  *
- * Reference for the data: Philip E. Ciddor.
+ * Reference for the data: Philip E. Ciddor
  * Refractive index of air: new equations for the visible and near infrared
- * Appl. Optics 35, 1566-1573 (1996).
+ * Appl. Optics 35, 1566-1573 (1996)
  * doi:10.1364/AO.35.001566
  * Conditions: 15.0 deg, 101 325 Pa
  */
@@ -82,5 +87,5 @@ cdoub rfrct_indx_air(double lam, const char *s)
         return 1. + 0.i;
     }
     else
-        return (n + 0.i);
+        return n + 0.i;
 }

@@ -10,29 +10,29 @@
 /**
  * Good OpenGL tutorial: http://www.3dsource.de/faq/viewing.htm.
  */
-uint main_width,
-     main_height,
-     parent_win,
-     sub1_win;
-const uint init_main_width = 800,
-           init_main_height = 600;
-const double nearclppng = -1000.,
-             farclppng = 1000.;
-double rotY = 0.,
-       norY = 0.,
-       rotX = 0.,
-       movY = 0.,
-       movX = 0.,
-       zoom = DEFAULT_ZOOM;
-uchar use_light = 0;
+uint MAIN_WIDTH,
+     MAIN_HEIGHT,
+     PARENT_WIN,
+     SUB_WIN_1;
+const uint INIT_MAIN_WIDTH = 800,
+           INIT_MAIN_HEIGHT = 600;
+const double NEARCLIPPING = -1000.,
+             FARCLIPPING = 1000.;
+double ROT_Y = 0.,
+       NOR_Y = 0.,
+       ROT_X = 0.,
+       MOV_Y = 0.,
+       MOV_X = 0.,
+       ZOOM = DEFAULT_ZOOM;
+uchar USE_LIGHT = 0;
 
-extern const uchar lmouse_down,
-                   rmouse_down,
-                   stop_rot,
-                   translate,
-                   esc_pressed;
-extern const uint draw_ray_n;
-extern const double bin_sphere3_alpha;
+extern const uchar MOUSE_L_DOWN,
+                   MOUSE_R_DOWN,
+                   STOP_ROT,
+                   TRANSLATE,
+                   ESC_CLICKED;
+extern const uint DRAW_RAY_N;
+extern const double BIN_SPHERE3_ALPHA;
 
 /** \brief Initiates the OpenGL viewer.
  *
@@ -43,7 +43,7 @@ extern const double bin_sphere3_alpha;
  */
 void go_freeglut(int argc, char **argv)
 {
-    parent_win = init_main(argc, argv);
+    PARENT_WIN = init_main(argc, argv);
     glutDisplayFunc(&maindisplay);
     glutReshapeFunc(&reshape);
     glutCloseFunc(&close_all);
@@ -54,7 +54,7 @@ void go_freeglut(int argc, char **argv)
     glutSpecialFunc(&arrow_keys);
     glutVisibilityFunc(&visibility);
     glutWindowStatusFunc(&win_state);
-    sub1_win = glutCreateSubWindow(parent_win, 5, 5, main_width / 4, main_height / 5);
+    SUB_WIN_1 = glutCreateSubWindow(PARENT_WIN, 5, 5, MAIN_WIDTH / 4, MAIN_HEIGHT / 5);
     glutDisplayFunc(&subdisplay);
     glutKeyboardFunc(&keyboard);
     glutSpecialFunc(&arrow_keys);
@@ -71,10 +71,10 @@ void go_freeglut(int argc, char **argv)
 uint init_main(int argc, char **argv)
 {
     fncyprint("\ninitializing graphics...", 50);
-    main_width = init_main_width;
-    main_height = init_main_height;
+    MAIN_WIDTH = INIT_MAIN_WIDTH;
+    MAIN_HEIGHT = INIT_MAIN_HEIGHT;
     glutInit(&argc, argv);
-    glutInitWindowSize(main_width, main_height);
+    glutInitWindowSize(MAIN_WIDTH, MAIN_HEIGHT);
     glutInitWindowPosition(0, 0);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH | GLUT_MULTISAMPLE);
     glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
@@ -101,7 +101,7 @@ uint init_main(int argc, char **argv)
     glMaterialfv(GL_FRONT, GL_SHININESS, HIGH_SHININESS);
     glClearColor(0., 0., 0., 0.);
     glClearDepth(1.);
-    glViewport(0, 0, main_width, main_height);
+    glViewport(0, 0, MAIN_WIDTH, MAIN_HEIGHT);
     if(glutGet(GLUT_DISPLAY_MODE_POSSIBLE))
         fprintf(stdout, " done\n");
     else
@@ -122,7 +122,9 @@ uint init_main(int argc, char **argv)
  */
 void animate(void)
 {
-    static uint avg = 50, avgtime = 0, frams = 0;
+    static uint avg = 50,
+                avgtime = 0,
+                frams = 0;
     if(frams++ < avg)
         avgtime = glutGet(GLUT_ELAPSED_TIME);
     else
@@ -134,18 +136,18 @@ void animate(void)
         glutSetWindowTitle(title);
         avgtime = offset = glutGet(GLUT_ELAPSED_TIME);
     }
-    glutSetWindow(parent_win);
+    glutSetWindow(PARENT_WIN);
     glutPostRedisplay();
-    glutSetWindow(sub1_win);
+    glutSetWindow(SUB_WIN_1);
     glutPostRedisplay();
     usleep(10000);
-    if(!lmouse_down && !stop_rot)
+    if(!MOUSE_L_DOWN && !STOP_ROT)
     {
         static const double vrot = .02;
-        rotY += vrot * (glutGet(GLUT_ELAPSED_TIME) - avgtime); /**< Constant rotation. */
+        ROT_Y += vrot * (glutGet(GLUT_ELAPSED_TIME) - avgtime); /**< Constant rotation. */
     }
-    rotY = fmod(rotY, 360.);
-    rotX = fmod(rotX, 360.);
+    ROT_Y = fmod(ROT_Y, 360.);
+    ROT_X = fmod(ROT_X, 360.);
 }
 
 /** \brief Changes the drawing mode in case the window is not visible.
@@ -194,17 +196,19 @@ void maindisplay(void)
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
-    glScaled(zoom, zoom, zoom);
-    glTranslated(movX, movY, 0.);
-    glRotated(rotX, 1., 0., 0.);
-    glRotated(rotY, norY, 1., 0.);
+    glScaled(ZOOM, ZOOM, ZOOM);
+    glTranslated(MOV_X, MOV_Y, 0.);
+    glRotated(ROT_X, 1., 0., 0.);
+    glRotated(ROT_Y, NOR_Y, 1., 0.);
     //handle_glray((const glray *)NULL,0,DRAW_EM_ALL,1);
-    handle_glray((const glray *)NULL, 0, DRAW_SOME, 1, draw_ray_n);
-    if(use_light) glEnable(GL_LIGHTING);
+    handle_glray((const glray *)NULL, 0, DRAW_SOME, 1, DRAW_RAY_N);
+    if(USE_LIGHT)
+        glEnable(GL_LIGHTING);
     //handle_prtcls_boxed((const sphrcl_prtcl const *)NULL,(const boundingbox *)NULL,0,DRAW_EM_ALL);
     handle_prtcls((const sphrcl_prtcl *const)NULL, DRAW_EM_ALL);
     handle_bin_sphere3((const bin_hit_screen *const)NULL, DRAW_EM_ALL, SINCOS_MAP, INTENSITY);
-    if(use_light) glDisable(GL_LIGHTING);
+    if(USE_LIGHT)
+        glDisable(GL_LIGHTING);
     float width;
     glGetFloatv(GL_LINE_WIDTH, &width);
     glLineWidth(2.);
@@ -245,11 +249,11 @@ void subdisplay(void)
     /*drawblockstring2d("these keys may have the one or the other effect: "
                       "F1, F11, F12, Esc, R, m, Mouse Buttons. "
                       "this list might be incomplete.",
-                      23,.2,3.6,0.,-.4);*/
+                      23, .2, 3.6, 0., -.4);*/
     char info[256];
-    snprintf(info, 256, "printing ray %u", draw_ray_n);
+    snprintf(info, 256, "printing ray %u", DRAW_RAY_N);
     drawblockstring2d(info, 23, .2, 3.6, 0., -.4);
-    snprintf(info, 256, "screen alpha %.2f", bin_sphere3_alpha);
+    snprintf(info, 256, "screen alpha %.2f", BIN_SPHERE3_ALPHA);
     drawblockstring2d(info, 23, .2, 3.2, 0., -.4);
     glPopMatrix();
     glMatrixMode(GL_PROJECTION);
@@ -266,15 +270,17 @@ void subdisplay(void)
  */
 void reshape(const int width, const int height)
 {
-    if((uint)width != main_width || (uint)height != main_height)
+    if((uint)width != MAIN_WIDTH || (uint)height != MAIN_HEIGHT)
     {
-        main_width = width;
-        main_height = height;
-        glViewport(0, 0, main_width, main_height);
+        MAIN_WIDTH = width;
+        MAIN_HEIGHT = height;
+        glViewport(0, 0, MAIN_WIDTH, MAIN_HEIGHT);
     }
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-    glOrtho(-(double)main_width / 2., (double)main_width / 2., -(double)main_height / 2., (double)main_height / 2., nearclppng, farclppng);
+    glOrtho(-(double)MAIN_WIDTH / 2., (double)MAIN_WIDTH / 2.,
+            -(double)MAIN_HEIGHT / 2., (double)MAIN_HEIGHT / 2.,
+            NEARCLIPPING, FARCLIPPING);
 }
 
 /** \brief Handles deallocation of the memory allocated during the drawing processes.
@@ -307,11 +313,11 @@ void close_all(void)
     static uchar done = 0;
     if(!done) /**< No chance to free the memory twice. */
     {
-        if(glutGetWindow() && esc_pressed)
+        if(glutGetWindow() && ESC_CLICKED)
         {
             glutIdleFunc(NULL);
             free_drawing_mem();
-            glutDestroyWindow(parent_win);
+            glutDestroyWindow(PARENT_WIN);
             glutLeaveMainLoop();
         }
         else

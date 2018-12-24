@@ -37,3 +37,5 @@ rgb/
 tenet/
 test/
 cb/Doxygen/
+cb/artpic.layout
+*.exe

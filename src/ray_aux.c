@@ -63,15 +63,23 @@ void gen_startrays_straight(ray *res_pt rs, const double lam,
     snprintf(GLOBAL_RAY_INFO.info, L_INFOLENGTH,
              "polarisation at origin is (x %g, y %g) and declared as 'o' polarized."
              " rays starting in (%g, %g, %g) direction.",
-             cpol[0], cpol[1], z_axis[0], z_axis[1], z_axis[2]);
+             cpol[0], cpol[1],
+             z_axis[0], z_axis[1], z_axis[2]);
     for(l = 0, j = 1; j <= res_rad; j++)
         for(k = 0, t2 = rr * j; k < res_azim; k++, l++)
         {
-            rs[l] = (ray){.lam = lam, .v = (line3){.o = {t2, M_PIh, ra * k}, .l = 0., .r = {z_axis[0], z_axis[1], z_axis[2]}},
-                          .oamp = 1., .pamp = 0.,
-                          .ophase = 0., .pphase = 0.,
-                          .oint = 1., .pint = 0.,
-                          .mu_i = MU_VAC, .n_i = N_VAC,
+            rs[l] = (ray){.lam = lam,
+                          .v = (line3){.o = {t2, M_PIh, ra * k},
+                                       .l = 0.,
+                                       .r = {z_axis[0], z_axis[1], z_axis[2]}},
+                          .oamp = 1.,
+                          .pamp = 0.,
+                          .ophase = 0.,
+                          .pphase = 0.,
+                          .oint = 1.,
+                          .pint = 0.,
+                          .mu_i = MU_VAC,
+                          .n_i = N_VAC,
                           .opol = {cpol[0], cpol[1], cpol[2]},
                           .ppol = {normalpol[0], normalpol[1], normalpol[2]}};
             s_to_c3_ip(rs[l].v.o);
@@ -86,7 +94,8 @@ void gen_startrays_straight(ray *res_pt rs, const double lam,
     axz = angl3_xz(t1);
     alpha = atan2(t1[0], -t1[1]);
     beta = acos(t1[2]);
-    if(axy == 0xDEAD && ayz == 0xDEAD) transform_pol = 0; /**< t1 is at the origin. */
+    if(axy == 0xDEAD && ayz == 0xDEAD)
+        transform_pol = 0; /**< t1 is at the origin. */
     else if(axy == 0xDEAD && ayz == M_PIh) /**< t1 is parallel to the z axis. */
     {
         transform_pol = 0;
@@ -195,7 +204,7 @@ void propagate_ray(ray *r)
     addnmul3((*r).v.o, t2, (*r).v.r, t1); /**< Get the end point. */
     if(fabs(dist3((*r).v.o, t1) - t2) > DBL_EPSILON6)
         printf("The directional vector does not seem to be correctly normed: %g\n",
-        fabs(dist3((*r).v.o, t1) - t2));
+               fabs(dist3((*r).v.o, t1) - t2));
     assert(fabs(dist3((*r).v.o, t1) - t2) <= DBL_EPSILON6); /**< Checks if the directional vector was correctly normed. */
     cp3((*r).v.o, t1);
     (*r).travel += t2;

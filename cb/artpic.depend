@@ -365,7 +365,7 @@
 	"auxf.h"
 	"refr_data.h"
 
-1545570791 c:\users\cs\dropbox\programming\mie\artpic\src\artpic.h
+1545590614 c:\users\cs\dropbox\programming\mie\artpic\src\artpic.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -426,7 +426,7 @@
 
 1376293595 c:\users\cs\dropbox\programming\mie\artpic\src\control.h
 
-1545573493 source:c:\users\cs\dropbox\programming\mie\artpic\src\draw.c
+1545646707 source:c:\users\cs\dropbox\programming\mie\artpic\src\draw.c
 	"artpic.h"
 	"msg.h"
 	"alloc.h"
@@ -461,7 +461,7 @@
 	"lina.h"
 	"rot.h"
 
-1545571165 source:c:\users\cs\dropbox\programming\mie\artpic\src\intersec.c
+1545598660 source:c:\users\cs\dropbox\programming\mie\artpic\src\intersec.c
 	"artpic.h"
 	"auxf.h"
 	"lina.h"
@@ -475,7 +475,7 @@
 	"auxf.h"
 	"lina.h"
 
-1545574582 source:c:\users\cs\dropbox\programming\mie\artpic\src\main.c
+1545590512 source:c:\users\cs\dropbox\programming\mie\artpic\src\main.c
 	"artpic.h"
 	"viewer.h"
 	"draw.h"
@@ -508,7 +508,7 @@
 	"auxf.h"
 	"msg.h"
 
-1545571640 source:c:\users\cs\dropbox\programming\mie\artpic\src\ray.c
+1545646085 source:c:\users\cs\dropbox\programming\mie\artpic\src\ray.c
 	"artpic.h"
 	"lina.h"
 	"msg.h"
@@ -520,7 +520,7 @@
 	"tests.h"
 	"ray.h"
 
-1545571869 source:c:\users\cs\dropbox\programming\mie\artpic\src\ray_aux.c
+1545598218 source:c:\users\cs\dropbox\programming\mie\artpic\src\ray_aux.c
 	"artpic.h"
 	"lina.h"
 	"ray.h"
@@ -530,11 +530,11 @@
 	"tests.h"
 	"rot.h"
 
-1545571869 source:c:\users\cs\dropbox\programming\mie\artpic\src\refr_data.c
+1545597980 source:c:\users\cs\dropbox\programming\mie\artpic\src\refr_data.c
 	"artpic.h"
 	"msg.h"
 
-1529781135 source:c:\users\cs\dropbox\programming\mie\artpic\src\rot.c
+1545597888 source:c:\users\cs\dropbox\programming\mie\artpic\src\rot.c
 	"artpic.h"
 	"auxf.h"
 	"rot.h"
@@ -546,7 +546,7 @@
 	"lina.h"
 	"shapes.h"
 
-1545570224 source:c:\users\cs\dropbox\programming\mie\artpic\src\tests.c
+1545590909 source:c:\users\cs\dropbox\programming\mie\artpic\src\tests.c
 	"artpic.h"
 	"lina.h"
 	"msg.h"
@@ -570,7 +570,7 @@
 	"msg.h"
 	"tofile.h"
 
-1545572165 source:c:\users\cs\dropbox\programming\mie\artpic\src\viewer.c
+1545591378 source:c:\users\cs\dropbox\programming\mie\artpic\src\viewer.c
 	"artpic.h"
 	"msg.h"
 	"alloc.h"

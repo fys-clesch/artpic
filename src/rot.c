@@ -2,14 +2,14 @@
 #include "auxf.h"
 #include "rot.h"
 
-/** \brief Computes a matrix to rotate a point in R^3 around the origin
+/** \brief Computes a matrix to rotate a point in R^3 around the origin.
  *
- * \param m double* The output
- * \param ea const double* An array of three angles of rotation
+ * \param m double* The output.
+ * \param ea const double* An array of three angles of rotation.
  * \return void
  *
- * ea contains three Euler angles, whereas the line of nodes is the line perpendicular to both z and z' axis
- * The order is xyz, right handed, see http://en.wikipedia.org/wiki/Euler_angles
+ * ea contains three Euler angles, whereas the line of nodes is the line perpendicular to both z and z' axis.
+ * The order is xyz, right handed, see http://en.wikipedia.org/wiki/Euler_angles.
  */
 void gen_mat_rot3_euler_xyz(double *m, const double *ea)
 {
@@ -30,14 +30,14 @@ void gen_mat_rot3_euler_xyz(double *m, const double *ea)
     m[8] = c1 * c2;
 }
 
-/** \brief Computes a matrix to rotate a point in R^3 around the origin
+/** \brief Computes a matrix to rotate a point in R^3 around the origin.
  *
- * \param m double* The output
- * \param ea const double* An array of two angles of rotation
+ * \param m double* The output.
+ * \param ea const double* An array of two angles of rotation.
  * \return void
  *
- * ea contains two Euler angles, whereas the line of nodes is the line perpendicular to both z and z' axis
- * The order is zx, right handed
+ * ea contains two Euler angles, whereas the line of nodes is the line perpendicular to both z and z' axis.
+ * The order is zx, right handed.
  */
 void gen_mat_rot3_euler_zx(double *m, const double *ea)
 {
@@ -55,17 +55,17 @@ void gen_mat_rot3_euler_zx(double *m, const double *ea)
     m[8] = c2;
 }
 
-/** \brief Computes a matrix to rotate a point in R^3 around the origin with Euler angles
+/** \brief Computes a matrix to rotate a point in R^3 around the origin with Euler angles.
  *
- * \param m double* The output
- * \param gamma const double The third Euler angle
- * \param beta const double The second Euler angle
- * \param alpha const double The first Euler angle
+ * \param m double* The output.
+ * \param gamma const double The third Euler angle.
+ * \param beta const double The second Euler angle.
+ * \param alpha const double The first Euler angle.
  * \return void
  *
  * The angles are Euler angles
- * First rotates the point by alpha around z, then rotates it by beta around the x' and finally rotates it by gamma around z''
- * Assumes a right handed system
+ * First rotates the point by alpha around z, then rotates it by beta around the x' and finally rotates it by gamma around z''.
+ * Assumes a right handed system.
  */
 void gen_mat_rot3_euler_zpxpz(double *m, const double gamma, const double beta, const double alpha)
 {
@@ -85,14 +85,14 @@ void gen_mat_rot3_euler_zpxpz(double *m, const double gamma, const double beta, 
     m[8] = cg + cb * cb * t1;
 }
 
-/** \brief Computes a matrix to rotate a point in R^3 around a given vector
+/** \brief Computes a matrix to rotate a point in R^3 around a given vector.
  *
- * \param m double *res_pt The output
- * \param n const double *res_pt The vector to be rotated around
- * \param alpha const double The angle
+ * \param m double *res_pt The output.
+ * \param n const double *res_pt The vector to be rotated around.
+ * \param alpha const double The angle.
  * \return void
  *
- * Assumes a right handed system
+ * Assumes a right handed system.
  */
 void gen_mat_rot3_n(double *res_pt m, const double *res_pt n, const double alpha)
 {
@@ -113,15 +113,15 @@ void gen_mat_rot3_n(double *res_pt m, const double *res_pt n, const double alpha
     m[8] = n[2] * n[2] * cam1 + ca;
 }
 
-/** \brief Rotates a point in R^3 around the origin
+/** \brief Rotates a point in R^3 around the origin.
  *
- * \param p double* The point to be rotated
- * \param axy const double The angle in the xy plane
- * \param ayz const double The angle in the yz plane
+ * \param p double* The point to be rotated.
+ * \param axy const double The angle in the xy plane.
+ * \param ayz const double The angle in the yz plane.
  * \return void
  *
- * Rotates the point first around the x axis by ayz, then around the z axis by axy
- * Assumes a right handed system
+ * Rotates the point first around the x axis by ayz, then around the z axis by axy.
+ * Assumes a right handed system.
  */
 void rot3_zx(double *p, const double axy, const double ayz)
 {
@@ -148,16 +148,16 @@ void rot3_zx(double *p, const double axy, const double ayz)
     p[2] = syz * t3[1] + cyz * t3[2];
 }
 
-/** \brief Rotates and translates a point in R^3 around the origin
+/** \brief Rotates and translates a point in R^3 around the origin.
  *
- * \param p double* The point to be transformed
- * \param axy const double The angle in the xy plane
- * \param ayz const double The angle in the yz plane
- * \param t const double* The vector used for the translation
+ * \param p double* The point to be transformed.
+ * \param axy const double The angle in the xy plane.
+ * \param ayz const double The angle in the yz plane.
+ * \param t const double* The vector used for the translation.
  * \return void
  *
- * Rotates the point first around the x axis by ayz, then around the z axis by axy and finally translates it
- * Assumes a right handed system
+ * Rotates the point first around the x axis by ayz, then around the z axis by axy and finally translates it.
+ * Assumes a right handed system.
  */
 void rottrans3_zx(double *p, const double axy, const double ayz, const double *t)
 {
@@ -167,15 +167,15 @@ void rottrans3_zx(double *p, const double axy, const double ayz, const double *t
     p[2] += t[2];
 }
 
-/** \brief Rotates a point in R^3 around the origin
+/** \brief Rotates a point in R^3 around the origin.
  *
- * \param p double* The point to be rotated
- * \param ayz const double The angle in the yz plane
- * \param axy const double The angle in the xy plane
+ * \param p double* The point to be rotated.
+ * \param ayz const double The angle in the yz plane.
+ * \param axy const double The angle in the xy plane.
  * \return void
  *
- * Rotates the point first around the z axis by axy, then around the x axis by ayz
- * Assumes a right handed system
+ * Rotates the point first around the z axis by axy, then around the x axis by ayz.
+ * Assumes a right handed system.
  */
 void rot3_xz(double *p, const double ayz, const double axy)
 {
@@ -202,16 +202,16 @@ void rot3_xz(double *p, const double ayz, const double axy)
     p[2] = syz * t1 + syz * t2 + cyz * t3[2];
 }
 
-/** \brief Rotates and translates a point in R^3 around the origin
+/** \brief Rotates and translates a point in R^3 around the origin.
  *
- * \param p double* The point to be transformed
- * \param ayz const double The angle in the yz plane
- * \param axy const double The angle in the xy plane
- * \param t const double* The vector used for the translation
+ * \param p double* The point to be transformed.
+ * \param ayz const double The angle in the yz plane.
+ * \param axy const double The angle in the xy plane.
+ * \param t const double* The vector used for the translation.
  * \return void
  *
- * Rotates the point first around the z axis by axy, then around the x axis by ayz and finally translates it
- * Assumes a right handed system
+ * Rotates the point first around the z axis by axy, then around the x axis by ayz and finally translates it.
+ * Assumes a right handed system.
  */
 void rottrans3_xz(double *p, const double ayz, const double axy, const double *t)
 {
@@ -221,15 +221,15 @@ void rottrans3_xz(double *p, const double ayz, const double axy, const double *t
     p[2] += t[2];
 }
 
-/** \brief Rotates a point in R^3 around the origin
+/** \brief Rotates a point in R^3 around the origin.
  *
- * \param p double* The point to be rotated
- * \param beta const double The pitch angle
- * \param alpha const double The angle for the first rotation around the z axis
+ * \param p double* The point to be rotated.
+ * \param beta const double The pitch angle.
+ * \param alpha const double The angle for the first rotation around the z axis.
  * \return void
  *
- * Rotates the point first around the z axis by alpha, then around the x' axis by beta (pitch)
- * Assumes a right handed system
+ * Rotates the point first around the z axis by alpha, then around the x' axis by beta (pitch).
+ * Assumes a right handed system.
  */
 void rot3_xpz(double *p, const double beta, const double alpha)
 {
@@ -259,16 +259,16 @@ void rot3_xpz(double *p, const double beta, const double alpha)
     p[2] = -t4 * t3[0] + t5 * t3[1] + cb * t3[2];
 }
 
-/** \brief Rotates and translates a point in R^3 around the origin
+/** \brief Rotates and translates a point in R^3 around the origin.
  *
- * \param p double* The point to be transformed
- * \param beta const double The pitch angle
- * \param alpha const double The angle for the first rotation around the z axis
- * \param t const double* The vector used for the translation
+ * \param p double* The point to be transformed.
+ * \param beta const double The pitch angle.
+ * \param alpha const double The angle for the first rotation around the z axis.
+ * \param t const double* The vector used for the translation.
  * \return void
  *
- * Rotates the point first around the z axis by alpha, then around the x' axis by beta (pitch), then translates it
- * Assumes a right handed system
+ * Rotates the point first around the z axis by alpha, then around the x' axis by beta (pitch), then translates it.
+ * Assumes a right handed system.
  */
 void rottrans3_xpz(double *p, const double beta, const double alpha, const double *t)
 {
@@ -278,14 +278,14 @@ void rottrans3_xpz(double *p, const double beta, const double alpha, const doubl
     p[2] += t[2];
 }
 
-/** \brief Rotates a point in R^3 around the z axis
+/** \brief Rotates a point in R^3 around the z axis.
  *
- * \param p double* The point to be rotated
- * \param axy const double The angle in the xy plane
+ * \param p double* The point to be rotated.
+ * \param axy const double The angle in the xy plane.
  * \return void
  *
- * Rotates the point around the z axis by axy
- * Assumes a right handed system
+ * Rotates the point around the z axis by axy.
+ * Assumes a right handed system.
  */
 void rot3_z(double *p, const double axy)
 {
@@ -302,15 +302,15 @@ void rot3_z(double *p, const double axy)
     p[1] = sxy * t1[0] + cxy * t1[1];
 }
 
-/** \brief Rotates and translates point in R^3 around the z axis
+/** \brief Rotates and translates point in R^3 around the z axis.
  *
- * \param p double* The point to be transformed
- * \param axy const double The angle in the xy plane
- * \param t const double* The vector used for the translation
+ * \param p double* The point to be transformed.
+ * \param axy const double The angle in the xy plane.
+ * \param t const double* The vector used for the translation.
  * \return void
  *
- * Rotates the point around the z axis by axy, then translates it
- * Assumes a right handed system
+ * Rotates the point around the z axis by axy, then translates it.
+ * Assumes a right handed system.
  */
 void rottrans3_z(double *p, const double axy, const double *t)
 {
@@ -320,14 +320,14 @@ void rottrans3_z(double *p, const double axy, const double *t)
     p[2] += t[2];
 }
 
-/** \brief Rotates a point in R^3 around the x axis
+/** \brief Rotates a point in R^3 around the x axis.
  *
- * \param p double* The point to be rotated
- * \param ayz const double The angle in the yz plane
+ * \param p double* The point to be rotated.
+ * \param ayz const double The angle in the yz plane.
  * \return void
  *
- * Rotates the point around the x axis by ayz
- * Assumes a right handed system
+ * Rotates the point around the x axis by ayz.
+ * Assumes a right handed system.
  */
 void rot3_x(double *p, const double ayz)
 {
@@ -344,15 +344,15 @@ void rot3_x(double *p, const double ayz)
     p[2] = syz * t1[1] + cyz * t1[2];
 }
 
-/** \brief Rotates and translates point in R^3 around the x axis
+/** \brief Rotates and translates point in R^3 around the x axis.
  *
- * \param p double* The point to be transformed
- * \param ayz const double The angle in the yz plane
- * \param t const double* The vector used for the translation
+ * \param p double* The point to be transformed.
+ * \param ayz const double The angle in the yz plane.
+ * \param t const double* The vector used for the translation.
  * \return void
  *
- * Rotates the point around the x axis by ayz, then translates it
- * Assumes a right handed system
+ * Rotates the point around the x axis by ayz, then translates it.
+ * Assumes a right handed system.
  */
 void rottrans3_x(double *p, const double ayz, const double *t)
 {
@@ -362,14 +362,14 @@ void rottrans3_x(double *p, const double ayz, const double *t)
     p[2] += t[2];
 }
 
-/** \brief Rotates a point in R^3 around the y axis
+/** \brief Rotates a point in R^3 around the y axis.
  *
- * \param p double* The point to be rotated
- * \param azx const double The angle in the zx plane
+ * \param p double* The point to be rotated.
+ * \param azx const double The angle in the zx plane.
  * \return void
  *
- * Rotates the point around the y axis by azx
- * Assumes a right handed system
+ * Rotates the point around the y axis by azx.
+ * Assumes a right handed system.
  */
 void rot3_y(double *p, const double azx)
 {
@@ -386,15 +386,15 @@ void rot3_y(double *p, const double azx)
     p[2] = -szx * t1[0] + czx * t1[2];
 }
 
-/** \brief Rotates and translates point in R^3 around the y axis
+/** \brief Rotates and translates point in R^3 around the y axis.
  *
- * \param p double* The point to be transformed
- * \param azx const double The angle in the yz plane
- * \param t const double* The vector used for the translation
+ * \param p double* The point to be transformed.
+ * \param azx const double The angle in the yz plane.
+ * \param t const double* The vector used for the translation.
  * \return void
  *
- * Rotates the point around the y axis by azx, then translates it
- * Assumes a right handed system
+ * Rotates the point around the y axis by azx, then translates it.
+ * Assumes a right handed system.
  */
 void rottrans3_y(double *p, const double azx, const double *t)
 {
@@ -404,16 +404,16 @@ void rottrans3_y(double *p, const double azx, const double *t)
     p[2] += t[2];
 }
 
-/** \brief Rotates a point in R^3 around the origin with Euler angles
+/** \brief Rotates a point in R^3 around the origin with Euler angles.
  *
- * \param p double* The point to be rotated
- * \param gamma const double The third Euler angle
- * \param beta const double The second Euler angle
- * \param alpha const double The first Euler angle
+ * \param p double* The point to be rotated.
+ * \param gamma const double The third Euler angle.
+ * \param beta const double The second Euler angle.
+ * \param alpha const double The first Euler angle.
  * \return void
  *
- * Rotates the point first around z axis by alpha, then around the x' axis by beta (pitch) and finally around z' by gamma
- * Assumes a right handed system
+ * Rotates the point first around z axis by alpha, then around the x' axis by beta (pitch) and finally around z' by gamma.
+ * Assumes a right handed system.
  */
 void rot3_zpxpz(double *p, const double gamma, const double beta, const double alpha)
 {
@@ -458,17 +458,17 @@ void rot3_zpxpz(double *p, const double gamma, const double beta, const double a
            (cg + cb * t7) * t3[2];
 }
 
-/** \brief Rotates and translates a point in R^3 around the origin with Euler angles
+/** \brief Rotates and translates a point in R^3 around the origin with Euler angles.
  *
- * \param p double* The point to be transformed
- * \param gamma const double The third Euler angle
- * \param beta const double The second Euler angle
- * \param alpha const double The first Euler angle
- * \param t const double* The vector used for the translation
+ * \param p double* The point to be transformed.
+ * \param gamma const double The third Euler angle.
+ * \param beta const double The second Euler angle.
+ * \param alpha const double The first Euler angle.
+ * \param t const double* The vector used for the translation.
  * \return void
  *
- * Rotates the point first around z axis by alpha, then around the x' axis by beta (pitch), then around z' by gamma and finally translates it
- * Assumes a right handed system
+ * Rotates the point first around z axis by alpha, then around the x' axis by beta (pitch), then around z' by gamma and finally translates it.
+ * Assumes a right handed system.
  */
 void rottrans3_zpxpz(double *p, const double gamma, const double beta, const double alpha, const double *t)
 {
@@ -478,13 +478,13 @@ void rottrans3_zpxpz(double *p, const double gamma, const double beta, const dou
     p[2] += t[2];
 }
 
-/** \brief Computes the angle between the x axis and the point mapped to the xy plane in R^3
+/** \brief Computes the angle between the x axis and the point mapped to the xy plane in R^3.
  *
- * \param p const double* The point
- * \return double The angle in radians spanning [0,M_PI2]
+ * \param p const double* The point.
+ * \return double The angle in radians spanning [0, M_PI2].
  *
- * In case that the point coincides with the z axis, return 0xDEAD
- * Returns the angle between the x axis and the point mapped to xy plane, which is the rotation of it around the z axis
+ * In case that the point coincides with the z axis, return 0xDEAD.
+ * Returns the angle between the x axis and the point mapped to xy plane, which is the rotation of it around the z axis.
  */
 double angl3_xy(const double *p)
 {
@@ -514,13 +514,13 @@ double angl3_xy(const double *p)
         return 0xDEAD;
 }
 
-/** \brief Computes the angle between the y axis and the point mapped to the yz plane in R^3
+/** \brief Computes the angle between the y axis and the point mapped to the yz plane in R^3.
  *
- * \param p const double* The point
- * \return double The angle in radians spanning [0,M_PI2]
+ * \param p const double* The point.
+ * \return double The angle in radians spanning [0, M_PI2].
  *
- * In case that the point coincides with the x axis, return 0xDEAD
- * Returns the angle between the y axis and the point mapped to yz plane, which is the rotation of it around the x axis
+ * In case that the point coincides with the x axis, return 0xDEAD.
+ * Returns the angle between the y axis and the point mapped to yz plane, which is the rotation of it around the x axis.
  */
 double angl3_yz(const double *p)
 {
@@ -550,13 +550,13 @@ double angl3_yz(const double *p)
         return 0xDEAD;
 }
 
-/** \brief Computes the angle between the x axis and the point mapped to the xz plane in R^3
+/** \brief Computes the angle between the x axis and the point mapped to the xz plane in R^3.
  *
- * \param p const double* The point
- * \return double The angle in radians spanning [0,M_PI2]
+ * \param p const double* The point.
+ * \return double The angle in radians spanning [0, M_PI2].
  *
- * In case that the point coincides with the y axis, return 0xDEAD
- * Returns the angle between the x axis and the point mapped to xz plane, which is the rotation of it around the y axis
+ * In case that the point coincides with the y axis, return 0xDEAD.
+ * Returns the angle between the x axis and the point mapped to xz plane, which is the rotation of it around the y axis.
  */
 double angl3_xz(const double *p)
 {

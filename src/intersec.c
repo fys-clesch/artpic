@@ -121,7 +121,8 @@ uchar intersec_lin_tria(const point3 *res_pt tria, const point3 *res_pt pin, lin
     oy = tria[0].x[j];
     lam2 = r1x / (r1x * r2y - r1y * r2x) * (goy + t2 * gry - oy - r1y / r1x * (gox - t2 * grx + ox));
     lam1 = (gox + t2 * grx - ox - lam2 * r2x) / r1x;
-    if(lam2 < 0. || lam1 < 0. || lam1 + lam2 > 1.) return 0;
+    if(lam2 < 0. || lam1 < 0. || lam1 + lam2 > 1.)
+        return 0;
     if(ret)
     {
         (*l).l = t2;
@@ -160,8 +161,10 @@ uchar intersec_lin_sph(const sphere3 *res_pt e, line3 *res_pt l, const uchar ret
     uchar pq = solve_pq(t1[0], t1[1], t1[2], t2, 0);
     if(pq != 2)
     {
-        if(pq)(*is).incdnc = VERTICAL;
-        else(*is).incdnc = NONE;
+        if(pq)
+            (*is).incdnc = VERTICAL;
+        else
+            (*is).incdnc = NONE;
         return 0;
     }
     if(t2[0] < 0. || t2[1] < 0.) /**< Check if the intersection is ahead of l. */
@@ -173,7 +176,8 @@ uchar intersec_lin_sph(const sphere3 *res_pt e, line3 *res_pt l, const uchar ret
         }
         else if(t2[0] < 0.) t2[0] = t2[1];
     }
-    else if(t2[0] > t2[1]) t2[0] = t2[1];
+    else if(t2[0] > t2[1])
+        t2[0] = t2[1];
     (*l).l = t2[0];
     if(ret)
     {
@@ -181,13 +185,16 @@ uchar intersec_lin_sph(const sphere3 *res_pt e, line3 *res_pt l, const uchar ret
         /**< Attention here: */
         sub3((*e).o, (*is).p, t1); /**< Normal vector points to centre of sphere. */
         double t3 = len_squ3(t1);
-        if(fabs(t3 - 1.) > DBL_EPSILON) nvec3_ip(t1, sqrt(t3));
+        if(fabs(t3 - 1.) > DBL_EPSILON)
+            nvec3_ip(t1, sqrt(t3));
         cp3((*is).normal, t1);
         (*is).cangl = cangl3((*l).r, t1); /**< Cosine of angle between l and normal vector. */
         assert(fabs((*is).cangl) <= 1.);
         (*is).angl = acos((*is).cangl);
-        if(fabs((*is).cangl) < DBL_EPSILON6)(*is).incdnc = VERTICAL;
-        else(*is).incdnc = OBLIQUE;
+        if(fabs((*is).cangl) < DBL_EPSILON6)
+            (*is).incdnc = VERTICAL;
+        else
+            (*is).incdnc = OBLIQUE;
     }
     return 1;
 }
