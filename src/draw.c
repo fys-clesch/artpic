@@ -23,7 +23,8 @@ extern uint DRAW_RAY_N;
  */
 void drawstring(const char *s)
 {
-    uint len, i;
+    uint len,
+         i;
     len = strlen(s);
     for(i = 0; i < len; i++)
         glutBitmapCharacter(GLUT_BITMAP_8_BY_13, s[i]);
@@ -67,7 +68,8 @@ void drawblockstring2d(const char *s, const uint linewidth, double sx, double sy
 {
     char *buf = alloc_char(linewidth + 1);
     uint len = strlen(s),
-         i, j;
+         i,
+         j;
     for(i = 0; i < len;)
     {
         strncpy(buf, &s[i], linewidth);
@@ -167,7 +169,8 @@ void draw_cb(const uchar free_cb)
         glMatrixMode(GL_MODELVIEW);
         glLoadIdentity();
         glTranslated(9.25, 7.25, 0.);
-        const double cbheight = 2.5, cbwidth = .5,
+        const double cbheight = 2.5,
+                     cbwidth = .5,
                      s = cbheight / res;
         double y = s;
         glBegin(GL_LINE_STRIP);
@@ -218,7 +221,8 @@ void handle_glray(const glray *rs, const uint bundles, const draw_opt opt, const
     else if(opt == DRAW_SOME)
     {
         va_list vl;
-        uint i, crs_i[n_rs];
+        uint i,
+             crs_i[n_rs];
         va_start(vl, n_rs);
         for(i = 0; i < n_rs; i++)
             crs_i[i] = va_arg(vl, uint); /**< Get the ray children to draw. */
@@ -230,7 +234,8 @@ void handle_glray(const glray *rs, const uint bundles, const draw_opt opt, const
             {
                 uint jr = crs_i[j], /**< jr is the specific ray child to draw. */
                      k,
-                     ks = 0, kt = 0; /**< ks counts the number of segments in a child, kt the total number of segments. */
+                     ks = 0,
+                     kt = 0; /**< ks counts the number of segments in a child, kt the total number of segments. */
                 if(jr >= (*crs[i]).n_glrs)
                 {
                     jr %= (*crs[i]).n_glrs;
@@ -260,6 +265,12 @@ void handle_glray(const glray *rs, const uint bundles, const draw_opt opt, const
                     glEnd();
                     ks++;
                 }
+                /* @todo Add labelling. */
+                /*for(k = 0; k <= (*crs[i]).glrs[jr].n_child; k++)
+                {
+                    glBegin();
+                }
+                */
                 if(kt != (*crs[i]).glrs[jr].n_trace)
                 {
                     print_trace_child_count(&(*crs[i]).glrs[jr]);
@@ -318,7 +329,8 @@ void handle_glray(const glray *rs, const uint bundles, const draw_opt opt, const
 void handle_sphere3(const uint res_polar, const uint res_azim, const double rad, const double *rgba, const draw_opt opt)
 {
     static uchar initdlist = 0;
-    static uint listid, ptc_count;
+    static uint listid,
+                ptc_count;
     if(opt == DRAW_EM_ALL && !initdlist)
     {
         patch3 *ptc = gen_patch3_sphere3(res_polar, res_azim, rad, &ptc_count);
@@ -375,8 +387,11 @@ void handle_bin_sphere3(const bin_hit_screen *const bhs, const draw_opt opt, con
 {
     static patch3 *ptc;
     static bin_hit_screen const *cbhs;
-    static uchar allocd = 0, initdlist = 0, update = 0;
-    static uint listid, ptc_count;
+    static uchar allocd = 0,
+                 initdlist = 0,
+                 update = 0;
+    static uint listid,
+                ptc_count;
     static double t_alpha = DEFAULT_BIN_SPHERE3_ALPHA;
     if(t_alpha != BIN_SPHERE3_ALPHA)
         update = 1;
@@ -396,7 +411,7 @@ void handle_bin_sphere3(const bin_hit_screen *const bhs, const draw_opt opt, con
     }
     else if(opt == GEN_LISTS && !initdlist)
     {
-gen_list_clause:
+        gen_list_clause:
         listid = glGenLists(1);
         if(!listid)
             error_msg("no empty display list", ERR_ARG);

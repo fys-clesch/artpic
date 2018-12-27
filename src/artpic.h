@@ -18,6 +18,8 @@
 /* #define NDEBUG */
 #include <assert.h>
 
+#pragma STDC FENV_ACCESS on
+
 #define ISLINUX 0u
 #define ISWIN32 1u
 #define ISWIN64 2u
@@ -94,13 +96,13 @@
  #define res_pt
 #endif
 
-#define MAXOF(a,b) ((a)>(b)?(a):(b))
-#define MINOF(a,b) ((a)<(b)?(a):(b))
-#define POW2(x) ((x)!=0.?(x)*(x):0.)
-#define PRINT_TOKEN_INT(tok) fprintf(stdout,#tok " is %i\n",tok)
-#define PRINT_TOKEN_DOUBLE(tok) fprintf(stdout,#tok " is %g\n",tok)
+#define MAXOF(a, b) ((a) > (b) ? (a) : (b))
+#define MINOF(a, b) ((a) < (b) ? (a) : (b))
+#define POW2(x) ((x) != 0. ? (x) * (x) : 0.)
+#define PRINT_TOKEN_INT(tok) fprintf(stdout, #tok " is %i\n", tok)
+#define PRINT_TOKEN_DOUBLE(tok) fprintf(stdout, #tok " is %g\n", tok)
 #define FP_ERR_CLEAR feclearexcept(FE_ALL_EXCEPT)
-#define FP_ERR_CHECK fp_error(__FILE__,__LINE__,__func__)
+#define FP_ERR_CHECK fp_error(__FILE__, __LINE__, __func__)
 #define ERR_ARG __FILE__,__LINE__,__func__
 
 #ifdef M_PI

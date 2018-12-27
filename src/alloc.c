@@ -248,26 +248,24 @@ ray *alloc_ray(const uint n)
     }
     if(!init)
     {
-        r0 = (ray){
-            .v = (line3) {
-                .o = {0., 0., 0.},
-                .r = {0., 0., 0.},
-                .l = 0.},
-            .lam = 0.,
-            .oamp = 0.,
-            .pamp = 0.,
-            .ophase = 0.,
-            .pphase = 0.,
-            .oint = 0.,
-            .pint = 0.,
-            .opol = {1., 0., 0.},
-            .ppol = {0., 1., 0.},
-            .mu_i = MU_VAC,
-            .travel = 0.,
-            .n_i = N_VAC,
-            .tir = 0,
-            .trans_child = 0,
-            .hits = 0};
+        r0 = (ray){.v = (line3) {.o = {0., 0., 0.},
+                                 .r = {0., 0., 0.},
+                                 .l = 0.},
+                   .lam = 0.,
+                   .oamp = 0.,
+                   .pamp = 0.,
+                   .ophase = 0.,
+                   .pphase = 0.,
+                   .oint = 0.,
+                   .pint = 0.,
+                   .opol = {1., 0., 0.},
+                   .ppol = {0., 1., 0.},
+                   .mu_i = MU_VAC,
+                   .travel = 0.,
+                   .n_i = N_VAC,
+                   .tir = 0,
+                   .trans_child = 0,
+                   .hits = 0};
         memset(r0.info, 0, INFOLENGTH + 1);
         init = 1;
     }
@@ -292,26 +290,24 @@ ray *realloc_ray(ray *m, const double lam, const uint n, const uint plus)
     if(np < n)
         error_msg("integer overflow. continuing will likely be erroneous, at least data will be lost", ERR_ARG);
     ray *back = m, r0;
-    r0 = (ray){
-        .v = (line3) {
-            .o = {0., 0., 0.},
-            .r = {0., 0., 0.},
-            .l = 0.},
-        .lam = lam,
-        .oamp = 0.,
-        .pamp = 0.,
-        .ophase = 0.,
-        .pphase = 0.,
-        .oint = 0.,
-        .pint = 0.,
-        .opol = {1., 0., 0.},
-        .ppol = {0., 1., 0.},
-        .mu_i = MU_VAC,
-        .travel = 0.,
-        .n_i = N_VAC,
-        .tir = 0,
-        .trans_child = 0,
-        .hits = 0};
+    r0 = (ray){.v = (line3) {.o = {0., 0., 0.},
+                             .r = {0., 0., 0.},
+                             .l = 0.},
+               .lam = lam,
+               .oamp = 0.,
+               .pamp = 0.,
+               .ophase = 0.,
+               .pphase = 0.,
+               .oint = 0.,
+               .pint = 0.,
+               .opol = {1., 0., 0.},
+               .ppol = {0., 1., 0.},
+               .mu_i = MU_VAC,
+               .travel = 0.,
+               .n_i = N_VAC,
+               .tir = 0,
+               .trans_child = 0,
+               .hits = 0};
     memset(r0.info, 0, INFOLENGTH + 1);
     m = (ray *)realloc(m, np * sizeof(ray));
     count_mem(plus * sizeof(ray));
@@ -347,24 +343,22 @@ glray_s *alloc_glray_s(const uint n)
         exit(EXIT_FAILURE);
     }
     for(i = 0; i < n; i++)
-        m[i] = (glray_s){
-            .v = (line3){
-                .o = {0., 0., 0.},
-                .r = {0., 0., 0.},
-                .l = 0.},
-            .oamp = 0.,
-            .pamp = 0.,
-            .ophase = 0.,
-            .pphase = 0.,
-            .oint = 0.,
-            .pint = 0.,
-            .opol = {1., 0., 0.},
-            .ppol = {0., 1., 0.},
-            .rgba = {NULL, NULL, NULL, NULL},
-            .n_trace = 0,
-            .n_child = 0,
-            .trace_len = 0,
-            .child_len = 0};
+        m[i] = (glray_s){.v = (line3){.o = {0., 0., 0.},
+                                      .r = {0., 0., 0.},
+                                      .l = 0.},
+                         .oamp = 0.,
+                         .pamp = 0.,
+                         .ophase = 0.,
+                         .pphase = 0.,
+                         .oint = 0.,
+                         .pint = 0.,
+                         .opol = {1., 0., 0.},
+                         .ppol = {0., 1., 0.},
+                         .rgba = {NULL, NULL, NULL, NULL},
+                         .n_trace = 0,
+                         .n_child = 0,
+                         .trace_len = 0,
+                         .child_len = 0};
     return m;
 }
 
@@ -475,7 +469,7 @@ point3 *alloc_point3(const uint n)
  */
 point3 *realloc_point3(point3 *m, const uint n, const uint plus)
 {
-    uint nplus = n + plus;
+    const uint nplus = n + plus;
     if(nplus < n)
         error_msg("integer overflow. continuing will likely be erroneous, at least data will be lost", ERR_ARG);
     point3 *back = m;
@@ -579,14 +573,13 @@ intrsec *alloc_intrsec(const uint n)
         exit(EXIT_FAILURE);
     }
     for(i = 0; i < n; i++)
-        m[i] = (intrsec){
-            .p = {0., 0., 0.},
-            .normal = {0., 0., 0.},
-            .angl = 0.,
-            .cangl = 0.,
-            .mu_f = MU_VAC,
-            .n_f = N_VAC,
-            .incdnc = NONE};
+        m[i] = (intrsec){.p = {0., 0., 0.},
+                         .normal = {0., 0., 0.},
+                         .angl = 0.,
+                         .cangl = 0.,
+                         .mu_f = MU_VAC,
+                         .n_f = N_VAC,
+                         .incdnc = NONE};
     return m;
 }
 
@@ -600,7 +593,7 @@ intrsec *alloc_intrsec(const uint n)
  */
 intrsec *realloc_intrsec(intrsec *m, const uint n, const uint plus)
 {
-    uint np = n + plus;
+    const uint np = n + plus;
     if(np < n)
         error_msg("integer overflow. continuing will likely be erroneous, at least data will be lost", ERR_ARG);
     intrsec *back = m;
@@ -615,14 +608,13 @@ intrsec *realloc_intrsec(intrsec *m, const uint n, const uint plus)
     {
         uint i;
         for(i = n; i < np; i++)
-            m[i] = (intrsec){
-                .p = {0., 0., 0.},
-                .normal = {0., 0., 0.},
-                .angl = 0.,
-                .cangl = 0.,
-                .mu_f = MU_VAC,
-                .n_f = N_VAC,
-                .incdnc = NONE};
+            m[i] = (intrsec){.p = {0., 0., 0.},
+                             .normal = {0., 0., 0.},
+                             .angl = 0.,
+                             .cangl = 0.,
+                             .mu_f = MU_VAC,
+                             .n_f = N_VAC,
+                             .incdnc = NONE};
     }
     return m;
 }
@@ -652,7 +644,8 @@ void free_omatrix(double **m, const uint row)
 double **alloc_omatrix(const uint row, const uint col)
 {
     double **m;
-    uint i, j;
+    uint i,
+         j;
     m = (double **)malloc(row * sizeof(double *));
     count_mem(row * sizeof(double *));
     if(NULL == m)
@@ -689,8 +682,11 @@ double **alloc_omatrix(const uint row, const uint col)
 double **alloc_omatrix_for_bin_sphere3(const uint pol, const uint azi, const uint field)
 {
     double **m;
-    uint i, j, t1 = field * azi;
-    if(t1 < azi) error_msg("integer overflow", ERR_ARG);
+    uint i,
+         j,
+         t1 = field * azi;
+    if(t1 < azi)
+        error_msg("integer overflow", ERR_ARG);
     m = (double **)malloc(pol * sizeof(double *));
     count_mem(pol * sizeof(double *));
     if(NULL == m)
@@ -742,7 +738,8 @@ void free_ocmatrix(cdoub **m, const uint row)
 cdoub **alloc_ocmatrix(const uint row, const uint col)
 {
     cdoub **m;
-    uint i, j;
+    uint i,
+         j;
     m = (cdoub **)malloc(row * sizeof(cdoub *));
     count_mem(row * sizeof(cdoub *));
     if(NULL == m)
@@ -779,8 +776,11 @@ cdoub **alloc_ocmatrix(const uint row, const uint col)
 cdoub **alloc_ocmatrix_for_bin_sphere3(const uint pol, const uint azi, const uint field)
 {
     cdoub **m;
-    uint i, j, t1 = field * azi;
-    if(t1 < azi) error_msg("integer overflow", ERR_ARG);
+    uint i,
+         j,
+         t1 = field * azi;
+    if(t1 < azi)
+        error_msg("integer overflow", ERR_ARG);
     m = (cdoub **)malloc(pol * sizeof(cdoub *));
     count_mem(pol * sizeof(cdoub *));
     if(NULL == m)
@@ -829,18 +829,17 @@ hit_screen *alloc_hit_screen(const uint n)
     }
     if(!init)
     {
-        h0 = (hit_screen){
-            .p = {0., 0., 0.},
-            .lam = 0.,
-            .cos_incdnc = 0xDEAD,
-            .opol = {0., 0., 0.},
-            .ppol = {0., 0., 0.},
-            .coamp = 0. + 0.i,
-            .cpamp = 0. + 0.i,
-            .oint = 0.,
-            .pint = 0.,
-            .tir = 0,
-            .state = EMPTY_STATE};
+        h0 = (hit_screen){.p = {0., 0., 0.},
+                          .lam = 0.,
+                          .cos_incdnc = 0xDEAD,
+                          .opol = {0., 0., 0.},
+                          .ppol = {0., 0., 0.},
+                          .coamp = 0. + 0.i,
+                          .cpamp = 0. + 0.i,
+                          .oint = 0.,
+                          .pint = 0.,
+                          .tir = 0,
+                          .state = EMPTY_STATE};
         memset(h0.info, 0, INFOLENGTH + 1);
         init = 1;
     }
@@ -859,23 +858,22 @@ hit_screen *alloc_hit_screen(const uint n)
  */
 hit_screen *realloc_hit_screen(hit_screen *m, const uint n, const uint plus)
 {
-    uint np = n + plus;
-    if(np < n)
+    const uint nplus = n + plus;
+    if(nplus < n)
         error_msg("integer overflow. continuing will likely be erroneous, at least data will be lost", ERR_ARG);
-    hit_screen *back = m, h0 = (hit_screen){
-        .p = {0., 0., 0.},
-        .lam = 0.,
-        .cos_incdnc = 0xDEAD,
-        .opol = {0., 0., 0.},
-        .ppol = {0., 0., 0.},
-        .coamp = 0. + 0.i,
-        .cpamp = 0. + 0.i,
-        .oint = 0.,
-        .pint = 0.,
-        .tir = 0,
-        .state = EMPTY_STATE};
+    hit_screen *back = m, h0 = (hit_screen){.p = {0., 0., 0.},
+                                            .lam = 0.,
+                                            .cos_incdnc = 0xDEAD,
+                                            .opol = {0., 0., 0.},
+                                            .ppol = {0., 0., 0.},
+                                            .coamp = 0. + 0.i,
+                                            .cpamp = 0. + 0.i,
+                                            .oint = 0.,
+                                            .pint = 0.,
+                                            .tir = 0,
+                                            .state = EMPTY_STATE};
     memset(h0.info, 0, INFOLENGTH + 1);
-    m = (hit_screen *)realloc(m, np * sizeof(hit_screen));
+    m = (hit_screen *)realloc(m, nplus * sizeof(hit_screen));
     count_mem(plus * sizeof(hit_screen));
     if(NULL == m)
     {
@@ -885,7 +883,7 @@ hit_screen *realloc_hit_screen(hit_screen *m, const uint n, const uint plus)
     else
     {
         uint i;
-        for(i = n; i < np; i++)
+        for(i = n; i < nplus; i++)
             memcpy(&m[i], &h0, sizeof(hit_screen));
     }
     return m;
@@ -925,26 +923,24 @@ bin_hit_screen *alloc_bin_hit_screen(const uint n, const double rad, const uint 
     ALLOCATED_EXHAUSTED_EVENT_MEMORY = 1000;
     for(i = 0; i < n; i++)
     {
-        m[i] = (bin_hit_screen){
-            .lam = 0.,
-            .rad = rad,
-            .amp_max = 0.,
-            .amp_sum = 0.,
-            .mod_amp_max = 0.,
-            .mod_amp_sum = 0.,
-            .ray_int_max = 0.,
-            .ray_int_sum = 0.,
-            .pol_max = 0.,
-            .pol_sum = 0.,
-            .res_polar = res_polar,
-            .res_azim = res_azim,
-            .tir = 0,
-            .screen_hit_coor_sys = CARTESIAN_CS,
-            .global_info = (gen_ray_info){
-                .count_gen = 0,
-                .count_hit = 0,
-                .count_lost = 0,
-                .count_exhstd = 0}};
+        m[i] = (bin_hit_screen){.lam = 0.,
+                                .rad = rad,
+                                .amp_max = 0.,
+                                .amp_sum = 0.,
+                                .mod_amp_max = 0.,
+                                .mod_amp_sum = 0.,
+                                .ray_int_max = 0.,
+                                .ray_int_sum = 0.,
+                                .pol_max = 0.,
+                                .pol_sum = 0.,
+                                .res_polar = res_polar,
+                                .res_azim = res_azim,
+                                .tir = 0,
+                                .screen_hit_coor_sys = CARTESIAN_CS,
+                                .global_info = (gen_ray_info){.count_gen = 0,
+                                                              .count_hit = 0,
+                                                              .count_lost = 0,
+                                                              .count_exhstd = 0}};
         m[i].amp = alloc_omatrix_for_bin_sphere3(res_polar, res_azim, 1);
         m[i].mod_amp = alloc_omatrix_for_bin_sphere3(res_polar, res_azim, 1);
         m[i].ray_int = alloc_omatrix_for_bin_sphere3(res_polar, res_azim, 1);
@@ -971,7 +967,8 @@ bin_hit_screen *alloc_bin_hit_screen(const uint n, const double rad, const uint 
  */
 void free_bin_hit_screen(bin_hit_screen *m, const uint n)
 {
-    uint i, j = m[0].res_polar;
+    uint i,
+         j = m[0].res_polar;
     for(i = 0; i < n; i++)
     {
         free_omatrix(m[i].amp, j);
@@ -1029,15 +1026,13 @@ sphrcl_prtcl *alloc_sphrcl_prtcl(const uint n)
     }
     for(i = 0; i < n; i++)
     {
-        m[i] = (sphrcl_prtcl){
-            .s = (sphere3){
-                .o = {0., 0., 0.},
-                .r = 0.},
-            .n = N_VAC,
-            .mu = MU_VAC,
-            .hits = 0,
-            .exhstds = 0,
-            .no = j++};
+        m[i] = (sphrcl_prtcl){.s = (sphere3){.o = {0., 0., 0.},
+                                             .r = 0.},
+                              .n = N_VAC,
+                              .mu = MU_VAC,
+                              .hits = 0,
+                              .exhstds = 0,
+                              .no = j++};
         memset(m[i].info, 0, L_INFOLENGTH + 1);
     }
     return m;
@@ -1061,9 +1056,8 @@ vertex3 *alloc_vertex3(const uint n)
         exit(EXIT_FAILURE);
     }
     for(i = 0; i < n; i++)
-        m[i] = (vertex3){
-            .n = {0., 0., 0.},
-            .x = {0., 0., 0.}};
+        m[i] = (vertex3){.n = {0., 0., 0.},
+                         .x = {0., 0., 0.}};
     return m;
 }
 
@@ -1086,10 +1080,9 @@ patch3 *alloc_patch3(const uint n)
         exit(EXIT_FAILURE);
     }
     for(i = 0; i < n; i++)
-        m[i] = (patch3){
-            .n_vt = 0,
-            .gl_primitive = 0,
-            .rgba = {0., 0., 0., 0.}};
+        m[i] = (patch3){.n_vt = 0,
+                        .gl_primitive = 0,
+                        .rgba = {0., 0., 0., 0.}};
     return m;
 }
 
@@ -1126,9 +1119,8 @@ colourval *alloc_colourval(const uint n)
         exit(EXIT_FAILURE);
     }
     for(i = 0; i < n; i++)
-        m[i] = (colourval){
-            .rgba = {0xDEAD, 0xDEAD, 0xDEAD, 0xDEAD},
-            .val = 0xDEAD};
+        m[i] = (colourval){.rgba = {0xDEAD, 0xDEAD, 0xDEAD, 0xDEAD},
+                           .val = 0xDEAD};
     return m;
 }
 
@@ -1152,10 +1144,9 @@ colourbox *alloc_colourbox(const uint n, const uint ncval)
     }
     for(i = 0; i < n; i++)
     {
-        m[i] = (colourbox){
-            .max = 0.,
-            .min = 0.,
-            .ncval = ncval};
+        m[i] = (colourbox){.max = 0.,
+                           .min = 0.,
+                           .ncval = ncval};
         m[i].cval = alloc_colourval(ncval);
     }
     return m;
@@ -1169,7 +1160,8 @@ colourbox *alloc_colourbox(const uint n, const uint ncval)
  */
 boundingbox *alloc_boundingbox(const uint n)
 {
-    uint i, j;
+    uint i,
+         j;
     const uint k = 8;
     boundingbox *m = (boundingbox *)malloc(n * sizeof(boundingbox));
     count_mem(n * sizeof(boundingbox));

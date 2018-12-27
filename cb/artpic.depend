@@ -359,13 +359,13 @@
 
 1529784735 /home/clemens/Dropbox/Programming/Mie/artpic/src/alloc.h
 
-1545574085 source:c:\users\cs\dropbox\programming\mie\artpic\src\alloc.c
+1545845966 source:c:\users\cs\dropbox\programming\mie\artpic\src\alloc.c
 	"artpic.h"
 	"msg.h"
 	"auxf.h"
 	"refr_data.h"
 
-1545590614 c:\users\cs\dropbox\programming\mie\artpic\src\artpic.h
+1545846781 c:\users\cs\dropbox\programming\mie\artpic\src\artpic.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -392,7 +392,7 @@
 
 1545571869 c:\users\cs\dropbox\programming\mie\artpic\src\refr_data.h
 
-1545571781 source:c:\users\cs\dropbox\programming\mie\artpic\src\auxf.c
+1545848515 source:c:\users\cs\dropbox\programming\mie\artpic\src\auxf.c
 	"artpic.h"
 	"lina.h"
 	"alloc.h"
@@ -412,12 +412,12 @@
 
 1372878228 c:\users\cs\dropbox\programming\mie\artpic\src\rot.h
 
-1545570791 source:c:\users\cs\dropbox\programming\mie\artpic\src\color.c
+1545648319 source:c:\users\cs\dropbox\programming\mie\artpic\src\color.c
 	"artpic.h"
 	"msg.h"
 	"auxf.h"
 
-1545570487 source:c:\users\cs\dropbox\programming\mie\artpic\src\control.c
+1545646800 source:c:\users\cs\dropbox\programming\mie\artpic\src\control.c
 	"artpic.h"
 	"viewer.h"
 	"control.h"
@@ -426,7 +426,7 @@
 
 1376293595 c:\users\cs\dropbox\programming\mie\artpic\src\control.h
 
-1545646707 source:c:\users\cs\dropbox\programming\mie\artpic\src\draw.c
+1545845438 source:c:\users\cs\dropbox\programming\mie\artpic\src\draw.c
 	"artpic.h"
 	"msg.h"
 	"alloc.h"
@@ -475,7 +475,7 @@
 	"auxf.h"
 	"lina.h"
 
-1545590512 source:c:\users\cs\dropbox\programming\mie\artpic\src\main.c
+1545648386 source:c:\users\cs\dropbox\programming\mie\artpic\src\main.c
 	"artpic.h"
 	"viewer.h"
 	"draw.h"
@@ -570,7 +570,7 @@
 	"msg.h"
 	"tofile.h"
 
-1545591378 source:c:\users\cs\dropbox\programming\mie\artpic\src\viewer.c
+1545646774 source:c:\users\cs\dropbox\programming\mie\artpic\src\viewer.c
 	"artpic.h"
 	"msg.h"
 	"alloc.h"

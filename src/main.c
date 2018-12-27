@@ -352,7 +352,7 @@ int main(int argc, char **argv)
         {
             sort_detection(subhtscrn, j1, &b_htscrn[0], 0);
         }
-        #pragma omp critical(count_gen_update) /**< This can be substituted by atomic capture with OMP 3.1 */
+        #pragma omp critical(count_gen_up) /**< This can be substituted by atomic capture with OMP 3.1 */
         {
             GLOBAL_RAY_INFO.count_gen += (i2 + n_move * n_subrs);
         }
@@ -385,7 +385,8 @@ int main(int argc, char **argv)
         handle_glray(glrays, 1, COPY_RAYS, 0);
         handle_bin_sphere3(&b_htscrn[0], ALLOC_DATA, SINCOS_MAP, INTENSITY);
 //        handle_prtcls_boxed(mat_prtcls, &bbox, nprtcls, ALLOC_DATA);
-        for(uint i = 0; i < nprtcls; i++)
+        uint i;
+        for(i = 0; i < nprtcls; i++)
             handle_prtcls(&prtcls[i], ALLOC_DATA);
         go_freeglut(argc, argv);
     }

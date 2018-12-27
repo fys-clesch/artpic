@@ -313,7 +313,8 @@ void hsvtorgb(double *hsv, double *rgb)
  * The patch and the bin size have to be the same (this is tested)
  * Using a double const for bhs to make sure that whether the pointer nor the 'data of it' will be changed.
  */
-void colour_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const bhs, const colourfun cfun, const double alpha, const bin_hit_print_type type)
+void colour_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const bhs,
+                       const colourfun cfun, const double alpha, const bin_hit_print_type type)
 {
     uint i;
     double max, min = DBL_MAX, diff = 0xDEAD,
@@ -413,7 +414,8 @@ void colour_bin_patch3(patch3 *ptc, const uint nptc, const bin_hit_screen *const
                 memcpy(ptc[i].rgba, CGREY, 4 * sizeof(double));
         }
     }
-    else error_msg("unknown colourfun option", ERR_ARG);
+    else
+        error_msg("unknown colourfun option", ERR_ARG);
     if(type == POLARISATION_DENSITY)
         for(i = 0; i < nptc; i++)
             if(fptr[(*bhs).idx[i].ia][(*bhs).idx[i].ib] < DBL_EPSILON2)

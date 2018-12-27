@@ -323,7 +323,7 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
                 exit(EXIT_FAILURE);
             }
             else
-            (*bhs).tir += hsc[i].tir;
+                (*bhs).tir += hsc[i].tir;
         (*bhs).tir += hsc[0].tir;
     }
     for(i = 0; i < no; i++) /**< Scan through the different rays and store them according to their state: */
@@ -357,7 +357,8 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
                    ta = hsc[i].p[2] / ra;
             ulong tpi = lrint(floor(tp)),
                   tai = lrint(floor(ta));
-            if(tpi == 0 || tpi == (*bhs).res_polar - 1 || tai == (*bhs).res_azim) tai = 0;
+            if(tpi == 0 || tpi == (*bhs).res_polar - 1 || tai == (*bhs).res_azim)
+                tai = 0;
             assert(tai < (*bhs).res_azim && tpi < (*bhs).res_polar);
             uint j,
                  tai3 = tai * 3; /**< There are 3 entries in each bin, to step from one to another, multiply the address by 3. */
@@ -373,12 +374,16 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
             //        if(hsc[i].opol[0]<DBL_EPSILON) hsc[i].opol[1]=-hsc[i].opol[1];
             //        if(hsc[i].ppol[0]<0.) hsc[i].ppol[0]=-hsc[i].ppol[0]; /**< Map ppol[0] ... */
             //        if(hsc[i].ppol[0]<DBL_EPSILON) hsc[i].ppol[1]=-hsc[i].ppol[1];
-            for(j = 0; j < 3; j++) hsc[i].opol[j] = fabs(hsc[i].opol[j]);
-            for(j = 0; j < 3; j++) hsc[i].ppol[j] = fabs(hsc[i].ppol[j]);
+            for(j = 0; j < 3; j++)
+                hsc[i].opol[j] = fabs(hsc[i].opol[j]);
+            for(j = 0; j < 3; j++)
+                hsc[i].ppol[j] = fabs(hsc[i].ppol[j]);
             double t1 = cabs(hsc[i].coamp);
-            for(j = 0; j < 3; j++)(*bhs).pol_dist[tpi][tai3 + j] += t1 * hsc[i].opol[j];
+            for(j = 0; j < 3; j++)
+                (*bhs).pol_dist[tpi][tai3 + j] += t1 * hsc[i].opol[j];
             t1 = cabs(hsc[i].cpamp);
-            for(j = 0; j < 3; j++)(*bhs).pol_dist[tpi][tai3 + j] += t1 * hsc[i].ppol[j];
+            for(j = 0; j < 3; j++)
+                (*bhs).pol_dist[tpi][tai3 + j] += t1 * hsc[i].ppol[j];
         }
     if(sumup)
     {
@@ -396,7 +401,8 @@ void sort_detection(const hit_screen *res_pt hso, const uint no, bin_hit_screen 
             (*bhs).mod_amp[j][k] = POW2(creal((*bhs).camp[j][l0])) + POW2(cimag((*bhs).camp[j][l0])) +
                                    POW2(creal((*bhs).camp[j][l1])) + POW2(cimag((*bhs).camp[j][l1])) +
                                    POW2(creal((*bhs).camp[j][l2])) + POW2(cimag((*bhs).camp[j][l2]));
-            if((*bhs).mod_amp[j][k] > m_ma) m_ma = (*bhs).mod_amp[j][k];
+            if((*bhs).mod_amp[j][k] > m_ma)
+                m_ma = (*bhs).mod_amp[j][k];
             s_ma += (*bhs).mod_amp[j][k];
             /**< Compute the scalar amplitude of the e-field: */
             (*bhs).amp[j][k] = sqrt(POW2(creal((*bhs).camp[j][l0])) +

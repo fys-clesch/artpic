@@ -66,15 +66,21 @@ void error_msg(const char *res_pt msg, const char *res_pt file, int line, const 
  */
 void fp_error(const char *file, int line, const char *fname)
 {
-    int set_excepts = fetestexcept(FE_ALL_EXCEPT & (!FE_INVALID));
-    if(set_excepts & FE_DIVBYZERO) error_msg("there was a division by zero", file, line, fname);
-    if(set_excepts & FE_INEXACT) error_msg("sometimes double is not enough", file, line, fname);
-    if(set_excepts & FE_INVALID) error_msg("there was an invalid operation", file, line, fname);
-    if(set_excepts & FE_OVERFLOW) error_msg("overflow fp error. whatever that means.", file, line, fname);
-    if(set_excepts & FE_UNDERFLOW) error_msg("underflow fp error. whatever that means.", file, line, fname);
-#if __GNUC__>=4&&__GNUC_MINOR__>=8&&(OSID==ISWIN32||OSID==ISWIN64)
-    if(set_excepts & FE_DENORMAL) error_msg("denormal error. whatever that means.", file, line, fname);
-#endif
+    int set_excepts = fetestexcept(FE_ALL_EXCEPT);
+    if(set_excepts & FE_DIVBYZERO)
+        error_msg("there was a division by zero", file, line, fname);
+    if(set_excepts & FE_INEXACT)
+        error_msg("sometimes double is not enough", file, line, fname);
+    if(set_excepts & FE_INVALID)
+        error_msg("there was an invalid operation (domain error)", file, line, fname);
+    if(set_excepts & FE_OVERFLOW)
+        error_msg("overflow FP error", file, line, fname);
+    if(set_excepts & FE_UNDERFLOW)
+        error_msg("underflow FP error", file, line, fname);
+    #if __GNUC__ >= 4 && __GNUC_MINOR__ >= 8 && (OSID == ISWIN32 || OSID == ISWIN64)
+    if(set_excepts & FE_DENORMAL)
+        error_msg("denormal error. whatever that means.", file, line, fname);
+    #endif
     FP_ERR_CLEAR;
 }
 
@@ -87,13 +93,17 @@ void fp_error(const char *file, int line, const char *fname)
  */
 void print_ray(const ray *res_pt r, const char *res_pt c)
 {
-    fprintf(stdout, "ray %s:\nwavelength: %g\n"
+    fprintf(stdout,
+            "ray %s:\nwavelength: %g\n"
             "orthogonal component: %g exp(i %g), oint: %g\n"
             "parallel            : %g exp(i %g), pint: %g\n"
             "medium: n = %g + i %g, mu = %g\n"
             "travel: %g\ntir: %u\nhits: %u\ninfo: %s\nchild:\n",
-            c, (*r).lam, (*r).oamp, (*r).ophase, (*r).oint, (*r).pamp, (*r).pphase, (*r).pint,
-            creal((*r).n_i), cimag((*r).n_i), (*r).mu_i,
+            c, (*r).lam,
+            (*r).oamp, (*r).ophase, (*r).oint,
+            (*r).pamp, (*r).pphase, (*r).pint,
+            creal((*r).n_i), cimag((*r).n_i),
+            (*r).mu_i,
             (*r).travel, (*r).tir, (*r).hits, (*r).info);
     print_line3(&(*r).v, (*r).trans_child, 'r');
     print_doub3((*r).opol, (*r).trans_child, 'o');
@@ -128,7 +138,9 @@ void print_intrsec(const intrsec *res_pt i, const char *res_pt c)
  */
 void print_doub_mat(const double *m, uint row, uint col, const char *c)
 {
-    uint i, ii, j;
+    uint i,
+         ii,
+         j;
     fprintf(stdout, "%s:\n", c);
     for(i = 0; i < row; i++)
     {
@@ -149,11 +161,14 @@ void print_doub_mat(const double *m, uint row, uint col, const char *c)
  */
 void print_uint_mat(const uint *m, uint row, uint col, const char *c)
 {
-    uint i, ii, j;
+    uint i,
+         ii,
+         j;
     fprintf(stdout, "%s:\n", c);
     for(i = 0; i < row; i++)
     {
-        for(j = 0, ii = i * col; j < col; j++) fprintf(stdout, "%8u ", m[ii + j]);
+        for(j = 0, ii = i * col; j < col; j++)
+            fprintf(stdout, "%8u ", m[ii + j]);
         fprintf(stdout, "\n");
     }
 }
@@ -168,7 +183,8 @@ void print_uint_mat(const uint *m, uint row, uint col, const char *c)
  */
 void print_doub3(const double *p, const int i, const char c)
 {
-    fprintf(stdout, "%8s%15g\n%c[%3i]: %15g\n%8s%15g\n",
+    fprintf(stdout,
+            "%8s%15g\n%c[%3i]: %15g\n%8s%15g\n",
             "", p[0], c, i, p[1], "", p[2]);
 }
 
@@ -182,7 +198,8 @@ void print_doub3(const double *p, const int i, const char c)
  */
 void print_point3(const point3 *p, const int i, const char c)
 {
-    fprintf(stdout, "%8s%15g\n%c[%3i]: %15g\n%8s%15g\n",
+    fprintf(stdout,
+            "%8s%15g\n%c[%3i]: %15g\n%8s%15g\n",
             "", (*p).x[0], c, i, (*p).x[1], "", (*p).x[2]);
 }
 
@@ -196,7 +213,8 @@ void print_point3(const point3 *p, const int i, const char c)
  */
 void print_line3(const line3 *l, const int i, const char c)
 {
-    fprintf(stdout, "%8s%15g%3s%15g\n%c[%3i]: %15g + %15g * %g\n%8s%15g%3s%15g\n",
+    fprintf(stdout,
+            "%8s%15g%3s%15g\n%c[%3i]: %15g + %15g * %g\n%8s%15g%3s%15g\n",
             "", (*l).o[0], "", (*l).r[0],
             c, i, (*l).o[1], (*l).r[1], (*l).l,
             "", (*l).o[2], "", (*l).r[2]);
@@ -211,7 +229,8 @@ void print_line3(const line3 *l, const int i, const char c)
  */
 void print_plane3(const plane3 *p, const int i)
 {
-    fprintf(stdout, "%8s%15g%9s%15g\no[%3i]: %15g n[%3i]: %15g\n%8s%15g%9s%15g\n",
+    fprintf(stdout,
+            "%8s%15g%9s%15g\no[%3i]: %15g n[%3i]: %15g\n%8s%15g%9s%15g\n",
             "", (*p).o[0], "", (*p).n[0],
             i, (*p).o[1], i, (*p).n[1],
             "", (*p).o[2], "", (*p).n[2]);
@@ -290,8 +309,10 @@ void prog_of_rays(const uint n, const prog_ray_order order)
                 "          lost           %10lu\n"
                 "          detected       %10lu (%lu %%)\n",
                 fabs(omp_get_wtime() - start_t),
-                GLOBAL_RAY_INFO.count_gen, GLOBAL_RAY_INFO.count_exhstd,
-                GLOBAL_RAY_INFO.count_lost, GLOBAL_RAY_INFO.count_hit,
+                GLOBAL_RAY_INFO.count_gen,
+                GLOBAL_RAY_INFO.count_exhstd,
+                GLOBAL_RAY_INFO.count_lost,
+                GLOBAL_RAY_INFO.count_hit,
                 100 * GLOBAL_RAY_INFO.count_hit / GLOBAL_RAY_INFO.count_gen);
         sn = 0;
     }
@@ -310,12 +331,18 @@ void fncyprint(const char *str, const uint d)
     uint j, len = strlen(str);
     for(j = 0; j < len; j++)
     {
-        if(iscntrl(str[j])) i = str[j];
-        else if(d <= 100 && str[j] < 122) i = str[j] + 6;
-        else if(str[j] > 96) i = 127;
-        else if(str[j] <= 96 && str[j] > 64) i = 96;
-        else if(str[j] <= 64 && str[j] > 47) i = 64;
-        else i = 47;
+        if(iscntrl(str[j]))
+            i = str[j];
+        else if(d <= 100 && str[j] < 122)
+            i = str[j] + 6;
+        else if(str[j] > 96)
+            i = 127;
+        else if(str[j] <= 96 && str[j] > 64)
+            i = 96;
+        else if(str[j] <= 64 && str[j] > 47)
+            i = 64;
+        else
+            i = 47;
         while(str[j] != i)
         {
             fprintf(stdout, "%c", i--);
@@ -336,9 +363,12 @@ void fncyprint(const char *str, const uint d)
  */
 void print_trace_child_count(const glray_s *const res_pt glr)
 {
-    uint i, count = 0;
-    for(i = 0; i <= (*glr).n_child; i++) count += (*glr).child[i];
+    uint i,
+         count = 0;
+    for(i = 0; i <= (*glr).n_child; i++)
+        count += (*glr).child[i];
     fprintf(stdout,
             "total trace count is:                %u\n"
-            "in %4u child rays there are traces: %u\n", (*glr).n_trace, (*glr).n_child, count);
+            "in %4u child rays there are traces: %u\n",
+            (*glr).n_trace, (*glr).n_child, count);
 }
