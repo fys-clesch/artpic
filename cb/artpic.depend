@@ -365,7 +365,7 @@
 	"auxf.h"
 	"refr_data.h"
 
-1545846781 c:\users\cs\dropbox\programming\mie\artpic\src\artpic.h
+1545901644 c:\users\cs\dropbox\programming\mie\artpic\src\artpic.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -469,13 +469,13 @@
 
 1374075360 c:\users\cs\dropbox\programming\mie\artpic\src\intersec.h
 
-1545571363 source:c:\users\cs\dropbox\programming\mie\artpic\src\lina.c
+1545912446 source:c:\users\cs\dropbox\programming\mie\artpic\src\lina.c
 	"artpic.h"
 	"msg.h"
 	"auxf.h"
 	"lina.h"
 
-1545648386 source:c:\users\cs\dropbox\programming\mie\artpic\src\main.c
+1545936236 source:c:\users\cs\dropbox\programming\mie\artpic\src\main.c
 	"artpic.h"
 	"viewer.h"
 	"draw.h"
@@ -501,7 +501,7 @@
 
 1375810235 c:\users\cs\dropbox\programming\mie\artpic\src\tests.h
 
-1545571781 source:c:\users\cs\dropbox\programming\mie\artpic\src\msg.c
+1545917334 source:c:\users\cs\dropbox\programming\mie\artpic\src\msg.c
 	"artpic.h"
 	"alloc.h"
 	"ray_aux.h"
@@ -802,7 +802,11 @@
 	"draw.h"
 	"viewer.h"
 
-1545568499 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/alloc.c
+1545845966 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/alloc.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+	"refr_data.h"
 	"artpic.h"
 	"msg.h"
 	"auxf.h"
@@ -812,7 +816,7 @@
 	"auxf.h"
 	"refr_data.h"
 
-1545568961 /home/clesch/Dropbox/Programming/Mie/artpic/src/artpic.h
+1545901644 /home/clesch/Dropbox/Programming/Mie/artpic/src/artpic.h
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -852,22 +856,47 @@
 	<assert.h>
 	<errno.h>
 	<io.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<unistd.h>
+	<tgmath.h>
+	<limits.h>
+	<float.h>
+	<ctype.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<GL/freeglut.h>
+	<sys/stat.h>
+	<omp.h>
+	<stdarg.h>
+	<fenv.h>
+	<assert.h>
+	<errno.h>
+	<io.h>
 
 1529252650 /home/clesch/Dropbox/Programming/Mie/artpic/src/msg.h
 
 1529252736 /home/clesch/Dropbox/Programming/Mie/artpic/src/auxf.h
 
-1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/refr_data.h
+1545571869 /home/clesch/Dropbox/Programming/Mie/artpic/src/refr_data.h
 
-1529784735 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/color.c
+1545648319 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/color.c
 	"artpic.h"
 	"msg.h"
 	"auxf.h"
 	"artpic.h"
 	"msg.h"
 	"auxf.h"
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
 
-1529784735 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/control.c
+1545646800 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/control.c
+	"artpic.h"
+	"viewer.h"
+	"control.h"
 	"artpic.h"
 	"viewer.h"
 	"control.h"
@@ -879,7 +908,15 @@
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/control.h
 
-1529778543 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/draw.c
+1545845438 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/draw.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"shapes.h"
+	"color.h"
+	"lina.h"
+	"viewer.h"
+	"draw.h"
 	"artpic.h"
 	"msg.h"
 	"alloc.h"
@@ -897,17 +934,19 @@
 	"viewer.h"
 	"draw.h"
 
-1545568188 /home/clesch/Dropbox/Programming/Mie/artpic/src/alloc.h
+1545570791 /home/clesch/Dropbox/Programming/Mie/artpic/src/alloc.h
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/shapes.h
 
-1529252814 /home/clesch/Dropbox/Programming/Mie/artpic/src/color.h
+1545570791 /home/clesch/Dropbox/Programming/Mie/artpic/src/color.h
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/lina.h
 
-1529252815 /home/clesch/Dropbox/Programming/Mie/artpic/src/draw.h
+1545570791 /home/clesch/Dropbox/Programming/Mie/artpic/src/draw.h
 
-1529784735 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/font.c
+1545570870 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/font.c
+	"artpic.h"
+	"font.h"
 	"artpic.h"
 	"font.h"
 	"artpic.h"
@@ -915,7 +954,10 @@
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/font.h
 
-1529784729 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/fresnel.c
+1545570952 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/fresnel.c
+	"artpic.h"
+	"auxf.h"
+	"fresnel.h"
 	"artpic.h"
 	"auxf.h"
 	"fresnel.h"
@@ -925,7 +967,13 @@
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/fresnel.h
 
-1529784730 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/fromfile.c
+1545571045 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/fromfile.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"auxf.h"
+	"lina.h"
+	"rot.h"
 	"artpic.h"
 	"msg.h"
 	"alloc.h"
@@ -941,7 +989,11 @@
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/rot.h
 
-1529784734 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/intersec.c
+1545598660 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/intersec.c
+	"artpic.h"
+	"auxf.h"
+	"lina.h"
+	"intersec.h"
 	"artpic.h"
 	"auxf.h"
 	"lina.h"
@@ -953,7 +1005,11 @@
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/intersec.h
 
-1529784734 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/lina.c
+1545912446 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/lina.c
+	"artpic.h"
+	"msg.h"
+	"auxf.h"
+	"lina.h"
 	"artpic.h"
 	"msg.h"
 	"auxf.h"
@@ -963,7 +1019,7 @@
 	"auxf.h"
 	"lina.h"
 
-1538507506 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/msg.c
+1545849123 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/msg.c
 	"artpic.h"
 	"alloc.h"
 	"ray_aux.h"
@@ -974,10 +1030,25 @@
 	"ray_aux.h"
 	"auxf.h"
 	"msg.h"
+	"artpic.h"
+	"alloc.h"
+	"ray_aux.h"
+	"auxf.h"
+	"msg.h"
 
-1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/ray_aux.h
+1545571781 /home/clesch/Dropbox/Programming/Mie/artpic/src/ray_aux.h
 
-1545568961 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/ray.c
+1545646085 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/ray.c
+	"artpic.h"
+	"lina.h"
+	"msg.h"
+	"auxf.h"
+	"rot.h"
+	"refr_data.h"
+	"fresnel.h"
+	"ray_aux.h"
+	"tests.h"
+	"ray.h"
 	"artpic.h"
 	"lina.h"
 	"msg.h"
@@ -1003,7 +1074,7 @@
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/ray.h
 
-1545568961 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/ray_aux.c
+1545598218 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/ray_aux.c
 	"artpic.h"
 	"lina.h"
 	"ray.h"
@@ -1020,22 +1091,35 @@
 	"auxf.h"
 	"tests.h"
 	"rot.h"
+	"artpic.h"
+	"lina.h"
+	"ray.h"
+	"refr_data.h"
+	"msg.h"
+	"auxf.h"
+	"tests.h"
+	"rot.h"
 
-1529784734 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/refr_data.c
+1545597980 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/refr_data.c
 	"artpic.h"
 	"msg.h"
 	"artpic.h"
 	"msg.h"
+	"artpic.h"
+	"msg.h"
 
-1529784735 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/rot.c
+1545597888 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/rot.c
 	"artpic.h"
 	"auxf.h"
 	"rot.h"
 	"artpic.h"
 	"auxf.h"
 	"rot.h"
+	"artpic.h"
+	"auxf.h"
+	"rot.h"
 
-1529784735 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/shapes.c
+1545571977 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/shapes.c
 	"artpic.h"
 	"alloc.h"
 	"auxf.h"
@@ -1046,8 +1130,13 @@
 	"auxf.h"
 	"lina.h"
 	"shapes.h"
+	"artpic.h"
+	"alloc.h"
+	"auxf.h"
+	"lina.h"
+	"shapes.h"
 
-1545568961 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/tests.c
+1545590909 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/tests.c
 	"artpic.h"
 	"lina.h"
 	"msg.h"
@@ -1064,8 +1153,21 @@
 	"fresnel.h"
 	"refr_data.h"
 	"tests.h"
+	"artpic.h"
+	"lina.h"
+	"msg.h"
+	"ray.h"
+	"ray_aux.h"
+	"fresnel.h"
+	"refr_data.h"
+	"tests.h"
 
-1529784858 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/tofig.c
+1545572032 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/tofig.c
+	"artpic.h"
+	"auxf.h"
+	"alloc.h"
+	"msg.h"
+	"tofig.h"
 	"artpic.h"
 	"auxf.h"
 	"alloc.h"
@@ -1079,7 +1181,12 @@
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/tofig.h
 
-1529784735 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/tofile.c
+1545572076 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/tofile.c
+	"artpic.h"
+	"auxf.h"
+	"alloc.h"
+	"msg.h"
+	"tofile.h"
 	"artpic.h"
 	"auxf.h"
 	"alloc.h"
@@ -1093,7 +1200,15 @@
 
 1545503231 /home/clesch/Dropbox/Programming/Mie/artpic/src/tofile.h
 
-1529784803 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/viewer.c
+1545646774 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/viewer.c
+	"artpic.h"
+	"msg.h"
+	"alloc.h"
+	"color.h"
+	"control.h"
+	"shapes.h"
+	"draw.h"
+	"viewer.h"
 	"artpic.h"
 	"msg.h"
 	"alloc.h"
@@ -1373,7 +1488,15 @@
 	"viewer.h"
 	"control.h"
 
-1545568961 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/auxf.c
+1545848515 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/auxf.c
+	"artpic.h"
+	"lina.h"
+	"alloc.h"
+	"ray_aux.h"
+	"color.h"
+	"rot.h"
+	"msg.h"
+	"auxf.h"
 	"artpic.h"
 	"lina.h"
 	"alloc.h"
@@ -1383,7 +1506,21 @@
 	"msg.h"
 	"auxf.h"
 
-1545568961 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/main.c
+1545912815 source:/home/clesch/Dropbox/Programming/Mie/artpic/src/main.c
+	"artpic.h"
+	"viewer.h"
+	"draw.h"
+	"intersec.h"
+	"auxf.h"
+	"msg.h"
+	"ray.h"
+	"ray_aux.h"
+	"refr_data.h"
+	"tofig.h"
+	"tofile.h"
+	"fromfile.h"
+	"tests.h"
+	"alloc.h"
 	"artpic.h"
 	"viewer.h"
 	"draw.h"

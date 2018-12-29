@@ -61,17 +61,20 @@ int main(int argc, char **argv)
         for(i = 0; i < argc; i++)
             fprintf(stdout, "arg[%d]: %s\n", i, argv[i]);
     }
-#if RELEASE_BUILD
+    #if RELEASE_BUILD
     print_intro();
-#endif
+    #endif
     init_allocations();
     const uchar use_ogl = 1,
-                output_results = 0;
+                output_results = 0,
+                load_external_prtcls = 0;
     uint nors,
          ui,
-         res_azim, res_rad,
+         res_azim,
+         res_rad,
          nprtcls,
-         res_polar_bin, res_azim_bin;
+         res_polar_bin,
+         res_azim_bin;
     double max_rad,
            lambda,
            mu_prtcl;
@@ -79,11 +82,12 @@ int main(int argc, char **argv)
            fin,
            polarisation;
     sphere3 screen;
-    sphrcl_prtcl *mat_prtcls;
+
     /**< Set the detection screen: */
     res_polar_bin = 91;
     res_azim_bin = 360;
     bin_hit_screen *b_htscrn = alloc_bin_hit_screen(1, 4., res_polar_bin, res_azim_bin);
+
     /**< Set the rays and some detection containers: */
     lambda = 632.8e-6;
     max_rad = 3.95e-1;
@@ -95,6 +99,7 @@ int main(int argc, char **argv)
         error_msg("there are too many rays to be created - change the data type.", ERR_ARG);
     ray *rs = alloc_ray(nors);
     hit_screen *htscrn = alloc_hit_screen(nors);
+
     /**< Set the particles: */
     nprtcls = 3;
     mu_prtcl = 1.;
@@ -103,11 +108,25 @@ int main(int argc, char **argv)
     set_sphrcl_prtcl(&prtcls[1], 1. + 0.i, mu_prtcl, 0., .9, .25, .42);
     set_sphrcl_prtcl(&prtcls[2], 1. + 0.i, mu_prtcl, 0., 0., 1., .41);
     set_sphere3(&screen, 0., 0., 0., b_htscrn[0].rad);
+
+    /**< Load particles from a file. */
+    boundingbox bbox;
+    sphrcl_prtcl *mat_prtcls;
+    if(load_external_prtcls)
+    {
+        line3 trans_prtcls;
+        trans_prtcls = (line3){.o = {0., 0., 0.},
+                               .r = {1., 1., 0.},
+                               .l = 0.};
+        mat_prtcls = load_prtcls("mat.dat", rfrct_indx_h2o, lambda, 1., 1., &trans_prtcls, &nprtcls, &bbox, 1);
+    }
+
     /**< Initiate the bundle of rays: */
     set_point3(&polarisation, 1., 0., 0.);
     set_point3(&init, -1., 0., 0.);
     set_point3(&fin, 0., 0., 0.);
     gen_startrays_straight(rs, lambda, nors, res_azim, res_rad, max_rad, &init, &fin, &polarisation);
+
     /**< Initiate the drawing of rays: */
     glray *glrays;
     if(use_ogl)
@@ -119,15 +138,15 @@ int main(int argc, char **argv)
     }
     FP_ERR_CHECK;
     prog_of_rays(0, INIT_PROG);
-#if PARALLEL_PROCESSING
-#if OSID == ISWIN32 & RELEASE_BUILD
-#warning "on windows xp 32 bit and mingw32 with gcc 4.6.2" \
-"there have been found deviations when using the built - in openmp 3.0." \
-"deviations have been detected in about 20 percent of the results at the 4th decimal place."
-#endif
+    #if PARALLEL_PROCESSING
+    #if OSID == ISWIN32 & RELEASE_BUILD
+    #warning "on windows xp 32 bit and mingw32 with gcc 4.6.2" \
+    "there have been found deviations when using the built - in openmp 3.0." \
+    "deviations have been detected in about 20 percent of the results at the 4th decimal place."
+    #endif
     /**< Parallel start ==> */
     #pragma omp parallel for default(shared) lastprivate(ui) schedule(guided,2)
-#endif
+    #endif
     for(ui = 0; ui < nors; ui++)
     {
         intrsec isec;
@@ -136,8 +155,12 @@ int main(int argc, char **argv)
              n_subrs = 256,
              n_subhtscrn = 512,
              uj,
-             i1, i2, i3, i4,
-             j1, j2,
+             i1,
+             i2,
+             i3,
+             i4,
+             j1,
+             j2,
              n_move,
              max_subhtscrn = 1 << 15;
         ray first,
@@ -363,9 +386,11 @@ int main(int argc, char **argv)
         free(subrs);
         free(subhtscrn);
     } /**< <== Parallel end */
+
     sort_detection(htscrn, nors, &b_htscrn[0], 1);
     prog_of_rays(0, CLEAR_OUT);
     FP_ERR_CHECK;
+
     if(output_results)
     {
         print_bin_hit_screen("tenet / opera", &b_htscrn[0], 10, 0, INTENSITY, "testing", 0);
@@ -374,29 +399,31 @@ int main(int argc, char **argv)
         gnuplot_bin_hit_screen("plot / test", &b_htscrn[0], INTENSITY, 0, 0, 1, (res_polar_bin >> 1) + 1);
         gnuplot_bin_hit_screen("plot / test", &b_htscrn[0], POLARISATION_DENSITY, 0, 0, 1, (res_polar_bin >> 1) + 1);
     }
-    boundingbox bbox;
-    line3 trans_prtcls;
-    trans_prtcls = (line3){.o = {0., 0., 0.},
-                           .r = {1., 1., 0.},
-                           .l = 0.};
-    mat_prtcls = load_prtcls("mat.dat", rfrct_indx_h2o, lambda, 1., 1., &trans_prtcls, &nprtcls, &bbox, 1);
+
+    /**< Start the viewer */
+
     if(use_ogl)
     {
         handle_glray(glrays, 1, COPY_RAYS, 0);
         handle_bin_sphere3(&b_htscrn[0], ALLOC_DATA, SINCOS_MAP, INTENSITY);
-//        handle_prtcls_boxed(mat_prtcls, &bbox, nprtcls, ALLOC_DATA);
+        if(load_external_prtcls)
+            handle_prtcls_boxed(mat_prtcls, &bbox, nprtcls, ALLOC_DATA);
         uint i;
         for(i = 0; i < nprtcls; i++)
             handle_prtcls(&prtcls[i], ALLOC_DATA);
         go_freeglut(argc, argv);
     }
+
+    /**< Clean-up: */
     if(use_ogl)
         free_glray(glrays, 1);
-    free(mat_prtcls);
+    if(load_external_prtcls)
+       free(mat_prtcls);
     free(rs);
     free(htscrn);
     free(prtcls);
     free_bin_hit_screen(b_htscrn, 1);
     print_used_mem();
+
     return EXIT_SUCCESS;
 }

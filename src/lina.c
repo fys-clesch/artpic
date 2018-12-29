@@ -133,10 +133,14 @@ void envec3_ip(double *x)
  */
 double dist3(const double *res_pt x, const double *res_pt y)
 {
-    double z[3] = {x[0] - y[0], x[1] - y[1], x[2] - y[2]},
+    double z[3] = {x[0] - y[0],
+                   x[1] - y[1],
+                   x[2] - y[2]},
            t = len_squ3(z);
-    if(t > 0.) return sqrt(t);
-    else return 0.;
+    if(t > 0.)
+        return sqrt(t);
+    else
+        return 0.;
 }
 
 /** \brief Computes the squared Euclidean distance between two vectors in R^3.
@@ -149,7 +153,9 @@ double dist3(const double *res_pt x, const double *res_pt y)
  */
 double dist_squ3(const double *res_pt x, const double *res_pt y)
 {
-    double z[3] = {x[0] - y[0], x[1] - y[1], x[2] - y[2]};
+    double z[3] = {x[0] - y[0],
+                   x[1] - y[1],
+                   x[2] - y[2]};
     return len_squ3(z);
 }
 
@@ -328,10 +334,9 @@ void cross3(const double *a, const double *b, double *res_pt c)
  */
 void cross3_ip(const double *res_pt a, double *res_pt b)
 {
-    double t[3] = {a[1] *b[2] - a[2] *b[1],
-                   a[2] *b[0] - a[0] *b[2],
-                   a[0] *b[1] - a[1] *b[0]
-                  };
+    double t[3] = {a[1] * b[2] - a[2] * b[1],
+                   a[2] * b[0] - a[0] * b[2],
+                   a[0] * b[1] - a[1] * b[0]};
     cp3(b, t);
 }
 
@@ -401,7 +406,8 @@ double tripprod3(const double *a, const double *b, const double *c)
  */
 void inner_product3_mat_vec(const double *res_pt m, const double *res_pt v, double *res_pt out)
 {
-    uint i, j;
+    uint i,
+         j;
     for(i = 0; i < 3; i++)
         for(out[i] = 0., j = 0; j < 3; j++)
             out[i] += m[j + i * 3] * v[j];
@@ -418,7 +424,8 @@ void inner_product3_mat_vec(const double *res_pt m, const double *res_pt v, doub
 void inner_product3_mat_vec_ip(const double *res_pt m, double *res_pt v)
 {
     double t[3] = {0., 0., 0.};
-    uint i, j;
+    uint i,
+         j;
     for(i = 0; i < 3; i++)
         for(j = 0; j < 3; j++)
             t[i] += m[j + i * 3] * v[j];

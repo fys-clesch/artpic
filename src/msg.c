@@ -51,9 +51,9 @@ void error_msg(const char *res_pt msg, const char *res_pt file, int line, const 
     fprintf(stderr, "\a\ndire straits in file %s line %i from '%s':\n%s\n", file, line, fname, msg);
     perror("interpreted as");
     errno = 0;
-#if STOP_AT_ERR
+    #if STOP_AT_ERR
     getchar();
-#endif
+    #endif
 }
 
 /** \brief Prints floating point exceptions.
@@ -70,7 +70,7 @@ void fp_error(const char *file, int line, const char *fname)
     if(set_excepts & FE_DIVBYZERO)
         error_msg("there was a division by zero", file, line, fname);
     if(set_excepts & FE_INEXACT)
-        error_msg("sometimes double is not enough", file, line, fname);
+        error_msg("inexact operation occurred. can probably be ignored.", file, line, fname);
     if(set_excepts & FE_INVALID)
         error_msg("there was an invalid operation (domain error)", file, line, fname);
     if(set_excepts & FE_OVERFLOW)
@@ -119,11 +119,14 @@ void print_ray(const ray *res_pt r, const char *res_pt c)
  */
 void print_intrsec(const intrsec *res_pt i, const char *res_pt c)
 {
-    fprintf(stdout, "intrsec %s:\n"
+    fprintf(stdout,
+            "intrsec %s:\n"
             "angle     : %g\ncos(angle): %g\n"
             "mu_f      : %g\nn_f       : %g + i %g\n"
             "type      : %s\n\n",
-            c, (*i).angl * 180. / M_PI, (*i).cangl, (*i).mu_f, creal((*i).n_f), cimag((*i).n_f),
+            c,
+            (*i).angl * 180. / M_PI, (*i).cangl,
+            (*i).mu_f, creal((*i).n_f), cimag((*i).n_f),
             (*i).incdnc == NONE ? "none" : (*i).incdnc == OBLIQUE ? "oblique" : (*i).incdnc == VERTICAL ? "vertical" : "right-angled");
 }
 
@@ -230,7 +233,9 @@ void print_line3(const line3 *l, const int i, const char c)
 void print_plane3(const plane3 *p, const int i)
 {
     fprintf(stdout,
-            "%8s%15g%9s%15g\no[%3i]: %15g n[%3i]: %15g\n%8s%15g%9s%15g\n",
+            "%8s%15g%9s%15g\n"
+            "o[%3i]: %15g n[%3i]: %15g\n"
+            "%8s%15g%9s%15g\n",
             "", (*p).o[0], "", (*p).n[0],
             i, (*p).o[1], i, (*p).n[1],
             "", (*p).o[2], "", (*p).n[2]);
@@ -264,23 +269,24 @@ void gimme_bin(uchar i)
  */
 void prog_of_rays(const uint n, const prog_ray_order order)
 {
-    static char bar[100], printbar[100];
+    static char bar[100],
+                printbar[100];
     static ulong sn = 0;
     static double start_t;
     if(order == INIT_PROG)
     {
-#if PARALLEL_PROCESSING
+        #if PARALLEL_PROCESSING
         fprintf(stdout, "\nparallel processing info:"
                 " there are %i processors available to this program\n",
                 omp_get_num_procs());
-#endif
+        #endif
         start_t = omp_get_wtime();
         memset(bar, '-', 100);
-#if PRINT_PROG_OF_RAYS
+        #if PRINT_PROG_OF_RAYS
         fprintf(stdout, "\nprogress of driving %lu rays through your setup:\n|%-100.100s|",
                 GLOBAL_RAY_INFO.count_gen, printbar); /**< GLOBAL_RAY_INFO.count_gen is a global variable. */
         fflush(stdout);
-#endif
+        #endif
     }
     else if(order != CLEAR_OUT)
     {
@@ -288,19 +294,19 @@ void prog_of_rays(const uint n, const prog_ray_order order)
         if(order == PRINT_PROG)
         {
             memcpy(printbar, bar, sn * 100 / GLOBAL_RAY_INFO.count_gen);
-#if PRINT_PROG_OF_RAYS
+            #if PRINT_PROG_OF_RAYS
             fprintf(stdout, "%c|%-100.100s|", 13, printbar);
             fflush(stdout);
-#endif
+            #endif
         }
     }
     else
     {
         assert(sn * 100 / GLOBAL_RAY_INFO.count_gen <= 100);
         memcpy(printbar, bar, sn * 100 / GLOBAL_RAY_INFO.count_gen);
-#if PRINT_PROG_OF_RAYS
+        #if PRINT_PROG_OF_RAYS
         fprintf(stdout, "%c|%-100.100s|", 13, printbar);
-#endif
+        #endif
         fprintf(stdout,
                 "\nhere are the statistics:\n"
                 "execution time %.2g s\n"
