@@ -283,17 +283,16 @@ uchar set_refr_index(const ray *res_pt ri, intrsec *res_pt i, const cdoub n_prtc
  */
 void reg_hit(const ray *res_pt r, hit_screen *res_pt hs, const double cangl_i, const ray_end_state state)
 {
-    *hs = (hit_screen){
-        .p = {(*r).v.o[0], (*r).v.o[1], (*r).v.o[2]},
-        .lam = (*r).lam,
-        .cos_incdnc = cangl_i,
-        .opol = {(*r).opol[0], (*r).opol[1], (*r).opol[2]},
-        .ppol = {(*r).ppol[0], (*r).ppol[1], (*r).ppol[2]},
-        .coamp = (*r).oamp * (cos((*r).ophase) + sin((*r).ophase) * 1.i),
-        .cpamp = (*r).pamp * (cos((*r).pphase) + sin((*r).pphase) * 1.i),
-        .oint = (*r).oint,
-        .pint = (*r).pint,
-        .tir = (*r).tir,
-        .state = state};
+    *hs = (hit_screen){.p = {(*r).v.o[0], (*r).v.o[1], (*r).v.o[2]},
+                       .lam = (*r).lam,
+                       .cos_incdnc = cangl_i,
+                       .opol = {(*r).opol[0], (*r).opol[1], (*r).opol[2]},
+                       .ppol = {(*r).ppol[0], (*r).ppol[1], (*r).ppol[2]},
+                       .coamp = (*r).oamp * (cos((*r).ophase) + sin((*r).ophase) * 1.i),
+                       .cpamp = (*r).pamp * (cos((*r).pphase) + sin((*r).pphase) * 1.i),
+                       .oint = (*r).oint,
+                       .pint = (*r).pint,
+                       .tir = (*r).tir,
+                       .state = state};
     strncpy((*hs).info, (*r).info, INFOLENGTH);
 }

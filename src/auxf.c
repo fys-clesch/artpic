@@ -77,9 +77,12 @@ int int_pow(int x, uint n)
     if(n)
         for(;;)
         {
-            if(n & 1) pow *= x; /**< n is odd. */
-            if(n >>= 1) x *= x;
-            else break;
+            if(n & 1)
+                pow *= x; /**< n is odd. */
+            if(n >>= 1)
+                x *= x;
+            else
+                break;
         }
     return pow;
 }
@@ -131,8 +134,10 @@ double atan2_up(double x, const double y)
  */
 int comp_int(const void *p1, const void *p2)
 {
-    if(*(int *)p1 < * (int *)p2) return -1;
-    else if(*(int *)p1 > *(int *)p2) return 1;
+    if(*(int *)p1 < *(int *)p2)
+        return -1;
+    else if(*(int *)p1 > *(int *)p2)
+        return 1;
     return 0;
 }
 
@@ -146,8 +151,10 @@ int comp_int(const void *p1, const void *p2)
  */
 int comp_double(const void *p1, const void *p2)
 {
-    if(*(double *)p1 < * (double *)p2) return -1;
-    else if(*(double *)p1 > *(double *)p2) return 1;
+    if(*(double *)p1 < *(double *)p2)
+        return -1;
+    else if(*(double *)p1 > *(double *)p2)
+        return 1;
     return 0;
 }
 
@@ -169,7 +176,8 @@ double find_max(const double *res_pt m, uint *res_pt xm, uint *res_pt ym, const 
     uint x;
     for(x = 0; x < row; x++)
     {
-        uint t2 = x * col, y;
+        uint t2 = x * col,
+             y;
         for(y = 0; y < col; y++)
             if(m[t2 + y] > t1)
             {
@@ -199,7 +207,8 @@ double find_min(const double *res_pt m, uint *res_pt xm, uint *res_pt ym, const 
     uint x;
     for(x = 0; x < row; x++)
     {
-        uint t2 = x * col, y;
+        uint t2 = x * col,
+             y;
         for(y = 0; y < col; y++)
             if(m[t2 + y] < t1)
             {
@@ -226,11 +235,11 @@ uchar solve_pq(const double a, double b, const double c, double r[2], const ucha
     double t = b * b - 4. * a * c;
     if(isgreater(t, 0.))
     {
-#ifdef FP_FAST_FMA
+        #ifdef FP_FAST_FMA
         b = -.5 * fma(sign(b), sqrt(t), b);
-#else
+        #else
         b = -.5 * (b + sign(b) * sqrt(t));
-#endif
+        #endif
         r[0] = b / a;
         r[1] = c / b;
         return 2;
@@ -486,8 +495,9 @@ void set_sphere3(sphere3 *p, const double x0, const double x1, const double x2, 
  */
 void set_sphrcl_prtcl(sphrcl_prtcl *p, const cdoub n, const double mu, const double x0, const double x1, const double x2, const double r)
 {
-    (*p) = (sphrcl_prtcl){
-        .s = (sphere3) {.o = {x0, x1, x2}, .r = r}, .n = n, .mu = mu};
+    (*p) = (sphrcl_prtcl){.s = (sphere3){.o = {x0, x1, x2}, .r = r},
+                          .n = n,
+                          .mu = mu};
     snprintf((*p).info, L_INFOLENGTH, "no %u from (%g, %g, %g). n = %g + %gi. mu = %g. rad = %g.",
              (*p).no, x0, x1, x2, creal(n), cimag(n), mu, r);
 }
@@ -502,7 +512,9 @@ void set_sphrcl_prtcl(sphrcl_prtcl *p, const cdoub n, const double mu, const dou
  */
 void set_index2_bin_sphere3(index2 *indx, const uint pol, const uint azi)
 {
-    uint i, j, k;
+    uint i,
+         j,
+         k;
     for(i = 0, k = 0; i < pol; i++)
     {
         if(i != 0 && i != pol - 1)
@@ -535,13 +547,15 @@ void copy_ray_to_glray_s(const ray *const res_pt rs, glray_s *res_pt glrs, const
     uint i;
     for(i = 0; i < nors; i++)
     {
-        glrs[i] = (glray_s){
-            .v = rs[i].v,
-            .oamp = rs[i].oamp, .pamp = rs[i].pamp,
-            .ophase = rs[i].ophase, .pphase = rs[i].pphase,
-            .oint = rs[i].oint, .pint = rs[i].pint,
-            .opol = {rs[i].opol[0], rs[i].opol[1], rs[i].opol[2]},
-            .ppol = {rs[i].ppol[0], rs[i].ppol[1], rs[i].ppol[2]}};
+        glrs[i] = (glray_s){.v = rs[i].v,
+                            .oamp = rs[i].oamp,
+                            .pamp = rs[i].pamp,
+                            .ophase = rs[i].ophase,
+                            .pphase = rs[i].pphase,
+                            .oint = rs[i].oint,
+                            .pint = rs[i].pint,
+                            .opol = {rs[i].opol[0], rs[i].opol[1], rs[i].opol[2]},
+                            .ppol = {rs[i].ppol[0], rs[i].ppol[1], rs[i].ppol[2]}};
         add3(glrs[i].v.o, glrs[i].v.r, glrs[i].v.r);
         ulong t1 = lrint(floor(rs[i].lam * 1e6)); /**< Using a uint cast brings at least valgrind into trouble. */
         assert(t1 >= 380);

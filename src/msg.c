@@ -334,7 +334,8 @@ void prog_of_rays(const uint n, const prog_ray_order order)
 void fncyprint(const char *str, const uint d)
 {
     int i;
-    uint j, len = strlen(str);
+    uint j,
+         len = strlen(str);
     for(j = 0; j < len; j++)
     {
         if(iscntrl(str[j]))
