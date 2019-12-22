@@ -262,7 +262,7 @@ void gimme_bin(uchar i)
 /** \brief Handles the printing of the calculation progress.
  *
  * \param n const uint The number of the rays which have been traced (un)successfully at the time of calling this function.
- * \param order const prog_ray_order The precise order to this function.
+ * \param order const prog_ray_order Order this function what to do.
  * \return void
  *
  * The first call to this function has to be done with INIT_PROG, the last one with CLEAR_OUT.

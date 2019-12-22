@@ -177,7 +177,7 @@ typedef enum prog_ray_order_enum
     COUNT_PROG,
     PRINT_PROG,
     CLEAR_OUT
-}prog_ray_order; /**< An option identifier of what shall be printed when calling prog_of_rays. */
+}prog_ray_order; /**< An identifier of what shall be printed when calling prog_of_rays. */
 
 typedef enum coordinate_sys_enum
 {
